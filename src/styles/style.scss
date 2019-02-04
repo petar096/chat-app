@@ -1,0 +1,16 @@
+@import './nesto.scss';
+
+@font-face {
+    font-family: 'Spectra';
+    src: url('../assets/fonts/specta_retro_script_free-webfont.woff2') format('woff2'),
+         url('../assets/fonts/specta_retro_script_free-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.title {
+    font-family:'Spectra';
+    color: white;
+    background: #333;
+    font-size: $variabla;
+}
