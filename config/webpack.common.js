@@ -1,8 +1,16 @@
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	entry: {
+		app: './src/index.js'
+	},
+	output: {
+		filename: '[name].bundle.js',
+		path: path.resolve(__dirname, '..', 'dist')
+	},
 	module: {
 		rules: [
 			{
@@ -14,7 +22,12 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-				use: [ExtractCssChunks.loader, 'css-loader', 'sass-loader']
+				use: [
+					ExtractCssChunks.loader,
+					'css-loader',
+					'postcss-loader',
+					'sass-loader'
+				]
 			},
 			{
 				test: /\.(png|svg|jpg|jpeg|gif)$/,
@@ -27,12 +40,13 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({
-			template: './src/public/index.html',
+			template: './public/index.html',
 			filename: 'index.html'
 		}),
 		new ExtractCssChunks({
-			filename: '[name].css',
+			filename: '[contenthash][name].css',
 			chunkFilename: '[id].css',
 			hot: true,
 			orderWarning: true,
