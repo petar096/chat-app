@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import SignUp from './SignUp';
 
-export default class App extends Component {
+class ResetPassword extends Component {
 	render() {
 		return (
 			<div>
-				<SignUp />
+				<h1>Reset</h1>
 			</div>
 		);
 	}
 }
+
+export default ResetPassword;

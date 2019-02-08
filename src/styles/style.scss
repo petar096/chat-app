@@ -1,16 +1,15 @@
-@import './nesto.scss';
-
-@font-face {
-    font-family: 'Spectra';
-    src: url('../assets/fonts/specta_retro_script_free-webfont.woff2') format('woff2'),
-         url('../assets/fonts/specta_retro_script_free-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+* {
+	box-sizing: border-box;
+}
+html {
+	margin: 0;
+	padding: 0;
+	font-size: 10px;
 }
 
-.title {
-    font-family:'Spectra';
-    color: white;
-    background: #333;
-    font-size: $variabla;
+body {
+	font-family: 'Montserrat', sans-serif;
+	margin: 0;
+	padding: 0;
+	background: #fdfcff;
 }
