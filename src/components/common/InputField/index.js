@@ -2,28 +2,37 @@ import React from 'react';
 import './_InputField.scss';
 import PropTypes from 'prop-types';
 
-const InputField = props => (
-  <div className={props.small ? 'field field-small' : 'field'}>
+const InputField = ({
+  name,
+  type,
+  value,
+  onChange,
+  label,
+  small,
+  required
+}) => (
+  <div className={small ? 'field field-small' : 'field'}>
     <input
-      name={props.name}
-      type={props.type}
-      value={props.value}
+      name={name}
+      type={type}
+      value={value}
       className="field__input"
-      onChange={props.onChange}
+      onChange={onChange}
+      required={required}
       placeholder="&nbsp;"
-      reguired={props.required}
     />
-    <span class="field__label">{props.label}</span>
+    <span class="field__label">{label}</span>
   </div>
 );
 
-InputField.propTypes = {
+InputField.propType = {
   name: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string,
-  className: PropTypes.string,
+  label: PropTypes.string,
+  small: PropTypes.string,
   onChange: PropTypes.func,
-  reguired: PropTypes.bool
+  required: PropTypes.bool
 };
 
 export default InputField;
