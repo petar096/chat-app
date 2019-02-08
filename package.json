@@ -45,8 +45,10 @@
 		"webpack-node-externals": "^1.7.2"
 	},
 	"dependencies": {
+		"prop-types": "^15.6.2",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
-		"react-router": "^4.3.1"
+		"react-router": "^4.3.1",
+		"react-router-dom": "^4.3.1"
 	}
 }
