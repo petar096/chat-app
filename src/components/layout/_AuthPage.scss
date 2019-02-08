@@ -1,16 +1,13 @@
+@import '../../styles/common/_variables';
+
 .auth-container {
-	display: flex;
-	height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .auth-left-side {
-	flex:1;
-	background: -webkit-linear-gradient(
-		31deg,
-		rgb(115, 152, 185),
-		rgb(59, 20, 90)
-	);
-	background: linear-gradient(31deg, rgb(115, 152, 185), rgb(59, 20, 90));
+    flex:1;
+	background: $main-bg;
 }
 
 .auth-right-side {

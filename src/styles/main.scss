@@ -1,2 +1,4 @@
-@import './style.scss';
-@import './signUp.scss';
+@import './_global.scss';
+@import './common/variables';
+@import './helpers/typography';
+@import './helpers/forms';
