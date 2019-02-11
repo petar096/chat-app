@@ -4,6 +4,8 @@ import Button from '../common/Button';
 import { Link } from 'react-router-dom';
 
 import './_Login.scss';
+import Alert from '../common/Alert';
+import Footer from '../layout/Footer';
 
 class Login extends Component {
   constructor(props) {
@@ -12,12 +14,14 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      remeberMe: false
+      remeberMe: false,
+      error: ''
     };
 
     // functions
     this.handleChange = this.handleChange.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.handleError = this.handleError.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
@@ -28,9 +32,14 @@ class Login extends Component {
   }
 
   handleChange(e) {
+    const { username, password } = this.state;
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  handleError(type, msg) {
+    return <Alert type={type} msg={msg} />;
   }
 
   handleCheckbox(e) {
@@ -42,6 +51,7 @@ class Login extends Component {
   render() {
     return (
       <React.Fragment>
+        <Alert type="success" msg="Error" />
         <h2 className="primary-heading">Food-order</h2>
         <h4 className="subheading">
           Welcome back!Please login to your account.
@@ -85,20 +95,13 @@ class Login extends Component {
           </div>
 
           <div className="form-group-inline" style={{ marginTop: '4rem' }}>
-            <Button text="Sign up" className="btn--primary btn-block" />
-            <Button text="Sign up" className="btn--secondary btn-block" />
+            <Button text="Login" className="btn--primary btn-block" />
+            <Link to="/" style={{ width: '100%', marginLeft: '2rem' }}>
+              <Button text="Sign up" className="btn--secondary btn-block" />
+            </Link>
           </div>
         </form>
-        <footer
-          style={{
-            width: '100%',
-            marginTop: 'auto',
-            textAlign: 'center',
-            fontSize: '1.6rem',
-            paddingBottom: '1rem'
-          }}>
-          Terms of use. Privacy police.
-        </footer>
+        <Footer />
       </React.Fragment>
     );
   }

@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 
 import InputField from '../common/InputField';
 import Button from '../common/Button';
+import Footer from '../layout/Footer';
 
 import './_SignUp.scss';
+import Alert from '../common/Alert';
 
 class SignUp extends Component {
   constructor(props) {
@@ -16,7 +18,8 @@ class SignUp extends Component {
       username: '',
       email: '',
       password: '',
-      rePassword: ''
+      rePassword: '',
+      error: ''
     };
 
     // functions
@@ -39,6 +42,10 @@ class SignUp extends Component {
   render() {
     return (
       <React.Fragment>
+        {this.state.error ? (
+          <Alert type="error" msg={this.state.error} />
+        ) : null}
+
         <h2 className="primary-heading">Food-order</h2>
         <h4 className="subheading">Plaease complete to create your account</h4>
 
@@ -102,16 +109,7 @@ class SignUp extends Component {
           }}>
           Already have account?Sign in.
         </Link>
-        <footer
-          style={{
-            width: '100%',
-            marginTop: 'auto',
-            textAlign: 'center',
-            fontSize: '1.6rem',
-            paddingBottom: '1rem'
-          }}>
-          Terms of use. Privacy police.
-        </footer>
+        <Footer />
       </React.Fragment>
     );
   }

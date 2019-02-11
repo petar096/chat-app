@@ -1,0 +1,23 @@
+.alert {
+    width: 40rem;
+    height: 2.5rem;
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .3rem;
+
+
+    &--error {
+        background: lighten(red, 40%);
+        color: red;
+    }
+
+    &--success {
+        background: #B2DBBF;
+        color: green;
+    }
+}
+
