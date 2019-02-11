@@ -9,10 +9,12 @@ const InputField = ({
   onChange,
   label,
   small,
-  required
+  required,
+  autofocus
 }) => (
   <div className={small ? 'field field-small' : 'field'}>
     <input
+      autoFocus={autofocus}
       name={name}
       type={type}
       value={value}

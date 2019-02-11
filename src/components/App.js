@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import SignUp from './SignUp/';
 import Login from './Login/';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ResetPassword from './ForgetPassword/ResetPassword';
+import ResetPassword from './ForgetPassword/';
 
 class App extends Component {
   render() {

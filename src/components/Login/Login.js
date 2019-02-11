@@ -58,6 +58,7 @@ class Login extends Component {
         </h4>
         <form className="form" onSubmit={this.handleOnSubmit}>
           <InputField
+            autofocus={true}
             type="text"
             name="username"
             label="Username"
@@ -80,7 +81,7 @@ class Login extends Component {
                 checked={this.state.remeberMe}
               />{' '}
               <span className="checkmark" />
-              Remeber me
+              Remember me
             </label>
 
             <Link

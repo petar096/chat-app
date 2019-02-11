@@ -47,11 +47,12 @@ class SignUp extends Component {
         ) : null}
 
         <h2 className="primary-heading">Food-order</h2>
-        <h4 className="subheading">Plaease complete to create your account</h4>
+        <h4 className="subheading">Please complete to create your account</h4>
 
         <form className="form" onSubmit={this.handleOnSubmit}>
           <div className="form-group-inline">
             <InputField
+              autofocus={true}
               type="text"
               name="firstName"
               label="First Name"
