@@ -21,7 +21,7 @@ const InputField = ({
       required={required}
       placeholder="&nbsp;"
     />
-    <span class="field__label">{label}</span>
+    <span className="field__label">{label}</span>
   </div>
 );
 
