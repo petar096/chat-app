@@ -1,6 +1,6 @@
 import React from 'react';
-import AuthPage from '../layout';
 import SignUp from './SignUp';
+import AuthPage from '../../layout/AuthPage';
 
 export default function() {
 	return <AuthPage right={<SignUp />} />;

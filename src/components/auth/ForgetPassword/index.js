@@ -1,7 +1,7 @@
 import React from 'react';
-import AuthPage from '../layout';
 import ResetPassword from './ResetPassword';
+import AuthPage from '../../layout/AuthPage';
 
 export default function() {
-  return <AuthPage right={<ResetPassword />} />;
+	return <AuthPage right={<ResetPassword />} />;
 }
