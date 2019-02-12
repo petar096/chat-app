@@ -7,6 +7,7 @@ import Alert from '../../common/Alert';
 import Footer from '../../layout/Footer';
 
 import './_SignUp.scss';
+import { SIGN_IN } from '../../../constants/routes';
 
 class SignUp extends Component {
 	constructor(props) {
@@ -101,7 +102,7 @@ class SignUp extends Component {
 					<Button text="Sign up" className="btn--primary" />
 				</form>
 				<Link
-					to="/login"
+					to={SIGN_IN}
 					style={{
 						display: 'block',
 						textAlign: 'center',

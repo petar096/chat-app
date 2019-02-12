@@ -26,7 +26,7 @@ class ResetPassword extends Component {
 			<React.Fragment>
 				<h2 className="primary-heading">Food-order</h2>
 				<h4 className="subheading">
-					Welcome back!Please login to your account.
+					Welcome back! Please login to your account.
 				</h4>
 				<form className="form">
 					<InputField
@@ -37,7 +37,7 @@ class ResetPassword extends Component {
 						onChange={this.handleChange}
 						value={this.state.email}
 					/>
-					<Button text="Login" className="btn--primary" />
+					<Button text="Send request" className="btn--primary" />
 				</form>
 				<Footer />
 			</React.Fragment>

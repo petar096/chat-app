@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { signIn } from '../../../store/actions/authActions';
 import './_Login.scss';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
 import Alert from '../../common/Alert';
 import Footer from '../../layout/Footer';
+import { PASSWORD_FORGET } from '../../../constants/routes';
 
 class Login extends Component {
 	constructor(props) {
@@ -30,6 +32,7 @@ class Login extends Component {
 		e.preventDefault();
 
 		console.log(this.state);
+		this.props.signIn();
 	}
 
 	handleChange(e) {
@@ -86,7 +89,7 @@ class Login extends Component {
 						</label>
 
 						<Link
-							to="/forgot-password"
+							to={PASSWORD_FORGET}
 							style={{
 								marginLeft: 'auto',
 								fontSize: '1.8rem',
@@ -108,4 +111,7 @@ class Login extends Component {
 		);
 	}
 }
-export default Login;
+export default connect(
+	null,
+	{ signIn }
+)(Login);
