@@ -17,9 +17,14 @@ export const signIn = (email, password) => dispatch => {
 		.catch(err => console.log(err));
 };
 
-// export const signUp = (user) {
-
-// }
+export const signUp = user => dispatch => {
+	auth
+		.createUserWithEmailAndPassword(user.email, user.password)
+		.then(data => {
+			console.log(data);
+		})
+		.catch();
+};
 
 export const signOut = () => dispatch => {
 	auth.signOut().then(() =>

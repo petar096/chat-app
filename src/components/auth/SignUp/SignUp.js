@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signUp } from '../../../store/actions/authActions';
+
+import { SIGN_IN } from '../../../constants/routes';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
@@ -7,7 +11,6 @@ import Alert from '../../common/Alert';
 import Footer from '../../layout/Footer';
 
 import './_SignUp.scss';
-import { SIGN_IN } from '../../../constants/routes';
 
 class SignUp extends Component {
 	constructor(props) {
@@ -35,9 +38,11 @@ class SignUp extends Component {
 	}
 
 	handleOnSubmit(e) {
+		const { firstName, lastName, email, username, password } = this.state;
 		e.preventDefault();
 
-		console.log(this.state);
+		let user = { email, password, username, password, firstName, lastName };
+		this.props.signUp(user);
 	}
 
 	render() {
@@ -117,4 +122,7 @@ class SignUp extends Component {
 	}
 }
 
-export default SignUp;
+export default connect(
+	null,
+	{ signUp }
+)(SignUp);
