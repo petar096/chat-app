@@ -15,7 +15,7 @@ class Login extends Component {
 		super(props);
 
 		this.state = {
-			username: '',
+			email: '',
 			password: '',
 			remeberMe: false,
 			error: ''
@@ -32,11 +32,11 @@ class Login extends Component {
 		e.preventDefault();
 
 		console.log(this.state);
-		this.props.signIn();
+		this.props.signIn(this.state.email, this.state.password);
 	}
 
 	handleChange(e) {
-		const { username, password } = this.state;
+		const { email, password } = this.state;
 		this.setState({
 			[e.target.name]: e.target.value
 		});
@@ -63,14 +63,14 @@ class Login extends Component {
 				<form className="form" onSubmit={this.handleOnSubmit}>
 					<InputField
 						autofocus={true}
-						type="text"
-						name="username"
-						label="Username"
+						type="email"
+						name="email"
+						label="Email"
 						onChange={this.handleChange}
 						value={this.state.username}
 					/>
 					<InputField
-						type="text"
+						type="password"
 						name="password"
 						label="Password"
 						onChange={this.handleChange}

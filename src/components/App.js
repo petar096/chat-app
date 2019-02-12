@@ -5,14 +5,15 @@ import { SIGN_UP, SIGN_IN, PASSWORD_FORGET } from '../constants/routes';
 import Login from './auth/Login/';
 import ResetPassword from './auth/ForgetPassword/';
 import SignUp from './auth/SignUp';
+import NotFoundPage from './pages/NotFoundPage';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			authUser: null
-		};
+		// this.state = {
+		// 	authUser: null
+		// };
 	}
 
 	// componentDidMount() {
@@ -30,6 +31,7 @@ class App extends Component {
 					<Route path="/" component={SignUp} exact />
 					<Route path={SIGN_IN} component={Login} exact />
 					<Route path={PASSWORD_FORGET} component={ResetPassword} exact />
+					<Route component={NotFoundPage} />
 				</Switch>
 			</Router>
 		);

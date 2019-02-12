@@ -1,12 +1,11 @@
 import { auth } from '../../firebase/config';
 import { SIGN_IN, LOG_OUT } from '../types/authConstants';
 
-export const signIn = () => dispatch => {
+export const signIn = (email, password) => dispatch => {
 	auth
-		.signInWithEmailAndPassword('admin@admin.com', 'admin123')
+		.signInWithEmailAndPassword(email, password)
 		.then(data => {
 			let user = data.user;
-			console.log(user);
 			dispatch({
 				type: SIGN_IN,
 				user: {
@@ -18,9 +17,14 @@ export const signIn = () => dispatch => {
 		.catch(err => console.log(err));
 };
 
+// export const signUp = (user) {
+
+// }
+
 export const signOut = () => dispatch => {
-	auth.signOut();
-	dispatch({
-		type: LOG_OUT
-	});
+	auth.signOut().then(() =>
+		dispatch({
+			type: LOG_OUT
+		})
+	);
 };
