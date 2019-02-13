@@ -32,9 +32,7 @@ class Login extends Component {
 	handleOnSubmit(e) {
 		e.preventDefault();
 
-		console.log(this.props);
-		const login = () =>
-			this.props.signIn(this.state.email, this.state.password);
+		this.props.signIn(this.state.email, this.state.password);
 	}
 
 	handleChange(e) {
@@ -103,7 +101,10 @@ class Login extends Component {
 					<div className="form-group-inline" style={{ marginTop: '4rem' }}>
 						<Button text="Login" className="btn--primary btn-block" />
 						<Link to="/signup" style={{ width: '100%', marginLeft: '2rem' }}>
-							<Button text="Sign up" className="btn--secondary btn-block" />
+							<Button
+								text={`Login with github`}
+								className="btn--secondary btn-block"
+							/>
 						</Link>
 					</div>
 				</form>

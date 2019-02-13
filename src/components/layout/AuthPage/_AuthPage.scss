@@ -1,8 +1,9 @@
 @import '../../../styles/common/variables';
 
 .auth-container {
+	// padding-top: 6rem;
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 6rem);
 }
 
 .auth-left-side {

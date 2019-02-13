@@ -1,0 +1,43 @@
+.header {
+  height: 6rem;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0rem 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:  #7975B7;
+  
+  .logo {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-right: auto;
+  }
+
+  .right-nav {
+    display: flex;
+    padding: 0;
+    list-style: none;
+    height: auto;
+
+    li {
+      display: inline-block;
+      margin: 0 .6rem;
+
+      
+      a {
+        color: #fff;
+        font-size: 1.8rem;
+        text-decoration: none;
+        display: block;
+        padding: .4rem;
+
+        &:hover {
+          color: darken(#7975B7, 20%);
+        }
+      }
+    }
+  }
+}

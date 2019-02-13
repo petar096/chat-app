@@ -1,5 +1,5 @@
 import { auth } from '../../firebase/config';
-import { SIGN_IN, LOG_OUT } from '../types/authConstants';
+import { SIGN_IN, LOG_OUT, SET_USER } from '../types/authConstants';
 
 export const signIn = (email, password) => dispatch => {
 	auth
@@ -15,6 +15,15 @@ export const signIn = (email, password) => dispatch => {
 			});
 		})
 		.catch(err => console.log(err));
+};
+export const setUser = user => dispatch => {
+	dispatch({
+		type: SET_USER,
+		user: {
+			id: user.uid,
+			email: user.email
+		}
+	});
 };
 
 export const signUp = user => dispatch => {

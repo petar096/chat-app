@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { SIGN_UP, SIGN_IN, PASSWORD_FORGET } from '../constants/routes';
+import { connect } from 'react-redux';
 import { auth } from '../firebase/config';
 
 import Home from './pages/Home';
@@ -11,21 +12,16 @@ import NotFoundPage from './pages/NotFoundPage';
 import { PrivateRoute } from '../routing/PrivateRoute';
 import PublicRoute from '../routing/PublicRoute';
 import Header from './layout/Header/Header';
+import { setUser } from '../store/actions/authActions';
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			authUser: {}
-		};
-	}
-
 	componentDidMount() {
 		auth.onAuthStateChanged(authUser => {
-			authUser
-				? this.setState(() => ({ authUser }))
-				: this.setState(() => ({ authUser: {} }));
+			if (authUser) {
+				this.props.setUser(authUser);
+			} else {
+				console.log(this.props);
+			}
 		});
 	}
 
@@ -37,7 +33,7 @@ class App extends Component {
 					<Switch>
 						<Route path="/" component={Home} exact />
 						<PublicRoute path={SIGN_IN} component={Login} />
-						<PrivateRoute path={SIGN_UP} component={SignUp} />
+						<Route path={SIGN_UP} component={SignUp} />
 						<Route path={PASSWORD_FORGET} component={ResetPassword} exact />
 						<Route component={NotFoundPage} />
 					</Switch>
@@ -47,4 +43,7 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default connect(
+	null,
+	{ setUser }
+)(App);

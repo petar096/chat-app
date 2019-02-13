@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 import AuthNavLinks from './AuthNavLinks';
 import NonAuthNavLinks from './NonAuthNavLinks';
 
+import './_Header.scss';
+
 const Header = ({ isAuthenticated }) => (
-	<header>{isAuthenticated ? <AuthNavLinks /> : <NonAuthNavLinks />}</header>
+	<header className="header">
+		<div className="logo">Food order</div>
+		<ul className="right-nav">
+			{isAuthenticated ? <AuthNavLinks /> : <NonAuthNavLinks />}
+		</ul>
+	</header>
 );
 
 const mapStateToProps = state => ({

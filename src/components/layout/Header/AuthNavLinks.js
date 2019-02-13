@@ -1,12 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 // import { HOME } from '../constants/routes';
+import { signOut } from '../../../store/actions/authActions';
+import { HOME_PAGE } from '../../../constants/routes';
 
-const AuthNavLinks = () => {
+const AuthNavLinks = props => {
 	return (
-		<ul>
-			<Link to="">Home</Link>
-		</ul>
+		<React.Fragment>
+			<li>
+				<NavLink to={HOME_PAGE}>Home</NavLink>
+			</li>
+			<li>
+				<a href="#" onClick={props.logout}>
+					Logout
+				</a>
+			</li>
+		</React.Fragment>
 	);
 };
-export default AuthNavLinks;
+
+const mapDispatchToProps = dispatch => ({
+	logout: () => dispatch(signOut())
+});
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(AuthNavLinks);
