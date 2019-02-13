@@ -1,4 +1,4 @@
-const initState = null;
+const initState = {};
 import { SIGN_IN, LOG_OUT } from '../types/authConstants';
 
 const authReducer = (state = initState, action) => {
@@ -6,7 +6,7 @@ const authReducer = (state = initState, action) => {
 		case SIGN_IN:
 			return action.user;
 		case LOG_OUT:
-			return null;
+			return {};
 		default:
 			return state;
 	}

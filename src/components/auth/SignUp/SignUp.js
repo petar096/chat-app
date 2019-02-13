@@ -58,7 +58,6 @@ class SignUp extends Component {
 				<form className="form" onSubmit={this.handleOnSubmit}>
 					<div className="form-group-inline">
 						<InputField
-							autofocus={true}
 							type="text"
 							name="firstName"
 							label="First Name"

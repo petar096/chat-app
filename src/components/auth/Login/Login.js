@@ -9,6 +9,7 @@ import Button from '../../common/Button';
 import Alert from '../../common/Alert';
 import Footer from '../../layout/Footer';
 import { PASSWORD_FORGET } from '../../../constants/routes';
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
 	constructor(props) {
@@ -31,8 +32,9 @@ class Login extends Component {
 	handleOnSubmit(e) {
 		e.preventDefault();
 
-		console.log(this.state);
-		this.props.signIn(this.state.email, this.state.password);
+		console.log(this.props);
+		const login = () =>
+			this.props.signIn(this.state.email, this.state.password);
 	}
 
 	handleChange(e) {
@@ -62,7 +64,6 @@ class Login extends Component {
 				</h4>
 				<form className="form" onSubmit={this.handleOnSubmit}>
 					<InputField
-						autofocus={true}
 						type="email"
 						name="email"
 						label="Email"
@@ -101,7 +102,7 @@ class Login extends Component {
 
 					<div className="form-group-inline" style={{ marginTop: '4rem' }}>
 						<Button text="Login" className="btn--primary btn-block" />
-						<Link to="/" style={{ width: '100%', marginLeft: '2rem' }}>
+						<Link to="/signup" style={{ width: '100%', marginLeft: '2rem' }}>
 							<Button text="Sign up" className="btn--secondary btn-block" />
 						</Link>
 					</div>
@@ -114,4 +115,4 @@ class Login extends Component {
 export default connect(
 	null,
 	{ signIn }
-)(Login);
+)(withRouter(Login));
