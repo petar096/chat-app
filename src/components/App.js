@@ -9,7 +9,7 @@ import Login from './auth/Login/';
 import ResetPassword from './auth/ForgetPassword/';
 import SignUp from './auth/SignUp';
 import NotFoundPage from './pages/NotFoundPage';
-import { PrivateRoute } from '../routing/PrivateRoute';
+import PrivateRoute from '../routing/PrivateRoute';
 import PublicRoute from '../routing/PublicRoute';
 import Header from './layout/Header/Header';
 import { setUser } from '../store/actions/authActions';
@@ -19,8 +19,6 @@ class App extends Component {
 		auth.onAuthStateChanged(authUser => {
 			if (authUser) {
 				this.props.setUser(authUser);
-			} else {
-				console.log(this.props);
 			}
 		});
 	}
@@ -33,8 +31,12 @@ class App extends Component {
 					<Switch>
 						<Route path="/" component={Home} exact />
 						<PublicRoute path={SIGN_IN} component={Login} />
-						<Route path={SIGN_UP} component={SignUp} />
-						<Route path={PASSWORD_FORGET} component={ResetPassword} exact />
+						<PublicRoute path={SIGN_UP} component={SignUp} />
+						<PublicRoute
+							path={PASSWORD_FORGET}
+							component={ResetPassword}
+							exact
+						/>
 						<Route component={NotFoundPage} />
 					</Switch>
 				</React.Fragment>

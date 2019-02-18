@@ -7,11 +7,11 @@ const AuthPage = ({ left = null, right = null }) => {
 			{left !== null ? (
 				<React.Fragment>
 					<div className="auth-right-side">{left}</div>
-					<div className="auth-left-side" />
+					<div className="auth-left-side bg-side" />
 				</React.Fragment>
 			) : (
 				<React.Fragment>
-					<div className="auth-left-side" />
+					<div className="auth-left-side bg-side" />
 					<div className="auth-right-side">{right}</div>
 				</React.Fragment>
 			)}

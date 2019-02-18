@@ -12,7 +12,6 @@
     user-select: none;
   }
   
-  /* Hide the browser's default checkbox */
   .container input {
     position: absolute;
     opacity: 0;
@@ -31,12 +30,10 @@
     border: .1rem solid #DADDD8;
     
   }
-  
 
   .container input:checked ~ .checkmark {
     background-color: #595687;
   }
-  
 
   .checkmark:after {
     content: "";
@@ -47,7 +44,6 @@
   .container input:checked ~ .checkmark:after {
     display: block;
   }
-  
 
   .container .checkmark:after {
     left: .9rem;

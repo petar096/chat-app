@@ -1,18 +1,10 @@
-import { combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { combineReducers } from 'redux';
 import authReducer from './authReducer';
+import { reducer as toastrReducer } from 'react-redux-toastr';
 
 const rootReducer = combineReducers({
-	auth: authReducer
+	auth: authReducer,
+	toastr: toastrReducer
 });
 
 export default rootReducer;
-
-// import { composeWithDevTools } from 'redux-devtools-extension';
-
-// import rootReducer from './reducers';
-
-// const store = createStore(
-// 	rootReducer,
-// 	composeWithDevTools(applyMiddleware(thunk))
-// );
