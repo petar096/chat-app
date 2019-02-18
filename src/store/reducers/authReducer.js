@@ -4,7 +4,6 @@ import { SIGN_IN, LOG_OUT, SET_USER } from '../types/authConstants';
 const authReducer = (state = initState, action) => {
 	switch (action.type) {
 		case SET_USER:
-		case SIGN_IN:
 			return action.user;
 		case LOG_OUT:
 			return {};

@@ -1,4 +1,4 @@
-import { auth, app } from '../../firebase/config';
+import { auth, app, db } from '../../firebase/config';
 import { toastr } from 'react-redux-toastr';
 import { SIGN_IN, LOG_OUT, SET_USER } from '../types/authConstants';
 
@@ -7,17 +7,12 @@ export const signIn = (email, password) => dispatch => {
 		.signInWithEmailAndPassword(email, password)
 		.then(data => {
 			let user = data.user;
-			dispatch({
-				type: SIGN_IN,
-				user: {
-					id: user.uid,
-					email: user.email
-				}
-			});
+			dispatch(setUser(user));
 			toastr.success('Log in', 'You have signed in successfull');
 		})
-		.catch(err => toastr.error('Login error', 'Invalid credentials'));
+		.catch(err => toastr.error('Login error', err.message));
 };
+
 export const setUser = user => dispatch => {
 	dispatch({
 		type: SET_USER,
@@ -28,13 +23,15 @@ export const setUser = user => dispatch => {
 	});
 };
 
-export const signUp = user => dispatch => {
+export const signUp = user => () => {
 	auth
 		.createUserWithEmailAndPassword(user.email, user.password)
 		.then(data => {
-			console.log(data);
+			db.collection('users')
+				.doc(data.user.uid)
+				.set({ ...user });
 		})
-		.catch();
+		.catch(err => toastr.error('Sign up error', err.message));
 };
 
 export const signOut = () => dispatch => {
@@ -43,11 +40,12 @@ export const signOut = () => dispatch => {
 			type: LOG_OUT
 		})
 	);
-	toastr.success('Sign out', 'You have successfully signed out');
+	toastr.info('Sign out', 'You have successfully signed out', {
+		timeOut: 1000
+	});
 };
 
 export const signInWithGoogle = () => dispatch => {
-	console.log('clicked');
 	const provider = new app.auth.GoogleAuthProvider();
 	auth
 		.signInWithPopup(provider)
@@ -62,5 +60,14 @@ export const signInWithGoogle = () => dispatch => {
 			});
 			toastr.success('Log in', 'You have signed in successfull');
 		})
-		.catch(err => console(err));
+		.catch(err => toastr.error('Login error', 'Invalid credentials'));
+};
+
+export const resetPassword = email => () => {
+	auth
+		.sendPasswordResetEmail(email)
+		.then(() =>
+			toastr.success('Password reset', 'Your password was sent to your email')
+		)
+		.catch(err => toastr.error('Error', err.message));
 };

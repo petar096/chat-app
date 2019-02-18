@@ -12,8 +12,6 @@
     text-decoration: none;
     text-align: center;
 
-
-
 	&:hover {
 		cursor: pointer;
 		background: darken(#B5B2B1, 10%);
@@ -42,7 +40,18 @@
             transition: all 0.2s ease-in;
         }
     }
+    &--google {
+        background:  #fff;
+        color: red;
+        border: .2rem solid red;
 
+        &:hover {
+          cursor: pointer;
+          background: red; 
+          color: #fff;
+          transition: all 0.2s ease-in;
+      }
+    }
 }
 .btn-block {
     width: 100%;

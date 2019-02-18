@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { HOME } from '../constants/routes';
 import { signOut } from '../../../store/actions/authActions';
 import { HOME_PAGE } from '../../../constants/routes';
 

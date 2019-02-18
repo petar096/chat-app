@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { signIn, signInWithGoogle } from '../../../store/actions/authActions';
 import './_Login.scss';
 
+import { Field, reduxForm } from 'redux-form';
+
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
 import Alert from '../../common/Alert';
 import Footer from '../../layout/Footer';
 import { PASSWORD_FORGET } from '../../../constants/routes';
-import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
 	constructor(props) {
@@ -36,7 +37,6 @@ class Login extends Component {
 	}
 
 	handleChange(e) {
-		const { email, password } = this.state;
 		this.setState({
 			[e.target.name]: e.target.value
 		});
@@ -46,7 +46,7 @@ class Login extends Component {
 		return <Alert type={type} msg={msg} />;
 	}
 
-	handleCheckbox(e) {
+	handleCheckbox() {
 		this.setState({
 			remeberMe: !this.state.remeberMe
 		});
@@ -61,6 +61,7 @@ class Login extends Component {
 					Welcome back!Please login to your account.
 				</h4>
 				<form className="form" onSubmit={this.handleOnSubmit}>
+					{/* <Field component={ */}
 					<InputField
 						type="email"
 						name="email"
@@ -68,6 +69,7 @@ class Login extends Component {
 						onChange={this.handleChange}
 						value={this.state.username}
 					/>
+					{/* }  */}
 					<InputField
 						type="password"
 						name="password"
@@ -105,9 +107,9 @@ class Login extends Component {
 							type="submit"
 						/>
 						<Button
-							text={`Login with github`}
+							text={<i className="fa fa-google" />}
 							type="button"
-							className="btn--secondary btn-block"
+							className="btn--google btn-block"
 							onClick={this.props.signInWithGoogle}
 							style={{ marginRight: '0' }}
 						/>
@@ -121,4 +123,4 @@ class Login extends Component {
 export default connect(
 	null,
 	{ signIn, signInWithGoogle }
-)(withRouter(Login));
+)(Login);

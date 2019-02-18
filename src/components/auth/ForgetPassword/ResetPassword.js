@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { resetPassword } from '../../../store/actions/authActions';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
@@ -13,12 +15,19 @@ class ResetPassword extends Component {
 		};
 
 		this.handleChange = this.handleChange.bind(this);
+		this.resetPassword = this.resetPassword.bind(this);
 	}
 
 	handleChange(e) {
 		this.setState({
 			[e.target.name]: e.target.value
 		});
+	}
+
+	resetPassword(e) {
+		e.preventDefault();
+
+		this.props.resetPassword(this.state.email);
 	}
 
 	render() {
@@ -28,7 +37,7 @@ class ResetPassword extends Component {
 				<h4 className="subheading">
 					Welcome back! Please login to your account.
 				</h4>
-				<form className="form">
+				<form className="form" onSubmit={this.resetPassword}>
 					<InputField
 						autofocus={true}
 						type="email"
@@ -45,4 +54,7 @@ class ResetPassword extends Component {
 	}
 }
 
-export default ResetPassword;
+export default connect(
+	null,
+	{ resetPassword }
+)(ResetPassword);
