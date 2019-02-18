@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signIn, signInWithGoogle } from '../../../store/actions/authActions';
+import {
+	signIn,
+	signInWithGoogle,
+	getUserById
+} from '../../../store/actions/authActions';
 import './_Login.scss';
 
 import { Field, reduxForm } from 'redux-form';
@@ -122,5 +126,5 @@ class Login extends Component {
 }
 export default connect(
 	null,
-	{ signIn, signInWithGoogle }
+	{ signIn, signInWithGoogle, getUserById }
 )(Login);

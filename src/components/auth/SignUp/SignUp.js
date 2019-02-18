@@ -26,7 +26,6 @@ class SignUp extends Component {
 			error: ''
 		};
 
-
 		// functions
 		this.handleChange = this.handleChange.bind(this);
 		this.handleOnSubmit = this.handleOnSubmit.bind(this);
