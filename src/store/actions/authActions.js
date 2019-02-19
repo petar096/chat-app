@@ -73,11 +73,6 @@ export const resetPassword = email => () => {
 };
 
 export const getUserById = id => () => {
-	// return db
-	// 	.collection('users')
-	// 	.doc(id)
-	// 	.get();
-
 	return db
 		.collection('users')
 		.doc(id)

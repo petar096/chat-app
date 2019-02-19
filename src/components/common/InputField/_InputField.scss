@@ -64,6 +64,13 @@
 				transform: translateY(-26px) scale(0.75);
 			}
 		}
+
+		&--error {
+			border-bottom: 2px solid red;
+		}
+		&--warning {
+			border-bottom: 2px solid orange;
+		}
 	}
 }
 .field-small {
@@ -72,4 +79,19 @@
 	&:nth-child(2) {
 		margin-left: 1rem;
 	}
+}
+.error {
+	font-size: 1.7rem;
+	margin-top: .2rem;
+	padding-top: .4rem;
+	display: block;
+	color: red;
+}
+
+.warning {
+	font-size: 1.7rem;
+	margin-top: .2rem;
+	padding-top: .4rem;
+	display: block;
+	color: orange;
 }

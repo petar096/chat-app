@@ -7,7 +7,7 @@ import { SIGN_IN } from '../../../constants/routes';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
-import Alert from '../../common/Alert';
+// import Alert from '../../common/Alert';
 import Footer from '../../layout/Footer';
 
 import './_SignUp.scss';
@@ -38,8 +38,8 @@ class SignUp extends Component {
 	}
 
 	handleOnSubmit(e) {
-		const { firstName, lastName, email, username, password } = this.state;
 		e.preventDefault();
+		const { firstName, lastName, email, username, password } = this.state;
 
 		let user = { email, password, username, password, firstName, lastName };
 		this.props.signUp(user);
@@ -48,9 +48,9 @@ class SignUp extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{this.state.error ? (
+				{/* {this.state.error ? (
 					<Alert type="error" msg={this.state.error} />
-				) : null}
+				) : null} */}
 
 				<h2 className="primary-heading">Food-order</h2>
 				<h4 className="subheading">Please complete to create your account</h4>

@@ -12,9 +12,32 @@ import { Field, reduxForm } from 'redux-form';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
-import Alert from '../../common/Alert';
 import Footer from '../../layout/Footer';
 import { PASSWORD_FORGET } from '../../../constants/routes';
+
+const validate = values => {
+	const errors = {};
+	if (!values.password) {
+		errors.password = 'Required';
+	} else if (values.password.length > 15) {
+		errors.password = 'Must be 15 characters or less';
+	}
+	if (!values.email) {
+		errors.email = 'Required';
+	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+		errors.email = 'Invalid email address';
+	}
+
+	return errors;
+};
+const warn = values => {
+	const warnings = {};
+	if (values.email && values.email.includes('admin.com')) {
+		console.log(values.email.includes('admin'));
+		warnings.email = 'Hmm, that looks little sketchy';
+	}
+	return warnings;
+};
 
 class Login extends Component {
 	constructor(props) {
@@ -28,26 +51,7 @@ class Login extends Component {
 		};
 
 		// functions
-		this.handleChange = this.handleChange.bind(this);
 		this.handleCheckbox = this.handleCheckbox.bind(this);
-		this.handleError = this.handleError.bind(this);
-		this.handleOnSubmit = this.handleOnSubmit.bind(this);
-	}
-
-	handleOnSubmit(e) {
-		e.preventDefault();
-
-		this.props.signIn(this.state.email, this.state.password);
-	}
-
-	handleChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	}
-
-	handleError(type, msg) {
-		return <Alert type={type} msg={msg} />;
 	}
 
 	handleCheckbox() {
@@ -57,29 +61,32 @@ class Login extends Component {
 	}
 
 	render() {
+		const { handleSubmit, reset, submitting } = this.props;
+
 		return (
 			<React.Fragment>
-				{this.state.error ? <Alert type="success" msg="Error" /> : null}
+				{/* {this.state.error ? <Alert type="success" msg="Error" /> : null} */}
 				<h2 className="primary-heading">Food-order</h2>
 				<h4 className="subheading">
 					Welcome back!Please login to your account.
 				</h4>
-				<form className="form" onSubmit={this.handleOnSubmit}>
-					{/* <Field component={ */}
-					<InputField
+				<form
+					className="form"
+					onSubmit={handleSubmit(({ email, password }) => {
+						this.props.signIn(email, password);
+						reset();
+					})}>
+					<Field
 						type="email"
 						name="email"
 						label="Email"
-						onChange={this.handleChange}
-						value={this.state.username}
+						component={InputField}
 					/>
-					{/* }  */}
-					<InputField
+					<Field
 						type="password"
 						name="password"
 						label="Password"
-						onChange={this.handleChange}
-						value={this.state.password}
+						component={InputField}
 					/>
 					<div className="form-group-inline">
 						<label className="container">
@@ -92,7 +99,6 @@ class Login extends Component {
 							<span className="checkmark" />
 							Remember me
 						</label>
-
 						<Link
 							to={PASSWORD_FORGET}
 							style={{
@@ -109,6 +115,7 @@ class Login extends Component {
 							text="Login"
 							className="btn--primary btn-block"
 							type="submit"
+							disabled={submitting}
 						/>
 						<Button
 							text={<i className="fa fa-google" />}
@@ -127,4 +134,10 @@ class Login extends Component {
 export default connect(
 	null,
 	{ signIn, signInWithGoogle, getUserById }
-)(Login);
+)(
+	reduxForm({
+		form: 'loginForm',
+		validate,
+		warn
+	})(Login)
+);
