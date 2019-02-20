@@ -5,36 +5,13 @@ import { signUp } from '../../../store/actions/authActions';
 
 import { SIGN_IN } from '../../../constants/routes';
 import { Field, reduxForm, Form } from 'redux-form';
+import { warn, validate } from './validate';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
 import Footer from '../../layout/Footer';
 
 import './_SignUp.scss';
-
-const validate = values => {
-	const errors = {};
-	if (!values.password) {
-		errors.password = 'Required';
-	} else if (values.password.length > 15) {
-		errors.password = 'Must be 15 characters or less';
-	}
-	if (!values.email) {
-		errors.email = 'Required';
-	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-		errors.email = 'Invalid email address';
-	}
-
-	return errors;
-};
-const warn = values => {
-	const warnings = {};
-	if (values.email && values.email.includes('admin.com')) {
-		console.log(values.email.includes('admin'));
-		warnings.email = 'Hmm, that looks little sketchy';
-	}
-	return warnings;
-};
 
 class SignUp extends Component {
 	constructor(props) {
@@ -55,18 +32,6 @@ class SignUp extends Component {
 
 		this.props.signUp(user);
 	}
-
-	// onSubmit={handleSubmit(values => {
-	// 	let user = {
-	// 		firstName: values.firstName,
-	// 		lastName: values.lastName,
-	// 		email: values.email,
-	// 		password: values.password,
-	// 		rePassword: values.rePassword,
-	// 		username: values.username
-	// 	};
-	// 	console.log(user);
-	// })}
 
 	render() {
 		const { handleSubmit, reset, submitting } = this.props;
@@ -117,16 +82,9 @@ class SignUp extends Component {
 						label="Re Password"
 						component={InputField}
 					/>
-					<Button text="Sign up" className="btn--primary" />
+					<Button text="Sign up" className="btn--primary btn-block--sm" />
 				</Form>
-				<Link
-					to={SIGN_IN}
-					style={{
-						display: 'block',
-						textAlign: 'center',
-						fontSize: '1.7rem',
-						letterSpacing: '.1rem'
-					}}>
+				<Link to={SIGN_IN} className="have-account-link">
 					Already have account?Sign in.
 				</Link>
 				<Footer />

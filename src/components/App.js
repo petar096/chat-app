@@ -13,7 +13,6 @@ import PrivateRoute from '../routing/PrivateRoute';
 import PublicRoute from '../routing/PublicRoute';
 import Header from './layout/Header/Header';
 import { setUser } from '../store/actions/authActions';
-import Test from './auth/Test';
 
 class App extends Component {
 	componentDidMount() {
@@ -38,7 +37,6 @@ class App extends Component {
 							component={ResetPassword}
 							exact
 						/>
-						{/* <Route path="/test" component={Test} /> */}
 						<Route component={NotFoundPage} />
 					</Switch>
 				</React.Fragment>

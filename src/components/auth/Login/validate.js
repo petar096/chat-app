@@ -3,7 +3,7 @@ export const validate = values => {
 
 	// password validator
 	if (!values.password) {
-		errors.password = 'Required';
+		errors.password = 'Password is Required';
 	} else if (values.password.length > 15) {
 		errors.password = 'Must be 15 characters or less';
 	} else if (values.password.length < 3) {
@@ -11,7 +11,7 @@ export const validate = values => {
 	}
 	// email validator
 	if (!values.email) {
-		errors.email = 'Required';
+		errors.email = 'Email is Required';
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
 		errors.email = 'Invalid email address';
 	}
