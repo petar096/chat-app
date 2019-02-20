@@ -30,7 +30,7 @@ class App extends Component {
 				<React.Fragment>
 					<Header />
 					<Switch>
-						<Route path="/" component={Home} exact />
+						<PrivateRoute path="/" component={Home} exact />
 						<PublicRoute path={SIGN_IN} component={Login} />
 						<PublicRoute path={SIGN_UP} component={SignUp} />
 						<PublicRoute
@@ -38,7 +38,7 @@ class App extends Component {
 							component={ResetPassword}
 							exact
 						/>
-						<Route path="/test" component={Test} />
+						{/* <Route path="/test" component={Test} /> */}
 						<Route component={NotFoundPage} />
 					</Switch>
 				</React.Fragment>

@@ -1,71 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-	signIn,
-	signInWithGoogle,
-	getUserById
-} from '../../../store/actions/authActions';
+import { signIn, signInWithGoogle } from '../../../store/actions/authActions';
+import { Field, reduxForm } from 'redux-form';
+
 import './_Login.scss';
 
-import { Field, reduxForm } from 'redux-form';
+import { PASSWORD_FORGET } from '../../../constants/routes';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
 import Footer from '../../layout/Footer';
-import { PASSWORD_FORGET } from '../../../constants/routes';
-
-const validate = values => {
-	const errors = {};
-	if (!values.password) {
-		errors.password = 'Required';
-	} else if (values.password.length > 15) {
-		errors.password = 'Must be 15 characters or less';
-	}
-	if (!values.email) {
-		errors.email = 'Required';
-	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-		errors.email = 'Invalid email address';
-	}
-
-	return errors;
-};
-const warn = values => {
-	const warnings = {};
-	if (values.email && values.email.includes('admin.com')) {
-		console.log(values.email.includes('admin'));
-		warnings.email = 'Hmm, that looks little sketchy';
-	}
-	return warnings;
-};
+import { warn, validate } from './validate';
 
 class Login extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			email: '',
-			password: '',
-			remeberMe: false,
-			error: ''
-		};
-
-		// functions
-		this.handleCheckbox = this.handleCheckbox.bind(this);
-	}
-
-	handleCheckbox() {
-		this.setState({
-			remeberMe: !this.state.remeberMe
-		});
-	}
-
 	render() {
 		const { handleSubmit, reset, submitting } = this.props;
 
 		return (
 			<React.Fragment>
-				{/* {this.state.error ? <Alert type="success" msg="Error" /> : null} */}
 				<h2 className="primary-heading">Food-order</h2>
 				<h4 className="subheading">
 					Welcome back!Please login to your account.
@@ -89,16 +42,12 @@ class Login extends Component {
 						component={InputField}
 					/>
 					<div className="form-group-inline">
-						<label className="container">
-							<input
-								type="checkbox"
-								name="remeberMe"
-								onChange={this.handleCheckbox}
-								checked={this.state.remeberMe}
-							/>{' '}
-							<span className="checkmark" />
-							Remember me
-						</label>
+						<Field
+							type="checkbox"
+							name="rememberMe"
+							component={InputField}
+							label="Remeber me"
+						/>
 						<Link
 							to={PASSWORD_FORGET}
 							style={{
@@ -131,9 +80,15 @@ class Login extends Component {
 		);
 	}
 }
+
+const mapDispatchToProps = dispatch => ({
+	signIn: (email, password) => dispatch(signIn(email, password)),
+	signInWithGoogle: () => dispatch(signInWithGoogle())
+});
+
 export default connect(
 	null,
-	{ signIn, signInWithGoogle, getUserById }
+	mapDispatchToProps
 )(
 	reduxForm({
 		form: 'loginForm',
