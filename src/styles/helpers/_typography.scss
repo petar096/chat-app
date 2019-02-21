@@ -13,5 +13,9 @@
     text-align: center;
     letter-spacing: .1rem;
 	color: #B0B7C1;
+
+	@include respond-to(phone) {
+		font-size: 1.4rem;
+	}
 }
 

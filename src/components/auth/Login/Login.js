@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import './_Login.scss';
 
-import { PASSWORD_FORGET } from '../../../constants/routes';
+import { PASSWORD_FORGET, SIGN_UP } from '../../../constants/routes';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
@@ -48,18 +48,11 @@ class Login extends Component {
 							component={InputField}
 							label="Remeber me"
 						/>
-						<Link
-							to={PASSWORD_FORGET}
-							style={{
-								marginLeft: 'auto',
-								fontSize: '1.8rem',
-								textDecoration: 'none'
-							}}>
+						<Link to={PASSWORD_FORGET} className="forgot-password-link">
 							Forgot Password?
 						</Link>
 					</div>
-
-					<div className="form-group-inline" style={{ marginTop: '4rem' }}>
+					<div className="inline-wrapper">
 						<Button
 							text="Login"
 							className="btn--primary btn-block"
@@ -71,10 +64,18 @@ class Login extends Component {
 							type="button"
 							className="btn--google btn-block"
 							onClick={this.props.signInWithGoogle}
-							style={{ marginRight: '0' }}
 						/>
 					</div>
 				</form>
+				<Link
+					to={SIGN_UP}
+					style={{
+						marginTop: '3rem',
+						textDecoration: 'underline',
+						fontSize: '1.8rem'
+					}}>
+					Don't have account? Sign up for free.
+				</Link>
 				<Footer />
 			</React.Fragment>
 		);

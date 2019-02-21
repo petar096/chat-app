@@ -41,22 +41,20 @@ class SignUp extends Component {
 				<h4 className="subheading">Please complete to create your account</h4>
 
 				<Form className="form" onSubmit={handleSubmit(this.handleOnSubmit)}>
-					<div className="form-group-inline">
-						<Field
-							type="text"
-							name="firstName"
-							label="First Name"
-							component={InputField}
-							small={true}
-						/>
-						<Field
-							type="text"
-							name="lastName"
-							label="Last Name"
-							small={true}
-							component={InputField}
-						/>
-					</div>
+					<Field
+						type="text"
+						name="firstName"
+						label="First Name"
+						component={InputField}
+						small={true}
+					/>
+					<Field
+						type="text"
+						name="lastName"
+						label="Last Name"
+						small={true}
+						component={InputField}
+					/>
 					<Field
 						type="text"
 						name="username"
@@ -82,7 +80,11 @@ class SignUp extends Component {
 						label="Re Password"
 						component={InputField}
 					/>
-					<Button text="Sign up" className="btn--primary btn-block--sm" />
+					<Button
+						text="Sign up"
+						className="btn--primary btn-block"
+						style={{ margin: '0 auto' }}
+					/>
 				</Form>
 				<Link to={SIGN_IN} className="have-account-link">
 					Already have account?Sign in.

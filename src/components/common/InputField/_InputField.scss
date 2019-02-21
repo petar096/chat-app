@@ -1,17 +1,29 @@
-.form-group-inline {
-	margin: 0 auto;
-	width: 100%;
-	max-width: 50rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+@import '../../../styles/helpers/mixins';
+
 
 .field {
 	position: relative;
-	margin: 2.5rem auto;
+	margin-bottom: 4.5rem;
 	width: 100%;
-	max-width: 50rem;
+			
+
+	&--small {
+		display: inline-block;
+		width: 48%;
+
+		@include respond-to(phone) {
+			width: 100%;
+			display: block;
+		}
+
+		&:nth-child(2) {
+			margin-left: 4%;
+
+			@include respond-to(phone) {
+				margin-left: 0;
+			}
+		}
+	}	
 
 	&__label {
 		position: absolute;
@@ -44,8 +56,9 @@
 				color: rgb(59, 20, 90);
 				font-weight: 600;
 				transform: translateY(-26px) scale(0.75);
+
 			}
-        }
+		}
         
 		&:hover {
 			background: rgba(#223254, 0.03);
@@ -55,12 +68,13 @@
 			background: none;
 			outline: none;
 			border-bottom: 2px solid rgb(59, 20, 90);
-            transition: all 0.6s ease-out;
+			transition: all 0.6s ease-out;
             
 			+ span {
 				color: rgb(59, 20, 90);
 				font-weight: 600;
-				letter-spacing: 0.1rem;
+				font-size: 1.6rem;
+				letter-spacing: 0.2rem;
 				transform: translateY(-26px) scale(0.75);
 			}
 		}
@@ -74,24 +88,43 @@
 	}
 }
 .field-small {
-    flex: 1;
-    
-	&:nth-child(2) {
+		flex: 1;
+		
+		@include respond-to(phone) {
+			margin: 0;
+		}
+		
+		&:nth-child(2) {
 		margin-left: 1rem;
+
+		@include respond-to(phone) {
+			margin-left: 0;
+		}
 	}
 }
 .error {
 	font-size: 1.7rem;
 	margin-top: .2rem;
 	padding-top: .4rem;
+	position: absolute;
 	display: block;
 	color: red;
+
+	@include respond-to(phone) {
+		font-size: 1.3rem;
+		
+	} 
 }
 
 .warning {
 	font-size: 1.7rem;
 	margin-top: .2rem;
 	padding-top: .4rem;
+	position: absolute;
 	display: block;
 	color: orange;
+
+	@include respond-to(phone) {
+		font-size: 1.3rem;
+	} 
 }

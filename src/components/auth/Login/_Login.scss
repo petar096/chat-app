@@ -1,3 +1,5 @@
+@import '../../../styles/helpers/mixins';
+
 .container {
     display: block;
     position: relative;
@@ -56,3 +58,24 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+  .inline-wrapper {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include respond-to(phone) {
+      flex-direction: column;
+      margin-top: 2rem;
+    }
+  }
+.forgot-password-link {
+  margin-left: auto;
+  font-size: 1.8rem;
+  text-decoration: none;
+
+  @include respond-to(phone) {
+    font-size: 1.4rem;
+  }
+}

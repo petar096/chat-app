@@ -27,7 +27,6 @@ class App extends Component {
 		return (
 			<Router>
 				<React.Fragment>
-					<Header />
 					<Switch>
 						<PrivateRoute path="/" component={Home} exact />
 						<PublicRoute path={SIGN_IN} component={Login} />

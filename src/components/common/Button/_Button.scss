@@ -1,3 +1,5 @@
+@import '../../../styles/helpers/mixins';
+
 .btn {
 	width: 18rem;
 	padding: 1.7rem 0.3rem;
@@ -26,6 +28,7 @@
             background: darken(#595687, 10%);
             transition: all 0.2s ease-in;
         }
+
     }
 
     &--secondary {
@@ -45,6 +48,10 @@
         color: red;
         border: .2rem solid red;
 
+        @include respond-to(phone) {
+            margin-top: .5rem;
+        }
+
         &:hover {
           cursor: pointer;
           background: red; 
@@ -54,5 +61,16 @@
     }
 }
 .btn-block {
-    width: 100%;
+    display: block;
+    // margin: 1rem auto;
+    @include respond-to(phone) {
+        width: 100%;
+    }
+}
+
+.btn-block--sm {
+    @include respond-to(phone) {
+        display: block;
+        width: 100%;
+    }
 }

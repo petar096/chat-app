@@ -1,7 +1,16 @@
 .form {
 	margin: 0 auto;
-	width: 90%;
+	width: 70%;
+	margin: 2rem auto;
+	padding: 3rem auto;
+
+	@include respond-to(phone) {
+		width: 90%;
+	}
+}
+
+.form-group-inline {
 	display: flex;
-	flex-direction: column;
-    align-items: center;
+	align-items: center;
+	margin: 2rem 0;
 }

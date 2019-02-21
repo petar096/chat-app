@@ -20,7 +20,7 @@ const InputField = ({
 		);
 	} else {
 		return (
-			<div className={small ? 'field field-small' : 'field'}>
+			<div className={small ? 'field field--small' : 'field'}>
 				<input
 					{...input}
 					name={name}
