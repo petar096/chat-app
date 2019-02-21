@@ -1,0 +1,52 @@
+.card {
+  width: 35rem;
+  background: #fff;
+	box-shadow: 0px 1px 15px 1px #45414e1a;
+  display: flex;
+  flex-direction: column;
+  border-bottom: .1rem solid #cdcdcd;
+  // temporary
+  height: 20rem;
+  // padding: 2rem;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+
+  .status {
+    padding: .4rem 2.4rem;
+    border-radius: 1.4rem;
+    background: red;
+    margin-left: auto;
+    font-size: 1.4rem;
+  }
+  }
+
+  &__content {
+    display: flex;
+
+    .content {
+      margin: auto;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    padding: 1rem;
+    margin-top: auto;
+    align-items: center;
+
+    .user-avatar {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      border: .1rem solid #cdcdcd;
+    }
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      margin-left: 3rem;
+    }
+  }
+}

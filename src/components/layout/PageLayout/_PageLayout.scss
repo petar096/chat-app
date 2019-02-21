@@ -1,0 +1,15 @@
+.page-layout {
+  display: flex;
+  height: calc(100vh - 6rem);
+}
+
+.site-content {
+  padding-left: 32rem;
+  background: #f0f0f7;
+  margin: 0;
+  flex: 1;
+
+  h1 {
+    margin: 0;
+  }
+}

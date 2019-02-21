@@ -7,8 +7,18 @@ import './_Header.scss';
 
 const Header = ({ isAuthenticated }) => (
 	<header className="header">
-		<div className="logo">Food order</div>
-		<ul className="right-nav">
+		<div className="logo-div">
+			<span>Food-order</span>
+		</div>
+		<div className="search-box">
+			<i className="fa fa-search" />
+			<input
+				type="text"
+				className="search-box__input"
+				placeholder="Search for places, invoices"
+			/>
+		</div>
+		<ul className="nav">
 			{isAuthenticated ? <AuthNavLinks /> : <NonAuthNavLinks />}
 		</ul>
 	</header>

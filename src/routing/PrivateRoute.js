@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
+import PageLayout from '../components/layout/PageLayout/PageLayout';
 
 export const PrivateRoute = ({
 	isAuthenticated,
@@ -10,7 +11,11 @@ export const PrivateRoute = ({
 	<Route
 		{...rest}
 		component={props =>
-			isAuthenticated ? <Component {...props} /> : <Redirect to="/signin" />
+			isAuthenticated ? (
+				<PageLayout content={<Component {...props} />} />
+			) : (
+				<Redirect to="/signin" />
+			)
 		}
 	/>
 );

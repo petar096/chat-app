@@ -12,11 +12,11 @@ const Home = props => {
 			.catch();
 	};
 	return (
-		<div>
+		<React.Fragment>
 			<h1>Home page</h1>
 			<Link to="/signin">Login</Link>
 			<button onClick={() => getUserById(props.user.id)}>Click</button>
-		</div>
+		</React.Fragment>
 	);
 };
 

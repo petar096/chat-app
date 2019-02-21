@@ -11,7 +11,8 @@ import SignUp from './auth/SignUp';
 import NotFoundPage from './pages/NotFoundPage';
 import PrivateRoute from '../routing/PrivateRoute';
 import PublicRoute from '../routing/PublicRoute';
-import Header from './layout/Header/Header';
+// import Header from './layout/Header/Header';
+import Test from './pages/Test';
 import { setUser } from '../store/actions/authActions';
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
 				<React.Fragment>
 					<Switch>
 						<PrivateRoute path="/" component={Home} exact />
+						<PrivateRoute path="/test" component={Test} />
 						<PublicRoute path={SIGN_IN} component={Login} />
 						<PublicRoute path={SIGN_UP} component={SignUp} />
 						<PublicRoute
