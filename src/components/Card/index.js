@@ -17,8 +17,8 @@ const Card = props => {
 			<div className="card__footer">
 				<img className="user-avatar" alt="User avatar image" src={img} />
 				<div className="user-info">
-					David Lee created order
-					<spn>4 min ago</spn>
+					<span className="user-info__username"> David Lee</span> created order
+					<span className="user-info__time">4 min ago</span>
 				</div>
 			</div>
 		</div>

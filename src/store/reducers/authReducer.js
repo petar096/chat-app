@@ -1,5 +1,5 @@
 const initState = {};
-import { SIGN_IN, LOG_OUT, SET_USER } from '../types/authConstants';
+import { LOG_OUT, SET_USER } from '../types/authConstants';
 
 const authReducer = (state = initState, action) => {
 	switch (action.type) {

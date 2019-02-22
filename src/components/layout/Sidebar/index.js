@@ -15,8 +15,8 @@ const Sidenav = () => {
 	];
 	return (
 		<aside className="sidenav">
-			{routes.map(route => (
-				<NavLink to={route.path} className="sidenav__link">
+			{routes.map((route, i) => (
+				<NavLink to={route.path} className="sidenav__link" key={i + 1}>
 					<i className={route.icon} /> {route.text}
 				</NavLink>
 			))}

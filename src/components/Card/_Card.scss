@@ -7,22 +7,27 @@
   border-bottom: .1rem solid #cdcdcd;
   // temporary
   height: 20rem;
-  // padding: 2rem;
 
+  // card heading
   &__heading {
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
-
-  .status {
-    padding: .4rem 2.4rem;
-    border-radius: 1.4rem;
-    background: red;
-    margin-left: auto;
     font-size: 1.4rem;
+    color: #a89e9e;
+      
+    .status {
+      padding: .4rem 2.4rem;
+      border-radius: 1.4rem;
+      background: red;
+      margin-left: auto;
+      color: #333;
+      font-weight: bold;
+    }
   }
-  }
+  //End of card heading
 
+  // Card content style
   &__content {
     display: flex;
 
@@ -30,7 +35,9 @@
       margin: auto;
     }
   }
+  // End of card content
 
+  // Card footer styiling
   &__footer {
     display: flex;
     padding: 1rem;
@@ -44,9 +51,20 @@
       border: .1rem solid #cdcdcd;
     }
     .user-info {
-      display: flex;
-      flex-direction: column;
       margin-left: 3rem;
+      font-size: 1.5rem;
+
+      &__username {
+        font-weight: 600;
+      }
+
+      &__time {
+        display: block;
+        font-size: 1.2rem;
+        color: #a89e9e;
+      }
     }
   }
+  // End of card footer
+
 }

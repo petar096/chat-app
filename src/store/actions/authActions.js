@@ -1,8 +1,10 @@
 import { auth, app, db } from '../../firebase/config';
 import { toastr } from 'react-redux-toastr';
 import { SIGN_IN, LOG_OUT, SET_USER } from '../types/authConstants';
+import { startLoading, finishLoading } from './loadingActions';
 
 export const signIn = (email, password) => dispatch => {
+	dispatch(startLoading());
 	auth
 		.signInWithEmailAndPassword(email, password)
 		.then(data => {
