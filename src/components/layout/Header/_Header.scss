@@ -1,5 +1,5 @@
 .header {
-  height: 7rem;
+  min-height: 7rem;
   position: relative;
   top: 0;
   left: 0;
@@ -11,42 +11,17 @@
 	box-shadow: 0px 1px 15px 1px #45414e1a;
   
 
-  .search-box {
-    display: flex;
-    align-items: center;
-    margin-left: 3rem;
-    width: 40%;
-    padding: 1rem;
 
-    i {
-      font-size: 1.8rem;
-      color: #595687;
-    }
-    &__input {
-        border: none;
-        font-size: 1.6rem;
-        width: 100%;
-        margin-left: 2rem;
-        // background: red;
-  
-        &:focus {
-          outline: none;
-          // border-bottom: .2rem solid #F7EDE2;
-        }
-  
-        &::placeholder {
-          color: #727492c0;
-        }
-    }
-  }
 
   .nav {
+    // flex: 2;
     display: flex;
     padding: 0;
     list-style: none;
     align-items: center;
     position: relative;
     height: auto;
+    // margin-left: auto;
     margin: 0 3rem 0 auto;
 
     &__link {
@@ -88,12 +63,7 @@
     &:hover .dropdown {
       display: block;
     }
-    .user-avatar {
-      width: 5rem;
-      height: 5rem;
-      border-radius: 50%;
-      border: .1rem solid #cdcdcd;
-    }
+
     .dropdown {
       display: none;
       position: absolute;

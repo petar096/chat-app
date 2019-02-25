@@ -1,0 +1,39 @@
+.chat-list-item {
+  padding: 5rem 2rem;
+  display: flex;
+  align-items: center;
+  border: .1rem solid #F1F1F3;
+  height: 8rem;
+  text-decoration: none;
+  color: #4D4F5C;
+
+
+  &:hover {
+    background: #F5F6FA;
+  }
+   &__content{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 2rem;
+  }
+
+  .chat-details {
+    display: flex;
+    flex: 1;
+    font-size: 1.7rem;
+    align-items: center;
+    justify-content: center;
+
+    &__time {
+      font-size: 1.2rem;
+      margin-left: auto;
+    }
+
+  }
+}
+.last-message {
+  font-size: 1.4rem;
+  color: #43425D;
+}

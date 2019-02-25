@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import Chat from './Chat';
 
 class ChatRoom extends Component {
 	render() {
 		return (
-			<div>
-				<h2>Chat room</h2>
-				{/* <Chat/> */}
-			</div>
+			<React.Fragment>
+				<Chat />
+			</React.Fragment>
 		);
 	}
 }

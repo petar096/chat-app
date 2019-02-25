@@ -4,20 +4,14 @@ import AuthNavLinks from './AuthNavLinks';
 import NonAuthNavLinks from './NonAuthNavLinks';
 
 import './_Header.scss';
+import SearchInput from '../../common/SearchInput';
 
 const Header = ({ isAuthenticated }) => (
 	<header className="header">
-		<div className="search-box">
-			<i className="fa fa-search" />
-			<input
-				type="text"
-				className="search-box__input"
-				placeholder="Search for places, invoices"
-			/>
-		</div>
-		<ul className="nav">
+		<SearchInput />
+		<nav className="nav">
 			{isAuthenticated ? <AuthNavLinks /> : <NonAuthNavLinks />}
-		</ul>
+		</nav>
 	</header>
 );
 

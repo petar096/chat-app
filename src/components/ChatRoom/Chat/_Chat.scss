@@ -1,0 +1,15 @@
+.chat-container {
+  background: #fff;
+  box-shadow: 0px 1px 15px 1px #45414e1a;
+  width: 90%;
+
+  //temporary
+  height: 90%;
+  margin: 4rem auto 3rem auto;
+  display: flex;
+}
+
+.conversation {
+  flex: 3;
+  // background: red;
+}

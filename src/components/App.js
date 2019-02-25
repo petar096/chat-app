@@ -11,7 +11,6 @@ import SignUp from './auth/SignUp';
 import NotFoundPage from './static/NotFoundPage';
 import PrivateRoute from '../routing/PrivateRoute';
 import PublicRoute from '../routing/PublicRoute';
-// import Header from './layout/Header/Header';
 import Test from './static/Test';
 import { setUser } from '../store/actions/authActions';
 import ChatRoom from './ChatRoom';

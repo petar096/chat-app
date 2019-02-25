@@ -1,0 +1,32 @@
+.search-box {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  padding: 2rem 3rem;
+  background: #fff;
+
+  i {
+    font-size: 1.8rem;
+    color: #595687;
+  }
+  &__input {
+      border: none;
+      font-size: 1.6rem;
+      width: 100%;
+      height: 100%;
+      margin-left: 2rem;
+
+      &:focus {
+        outline: none;
+        // border-bottom: .2rem solid #F7EDE2;
+      }
+
+      &::placeholder {
+        color: #727492c0;
+      }
+  }
+
+  &--block {
+    width: 100%;
+  }
+}

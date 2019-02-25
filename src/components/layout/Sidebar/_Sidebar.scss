@@ -14,13 +14,12 @@
     height: $header-height;
 
     span {
-    font-size: 1.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
-    margin: auto;
-    letter-spacing: .2rem;
-  
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #fff;
+      margin: auto;
+      letter-spacing: .2rem;
     } 
   }
 
@@ -28,13 +27,13 @@
     display: block;
     color: #fff;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     padding: 2rem 3rem;
     font-weight: 600;
 
     i {
       margin-right: 1rem;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
     }
 
     &:nth-child(2) {

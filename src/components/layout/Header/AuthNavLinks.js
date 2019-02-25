@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { signOut } from '../../../store/actions/authActions';
 import { HOME_PAGE } from '../../../constants/routes';
 import img from '../../../assets/images/46.jpg';
+import Avatar from '../../common/Avatar';
 
 const AuthNavLinks = props => {
 	return (
@@ -26,7 +27,7 @@ const AuthNavLinks = props => {
 			<div className="user">
 				<span className="user__username">{props.auth.email}</span>
 				<i className="fa fa-chevron-down" />
-				<img className="user-avatar" alt="User avatar image" src={img} />
+				<Avatar src={img} alt="User avatar image" />
 				<div className="dropdown">
 					<NavLink to="" className="dropdown__link">
 						dadas

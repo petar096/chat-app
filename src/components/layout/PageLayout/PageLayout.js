@@ -3,7 +3,7 @@ import Sidenav from '../Sidebar';
 import Header from '../Header/Header';
 import './_PageLayout.scss';
 
-export default function PageLayout({ content }) {
+const PageLayout = ({ content }) => {
 	return (
 		<div className="page-layout">
 			<Sidenav />
@@ -13,4 +13,5 @@ export default function PageLayout({ content }) {
 			</div>
 		</div>
 	);
-}
+};
+export default PageLayout;

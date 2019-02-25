@@ -6,7 +6,6 @@ export const startLoading = () => dispatch => {
 };
 
 export const finishLoading = () => dispatch => {
-	console.log('finished');
 	dispatch({
 		type: 'LOADING_FINISH'
 	});
