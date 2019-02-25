@@ -5,4 +5,9 @@ export const startLoading = () => dispatch => {
 	});
 };
 
-export const finishLoading = () => ({ type: 'LOADING_FINISH' });
+export const finishLoading = () => dispatch => {
+	console.log('finished');
+	dispatch({
+		type: 'LOADING_FINISH'
+	});
+};

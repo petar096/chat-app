@@ -12,7 +12,9 @@ const Card = props => {
 				</span>
 			</div>
 			<div className="card__content">
-				<div className="content"> Havariju </div>
+				<div className="content">
+					<button className="btn btn--primary"> Add </button>
+				</div>
 			</div>
 			<div className="card__footer">
 				<img className="user-avatar" alt="User avatar image" src={img} />

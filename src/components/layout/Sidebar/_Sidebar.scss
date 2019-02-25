@@ -1,25 +1,44 @@
+@import '../../../styles/common/variables';
+
 .sidenav {
-  background:  #43425d;
-  position: fixed;
+  background:  $dark-purple;
   width: 30rem;
   left: 0;
-  top:6rem;
+  // top: $header-height;
   height: 100%;
-  padding-top: .5rem;
+  // padding-top: .5rem;
+
+  .logo-div {
+    display: flex;
+    background:darken( $dark-purple, 10%);
+    height: $header-height;
+
+    span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    margin: auto;
+    letter-spacing: .2rem;
+  
+    } 
+  }
 
   &__link {
     display: block;
     color: #fff;
     text-decoration: none;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     padding: 2rem 3rem;
     font-weight: 600;
 
     i {
       margin-right: 1rem;
+      font-size: 1.6rem;
     }
 
-    &:first-child {
+    &:nth-child(2) {
+      margin-top: 2rem;
       margin-bottom: 5rem;
     }
 
@@ -27,8 +46,8 @@
       margin-top: 5rem;
     }
     &:hover {
-      background: darken(#43425d, 10%);
-      border-left: .4rem solid pink;
+      background: darken($dark-purple, 10%);
+      border-left: .5rem solid $light-purple;
     }
   }
 }

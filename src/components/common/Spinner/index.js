@@ -4,7 +4,10 @@ import Modal from '../Modal';
 
 const Spinner = () => (
 	<Modal>
-		<div className="lds-ripple">
+		<div className="lds-ring">
+			<h1>Loading..</h1>
+			<div />
+			<div />
 			<div />
 			<div />
 		</div>

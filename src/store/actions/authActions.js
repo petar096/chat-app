@@ -10,6 +10,7 @@ export const signIn = (email, password) => dispatch => {
 		.then(data => {
 			let user = data.user;
 			dispatch(setUser(user));
+			dispatch(finishLoading());
 			toastr.success('Log in', 'You have signed in successfull');
 		})
 		.catch(err => toastr.error('Login error', err.message));

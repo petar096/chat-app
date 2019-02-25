@@ -4,16 +4,17 @@ import { SIGN_UP, SIGN_IN, PASSWORD_FORGET } from '../constants/routes';
 import { connect } from 'react-redux';
 import { auth } from '../firebase/config';
 
-import Home from './pages/Home';
+import Home from './static/Home';
 import Login from './auth/Login/';
 import ResetPassword from './auth/ForgetPassword/';
 import SignUp from './auth/SignUp';
-import NotFoundPage from './pages/NotFoundPage';
+import NotFoundPage from './static/NotFoundPage';
 import PrivateRoute from '../routing/PrivateRoute';
 import PublicRoute from '../routing/PublicRoute';
 // import Header from './layout/Header/Header';
-import Test from './pages/Test';
+import Test from './static/Test';
 import { setUser } from '../store/actions/authActions';
+import ChatRoom from './ChatRoom';
 
 class App extends Component {
 	componentDidMount() {
@@ -38,6 +39,7 @@ class App extends Component {
 							component={ResetPassword}
 							exact
 						/>
+						<PrivateRoute path="/chatroom" component={ChatRoom} />
 						<Route component={NotFoundPage} />
 					</Switch>
 				</React.Fragment>

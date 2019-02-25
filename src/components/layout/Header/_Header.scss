@@ -1,5 +1,5 @@
 .header {
-  height: 6rem;
+  height: 7rem;
   position: relative;
   top: 0;
   left: 0;
@@ -10,22 +10,7 @@
 	background: #fff;
 	box-shadow: 0px 1px 15px 1px #45414e1a;
   
-  .logo-div {
-    display: flex;
-    width: 30rem;
-    height: 100%;
-    background:darken(#595687, 10%);
 
-    span {
-    font-size: 1.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
-    margin: auto;
-    letter-spacing: .2rem;
-  
-    } 
-  }
   .search-box {
     display: flex;
     align-items: center;

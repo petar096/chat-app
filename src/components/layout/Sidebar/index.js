@@ -9,12 +9,15 @@ const Sidenav = () => {
 		{ icon: 'fa fa-product-hunt', text: 'Products', path: 'test' },
 		{ icon: 'fa fa-bar-chart', text: 'Invoices', path: 'test' },
 		{ icon: 'fa fa-user-o', text: 'Customers', path: 'test' },
-		{ icon: 'fa fa-comments-o', text: 'Chat Room', path: 'test' },
+		{ icon: 'fa fa-comments-o', text: 'Chat Room', path: 'chatroom' },
 		{ icon: 'fa fa-calendar', text: 'Calendar', path: 'test' },
 		{ icon: 'fa fa-cog', text: 'Settings', path: 'test' }
 	];
 	return (
 		<aside className="sidenav">
+			<div className="logo-div">
+				<span>Food-order</span>
+			</div>
 			{routes.map((route, i) => (
 				<NavLink to={route.path} className="sidenav__link" key={i + 1}>
 					<i className={route.icon} /> {route.text}

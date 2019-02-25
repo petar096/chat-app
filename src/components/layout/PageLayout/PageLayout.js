@@ -5,12 +5,12 @@ import './_PageLayout.scss';
 
 export default function PageLayout({ content }) {
 	return (
-		<React.Fragment>
-			<Header />
-			<div className="page-layout">
-				<Sidenav />
-				<div className="site-content">{content}</div>
+		<div className="page-layout">
+			<Sidenav />
+			<div className="dashboard-container">
+				<Header />
+				<main className="site-content">{content}</main>
 			</div>
-		</React.Fragment>
+		</div>
 	);
 }

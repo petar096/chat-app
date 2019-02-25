@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 const Button = ({ text, className = '', onClick, type, style }) => {
 	return (
 		<button
-			href="#"
 			type={type}
 			className={`btn ${className}`}
 			style={style ? style : null}

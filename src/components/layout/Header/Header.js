@@ -7,9 +7,6 @@ import './_Header.scss';
 
 const Header = ({ isAuthenticated }) => (
 	<header className="header">
-		<div className="logo-div">
-			<span>Food-order</span>
-		</div>
 		<div className="search-box">
 			<i className="fa fa-search" />
 			<input

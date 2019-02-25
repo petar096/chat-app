@@ -11,7 +11,7 @@
 }
 
 .auth-left-side {
-	background: $main-bg;
+	background: $dark-purple;
 	flex: 1;
 
 	@include respond-to(phone) {
