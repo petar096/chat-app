@@ -1,0 +1,27 @@
+.message {
+  display: block;
+  padding: 1rem 1.2rem;
+  font-size: 1.6rem;
+  max-width: 50%;
+  word-wrap: break-word;
+ 
+  
+
+  &--autor {
+    margin-left: auto;
+    border-radius: 2.5rem 2.5rem 0 2.5rem;
+    background: #3B86FF;
+    // background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    margin-right: 1rem;
+    margin-top: 1rem;
+    color: #fff;
+  }
+  &--participant {
+    margin-right: auto;
+    border-radius:2.5rem 2.5rem 2.5rem 0;
+    background: #EDF0F5;
+    // background-image: linear-gradient(to right, #fded7f, #faeb75, #f6e96a, #f3e75f, #efe553, #e7e64d, #dee847, #d5e942, #c4ee45, #b1f34b, #9bf754, #81fb5f);
+    margin-top: 1rem;
+    margin-left: 1rem;
+  }
+}

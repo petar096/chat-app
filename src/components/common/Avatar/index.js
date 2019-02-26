@@ -5,7 +5,7 @@ const Avatar = ({ src, large, style, alt }) => {
 	return (
 		<img
 			src={src}
-			className={large ? 'avatar avatar-lg' : 'avatar'}
+			className={large ? 'avatar avatar--lg' : 'avatar'}
 			style={style}
 			alt={alt}
 		/>

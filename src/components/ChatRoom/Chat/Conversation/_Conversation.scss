@@ -1,0 +1,120 @@
+.conversation {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    padding: 2rem;
+    border-bottom: .2rem solid #F1F1F3;
+    display: flex;
+    position: relative;
+
+    &__details {
+      flex: 2;
+      align-items: center;
+      position: relative;
+      margin-left: 2.2rem;
+    }
+
+    .conversation__username {
+      display: block;
+      padding: 1rem;
+      font-size: 2.2rem;
+    }
+    .conversation__user-detail {
+      display: block;
+      padding: 0rem 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #A4AFB7;
+    }
+    .close {
+      text-decoration: none;
+      color: #A4AFB7;
+      display: inline-block;
+      margin-left: auto;
+      font-size: 2.4rem;
+      position: absolute;
+      right: .7rem;
+      top: .2rem;
+    }
+  }
+
+  &__body{
+    flex:3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form {
+    max-height: 10rem;
+    background: #F5F6FA;
+    padding: 0;
+
+    .message-form{
+      margin: 1rem auto;
+      max-height: 90%;
+      display: flex;
+      align-items: center;
+      border: 1px solid #fff;
+
+
+      .action-buttons-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .input-actions {
+          font-size: 2.2rem;
+          color: #CECFD0;
+          text-decoration: none;
+          margin: 1rem 1.2rem;
+          padding: 1rem;
+
+          &:hover {
+            color: darken(#CECFD0, 20%)
+          }
+        }
+
+        .send-button {
+          margin: auto;
+          height: 6rem;
+          width: 6rem;
+          border: none;
+          border-radius: 50%;
+           background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+          font-size: 1.8rem;
+          color: #fff;
+  
+          &:hover {
+            cursor: pointer;
+          }
+      }
+
+      }
+    }
+    .message-input {
+      border: none;
+      font-size: 2rem;
+      width: 100%;
+      min-height: 5rem;
+      max-height: 8rem;
+      resize: none;
+      background: #F5F6FA;
+      transition: height 0.3sec ease-out;
+      overflow: auto;
+      margin-right: 1rem;
+      padding: 1rem 2rem;
+
+      &:focus {
+        outline: none;
+        // border-bottom: .2rem solid #F7EDE2;
+      }
+
+      &::placeholder {
+        color: #727492c0;
+        margin-top: 1rem;
+      }
+    }
+  }
+}
