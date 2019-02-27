@@ -6,15 +6,16 @@
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  flex: 3;
+  flex: 1;
   margin: 0;
 }
 
 .site-content {
-  padding: 1rem;
+  padding: 2rem 2rem 0 2rem;
   background: #f0f0f7;
   margin: 0;
-  flex: 1;
+  height: 100%;
+  // flex: 1;
 
   h1 {
     margin: 0;
