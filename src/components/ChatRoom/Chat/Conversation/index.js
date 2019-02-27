@@ -8,7 +8,7 @@ import {
 	sendMessage,
 	getChats
 } from '../../../../store/actions/chatActions';
-
+import * as moment from 'moment';
 import './_Conversation.scss';
 
 class Conversation extends Component {
@@ -38,17 +38,20 @@ class Conversation extends Component {
 				});
 			});
 		});
-		this.props.messagesCollection().onSnapshot(snapshot => {
-			this.setState({ messages: [] });
-			snapshot.forEach(doc => {
-				const msg = { id: doc.id, ...doc.data() };
+		this.props
+			.messagesCollection()
+			.orderBy('time')
+			.onSnapshot(snapshot => {
+				this.setState({ messages: [] });
+				snapshot.forEach(doc => {
+					const msg = { id: doc.id, ...doc.data() };
 
-				this.setState({
-					...this.state,
-					messages: [...this.state.messages, msg]
+					this.setState({
+						...this.state,
+						messages: [...this.state.messages, msg]
+					});
 				});
 			});
-		});
 	}
 
 	renderMessages() {
@@ -82,7 +85,9 @@ class Conversation extends Component {
 				message: ''
 			});
 
-			this.chatBottom.scrollIntoView({ behavior: 'smooth' });
+			console.log(this.chatBottom);
+			// this.chatBottom.current.scrollIntoView({ behavior: 'smooth' });
+			window.scrollTo(0, this.chatBottom.current.offsetTop);
 		}
 	}
 
@@ -100,13 +105,14 @@ class Conversation extends Component {
 					</div>
 				</div>
 				<div className="conversation__body">
+					{console.log(this.state.messages)}
 					{this.state.messages.map((msg, i) => {
 						return (
 							<Message
 								key={i + 1}
 								text={msg.text}
 								autor={msg.sender === this.props.user.email ? true : false}
-								// time={msg.time}
+								time={msg.time}
 							/>
 						);
 					})}

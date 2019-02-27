@@ -1,12 +1,16 @@
 import React from 'react';
 import './_Message.scss';
+import * as moment from 'moment';
+import './_Message.scss';
 
 const Message = ({ time, text, autor }) => {
 	return (
-		<div className={`message message--${autor ? 'autor' : 'participant'}`}>
-			<p>{text}</p>
-			<span>{time}</span>
-		</div>
+		<React.Fragment>
+			<div className={`message message--${autor ? 'autor' : 'participant'}`}>
+				<p>{text}</p>
+				<span className="message-time">{moment(time).calendar()}</span>
+			</div>
+		</React.Fragment>
 	);
 };
 
