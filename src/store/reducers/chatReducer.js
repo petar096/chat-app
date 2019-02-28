@@ -5,36 +5,7 @@ import {
 	SEND_MESSAGE
 } from '../types/chatConstants';
 
-const initialState = [
-	{
-		id: 1,
-		participants: [
-			{ id: 123, email: '123@gmail.com' },
-			{ id: 456, email: '456@gmail.com' }
-		],
-		messages: [
-			{ senderID: 123, text: 'some dummy text', time: 'asfdadsf' },
-			{ senderID: 123, text: 'some dummy text', time: 'asfdadsf' },
-			{ senderID: 456, text: 'some dummy text', time: 'asfdadsf' },
-			{ senderID: 123, text: 'some dummy text', time: 'asfdadsf' }
-		]
-	},
-	{
-		id: 2,
-		participants: [
-			{ id: 123, email: '123@gmail.com' },
-			{ id: 789, email: '789@gmail.com' }
-		],
-		messages: [
-			{ senderID: 789, text: 'some dummy text', time: 'asfdadsf' },
-			{ senderID: 123, text: 'some dummy text', time: 'asfdadsf' },
-			{ senderID: 789, text: 'some dummy text', time: 'asfdadsf' },
-			{ senderID: 789, text: 'some dummy text', time: 'asfdadsf' }
-		]
-	}
-];
-
-const authReducer = (state = initialState, action) => {
+const chatReducer = (state = [], action) => {
 	switch (action.type) {
 		case GET_CHATS:
 			return action.chats;
@@ -49,4 +20,4 @@ const authReducer = (state = initialState, action) => {
 	}
 };
 
-export default authReducer;
+export default chatReducer;

@@ -6,29 +6,29 @@ import { connect } from 'react-redux';
 
 const Home = props => {
 	const getUserById = function(id) {
-		props
-			.getUserById(id)
-			.then(doc => console.log(doc.data()))
-			.catch();
-	};
+		// 	props
+		// 		.getUserById(id)
+		// 		.then(doc => console.log(doc.data()))
+		// 		.catch();
+		// };
+		props.getChats();
+		// const getChats = function() {
+		// 	console.log(props.user.email);
+		// 	const msg = {
+		// 		text: 'dsadasasasd',
+		// 		time: Date.now(),
+		// 		sender: props.user.email
+		// 	};
+		// 	// props.sendMessage(msg);
+		// 	console.log('here');
 
-	const getChats = function() {
-		console.log(props.user.email);
-		const msg = {
-			text: 'dsadasasasd',
-			time: Date.now(),
-			sender: props.user.email
-		};
-		// props.sendMessage(msg);
-		console.log('here');
-
-		// props.getChats().then(doc => {
-		// 	console.log(doc);
-		// 	doc.forEach(d => {
-		// 		console.log(d.id, d.data());
+		// 	props.getMessages().then(doc => {
+		// 		console.log(doc);
+		// 		doc.forEach(d => {
+		// 			console.log(d.id, d.data());
+		// 		});
 		// 	});
-		// });
-		props.sendMessage(msg);
+		// props.sendMessage(msg);
 		// props.getChats().then(chat => {
 		// 	const values = chat.docs.map(doc => ({
 		// 		id: doc.id,

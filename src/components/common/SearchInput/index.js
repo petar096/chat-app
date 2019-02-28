@@ -10,6 +10,7 @@ const SearchInput = props => {
 				type="text"
 				className="search-box__input"
 				placeholder="Search for places, invoices"
+				onChange={props.onChange}
 			/>
 		</div>
 	);

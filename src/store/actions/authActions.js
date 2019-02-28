@@ -81,3 +81,10 @@ export const getUserById = id => () => {
 		.doc(id)
 		.get();
 };
+
+export const getUsersByName = name => () => {
+	return db
+		.collection('users')
+		.where('firstName', '==', name)
+		.get();
+};

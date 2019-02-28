@@ -29,15 +29,6 @@ class Conversation extends Component {
 	}
 
 	componentDidMount() {
-		// change the ID from static
-
-		this.props.getChats().then(doc => {
-			doc.forEach(d => {
-				this.setState({
-					messages: [...this.state.messages, d.data()]
-				});
-			});
-		});
 		this.props
 			.messagesCollection()
 			.orderBy('time')
@@ -86,8 +77,8 @@ class Conversation extends Component {
 			});
 
 			console.log(this.chatBottom);
-			// this.chatBottom.current.scrollIntoView({ behavior: 'smooth' });
-			window.scrollTo(0, this.chatBottom.current.offsetTop);
+			this.chatBottom.current.scrollIntoView({ behavior: 'smooth' });
+			// window.scrollTo(0, this.chatBottom.current.offsetTop);
 		}
 	}
 
@@ -105,7 +96,6 @@ class Conversation extends Component {
 					</div>
 				</div>
 				<div className="conversation__body">
-					{console.log(this.state.messages)}
 					{this.state.messages.map((msg, i) => {
 						return (
 							<Message
@@ -116,8 +106,8 @@ class Conversation extends Component {
 							/>
 						);
 					})}
+					<span ref={this.chatBottom} />
 				</div>
-				<span ref={this.chatBottom} />
 				<div className="conversation__form">
 					<form className="message-form" onSubmit={this.handleOnSubmit}>
 						<textarea
@@ -147,14 +137,15 @@ class Conversation extends Component {
 	}
 }
 const mapStateToProps = state => ({
-	user: state.auth
+	user: state.auth,
+	chats: state.chats
 });
 
 const mapDispatchToProps = dispatch => ({
 	messagesCollection: () => dispatch(messagesCollection()),
-	sendMessage: msg => dispatch(sendMessage(msg)),
-	getChats: () => dispatch(getChats())
+	sendMessage: msg => dispatch(sendMessage(msg))
 });
+
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
