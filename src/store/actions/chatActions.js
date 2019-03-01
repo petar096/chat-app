@@ -26,9 +26,9 @@ export const getChatCollection = () => () => {
 	return db.collection('chats').get();
 };
 
-export const sendMessage = msg => () => {
+export const sendMessage = (id, msg) => () => {
 	db.collection('chats')
-		.doc('7031u8BpaP3tJaamRGfD')
+		.doc(id)
 		.collection('messages')
 		.add({ sender: msg.sender, text: msg.text, time: msg.time });
 };

@@ -8,7 +8,7 @@ import {
 	sendMessage,
 	getChats
 } from '../../../../store/actions/chatActions';
-import * as moment from 'moment';
+
 import './_Conversation.scss';
 
 class Conversation extends Component {
@@ -29,12 +29,6 @@ class Conversation extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.activeChat);
-
-		this.setState({
-			activeChat: this.props.activeChat
-		});
-
 		if (this.props.activeChat === null) {
 			return false;
 		} else {
@@ -53,36 +47,38 @@ class Conversation extends Component {
 				});
 		}
 	}
-
 	static getDerivedStateFromProps(nextProps, prevState) {
-		// console.log(nextProps, prevState);
-		if (nextProps.activeChat !== prevState.activeChat) {
-			const newState = {};
-			nextProps
-				.messagesCollection(nextProps.activeChat)
+		if (prevState.activeChat !== nextProps.activeChat) {
+			return {
+				...prevState,
+				activeChat: nextProps.activeChat
+			};
+		}
+		return null;
+	}
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.activeChat !== this.props.activeChat) {
+			this.props
+				.messagesCollection(this.props.activeChat)
 				.orderBy('time')
 				.onSnapshot(snapshot => {
-					prevState = { messages: [] };
+					this.setState({ messages: [] });
 					snapshot.forEach(doc => {
 						const msg = { id: doc.id, ...doc.data() };
-
-						newState.messages = [...prevState.messages, msg];
-						// newState = {
-						// 	...prevState,
-						// 	messages: [...prevState.messages, msg]
-						// };
+						this.setState({
+							...this.state,
+							messages: [...this.state.messages, msg]
+						});
 					});
 				});
-			console.log(newState);
-			return newState;
-		} else return null;
+		}
 	}
 
 	handleOnChange(e) {
-		const el = this.messageInput.current;
+		// const el = this.messageInput.current;
 		this.setState({
-			message: e.target.value,
-			height: el.scrollHeight
+			message: e.target.value
+			// height: el.scrollHeight
 		});
 	}
 
@@ -97,7 +93,7 @@ class Conversation extends Component {
 				time: Date.now(),
 				sender: this.props.user.email
 			};
-			this.props.sendMessage(msg);
+			this.props.sendMessage(this.state.activeChat, msg);
 
 			this.setState({
 				...this.state,
@@ -146,9 +142,9 @@ class Conversation extends Component {
 							onChange={this.handleOnChange}
 							name="message"
 							value={this.state.message}
-							ref={this.messageInput}
+							// ref={this.messageInput}
 							placeholder="Type message..."
-							style={{ height: `${this.state.height}px` }}
+							// style={{ height: `${this.state.height}px` }}
 						/>
 						<div className="action-buttons-container">
 							<button className="send-button" type="submit">
@@ -174,7 +170,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	messagesCollection: id => dispatch(messagesCollection(id)),
-	sendMessage: msg => dispatch(sendMessage(msg))
+	sendMessage: (id, msg) => dispatch(sendMessage(id, msg))
 });
 
 export default connect(
