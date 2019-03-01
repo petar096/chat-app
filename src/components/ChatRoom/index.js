@@ -3,11 +3,7 @@ import Chat from './Chat';
 
 class ChatRoom extends Component {
 	render() {
-		return (
-			<React.Fragment>
-				<Chat />
-			</React.Fragment>
-		);
+		return <Chat />;
 	}
 }
 export default ChatRoom;

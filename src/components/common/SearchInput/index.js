@@ -11,6 +11,7 @@ const SearchInput = props => {
 				className="search-box__input"
 				placeholder="Search for places, invoices"
 				onChange={props.onChange}
+				name={props.name}
 			/>
 		</div>
 	);

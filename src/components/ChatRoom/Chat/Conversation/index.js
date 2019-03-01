@@ -18,38 +18,66 @@ class Conversation extends Component {
 		this.state = {
 			message: '',
 			height: null,
-			messages: []
+			messages: [],
+			activeChat: null
 		};
 
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnSubmit = this.handleOnSubmit.bind(this);
-		this.renderMessages = this.renderMessages.bind(this);
-		this.messageInput = React.createRef();
-		this.chatBottom = React.createRef();
+		// this.messageInput = React.createRef();
+		// this.chatBottom = React.createRef();
 	}
 
 	componentDidMount() {
-		this.props
-			.messagesCollection()
-			.orderBy('time')
-			.onSnapshot(snapshot => {
-				this.setState({ messages: [] });
-				snapshot.forEach(doc => {
-					const msg = { id: doc.id, ...doc.data() };
+		console.log(this.props.activeChat);
 
-					this.setState({
-						...this.state,
-						messages: [...this.state.messages, msg]
+		this.setState({
+			activeChat: this.props.activeChat
+		});
+
+		if (this.props.activeChat === null) {
+			return false;
+		} else {
+			this.props
+				.messagesCollection(this.props.activeChat)
+				.orderBy('time')
+				.onSnapshot(snapshot => {
+					this.setState({ messages: [] });
+					snapshot.forEach(doc => {
+						const msg = { id: doc.id, ...doc.data() };
+						this.setState({
+							...this.state,
+							messages: [...this.state.messages, msg]
+						});
 					});
 				});
-			});
+		}
 	}
 
-	renderMessages() {
-		this.state.messages.map((msg, i) => {
-			console.log(msg);
-		});
+	static getDerivedStateFromProps(nextProps, prevState) {
+		// console.log(nextProps, prevState);
+		if (nextProps.activeChat !== prevState.activeChat) {
+			const newState = {};
+			nextProps
+				.messagesCollection(nextProps.activeChat)
+				.orderBy('time')
+				.onSnapshot(snapshot => {
+					prevState = { messages: [] };
+					snapshot.forEach(doc => {
+						const msg = { id: doc.id, ...doc.data() };
+
+						newState.messages = [...prevState.messages, msg];
+						// newState = {
+						// 	...prevState,
+						// 	messages: [...prevState.messages, msg]
+						// };
+					});
+				});
+			console.log(newState);
+			return newState;
+		} else return null;
 	}
+
 	handleOnChange(e) {
 		const el = this.messageInput.current;
 		this.setState({
@@ -76,19 +104,22 @@ class Conversation extends Component {
 				message: ''
 			});
 
-			console.log(this.chatBottom);
-			this.chatBottom.current.scrollIntoView({ behavior: 'smooth' });
+			// console.log(this.chatBottom);
+			// this.chatBottom.current.scrollIntoView({ behavior: 'smooth' });
 			// window.scrollTo(0, this.chatBottom.current.offsetTop);
 		}
 	}
 
 	render() {
+		const { activeUser } = this.props;
 		return (
 			<div className="conversation">
 				<div className="conversation__header">
 					<Avatar src={img} large={true} />
 					<div className="conversation__header__details">
-						<span className="conversation__username">John doe</span>
+						<span className="conversation__username">
+							{activeUser.firstName}
+						</span>
 						<span className="conversation__user-detail">Account menager</span>
 						<a href="#" className="close">
 							<i className="fa fa-times" />
@@ -142,7 +173,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	messagesCollection: () => dispatch(messagesCollection()),
+	messagesCollection: id => dispatch(messagesCollection(id)),
 	sendMessage: msg => dispatch(sendMessage(msg))
 });
 
