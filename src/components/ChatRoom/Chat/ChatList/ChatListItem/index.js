@@ -1,7 +1,6 @@
 import React from 'react';
 import img from '../../../../../assets/images/46.jpg';
 import Avatar from '../../../../common/Avatar';
-import { connect } from 'react-redux';
 
 import './_Chat-list-item.scss';
 
@@ -24,11 +23,4 @@ const ChatListItem = props => {
 	);
 };
 
-const mapStateToProps = state => ({
-	user: state.auth
-});
-
-export default connect(
-	mapStateToProps,
-	null
-)(ChatListItem);
+export default ChatListItem;

@@ -12,6 +12,7 @@ const SearchInput = props => {
 				placeholder="Search for places, invoices"
 				onChange={props.onChange}
 				name={props.name}
+				autoComplete={props.autoComplete}
 			/>
 		</div>
 	);

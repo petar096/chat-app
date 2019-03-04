@@ -4,10 +4,10 @@ import './_ChatList.scss';
 import SearchInput from '../../../common/SearchInput';
 import {
 	getChats,
-	getUsersByName,
 	getUserReference,
 	startConversation
 } from '../../../../store/actions/chatActions';
+import { getUsersByName } from '../../../../store/actions/authActions';
 import { connect } from 'react-redux';
 
 const debounce = (fn, delay) => {
@@ -27,11 +27,13 @@ class ChatsList extends Component {
 
 		this.state = {
 			searchTerm: '',
-			chats: []
+			chats: [],
+			users: []
 		};
 
 		this.filterChats = this.filterChats.bind(this);
-		this.handleOnClick = this.handleOnClick.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.getUsers = debounce(this.getUsers.bind(this), 200);
 	}
 
 	componentDidMount() {
@@ -40,12 +42,14 @@ class ChatsList extends Component {
 			snapshot.forEach(doc => {
 				const chat = { id: doc.id };
 
+				// get reference to other user from database
 				const userRef =
 					doc.data().participants[0].id ===
 					this.props.getUserReference(this.props.user.id).id
 						? doc.data().participants[1]
 						: doc.data().participants[0];
 
+				// get user data from reference
 				userRef.get().then(user => {
 					chat.otherUser = {
 						id: user.id,
@@ -64,35 +68,35 @@ class ChatsList extends Component {
 
 	// startConversation
 	startConversation(firstUser, secondUser) {
-		console.log('ovde');
 		const first = this.props.getUserReference(firstUser);
 		const second = this.props.getUserReference(secondUser);
 
 		this.props.startConversation(first, second);
 	}
 
-	filterChats(e) {
-		this.setState(
-			{
-				[e.target.name]: e.target.value
-			},
-			() => {
-				const newArray = this.state.chats.filter(c => {
-					console.log(c.participants);
-					c.participants.includes(this.state.searchTerm);
-				});
+	// to be done`
+	filterChats(e) {}
 
-				this.setState({
-					...this.state,
-					chats: newArray
+	getUsers(term) {
+		this.setState({ users: [] });
+		this.props
+			.getUsersByName(term)
+			.then(snapshots => {
+				snapshots.forEach(u => {
+					const user = { id: u.id, ...u.data() };
+					this.setState({ users: [...this.state.users, user] });
 				});
-			}
-		);
+			})
+			.catch(err => console.log(err));
 	}
 
-	handleOnClick(otherUser, id) {
-		this.props.setActiveUser(otherUser);
-		this.props.setActiveChat(id);
+	handleChange(e) {
+		this.setState(
+			{
+				searchTerm: e.target.value
+			},
+			() => this.getUsers(this.state.searchTerm)
+		);
 	}
 
 	render() {
@@ -101,19 +105,39 @@ class ChatsList extends Component {
 			<div className="chats-list">
 				<SearchInput
 					large={true}
-					onChange={this.filterChats}
+					onChange={this.handleChange}
 					name="searchTerm"
+					autoComplete="off"
 				/>
-				{chats.map(({ id, otherUser }) => {
-					// on click needed to create new Chat
-					return (
-						<ChatListItem
-							key={id}
-							userData={otherUser}
-							onClick={() => this.props.setActiveConversation(otherUser, id)}
-						/>
-					);
-				})}
+				{this.state.chats.length === 0 ? null : (
+					<React.Fragment>
+						<h2 className="subheading">Conversations</h2>
+						{chats.map(({ id, otherUser }) => {
+							return (
+								<ChatListItem
+									key={id}
+									userData={otherUser}
+									onClick={() =>
+										this.props.setActiveConversation(otherUser, id)
+									}
+								/>
+							);
+						})}
+					</React.Fragment>
+				)}
+
+				{this.state.users.length === 0 ? null : (
+					<React.Fragment>
+						<h2 className="subheading">Users</h2>
+						{this.state.users.map(data => (
+							<ChatListItem
+								key={data.id}
+								userData={data}
+								onClick={() => this.props.setActiveUser(data)}
+							/>
+						))}
+					</React.Fragment>
+				)}
 			</div>
 		);
 	}
@@ -126,7 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
 	getChats: email => dispatch(getChats(email)),
-	getUsersByName: name => dispatch(getUsersByName(name)),
+	getUsersByName: name => getUsersByName(name),
 	getUserReference: id => getUserReference(id),
 	startConversation: (user1, user2) => startConversation(user1, user2)
 });

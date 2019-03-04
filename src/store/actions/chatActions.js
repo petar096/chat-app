@@ -45,5 +45,5 @@ export const startConversation = (firstUser, secondUser) => {
 	const obj = {
 		participants: [firstUser, secondUser]
 	};
-	db.collection('chats').add(obj);
+	return db.collection('chats').add(obj);
 };

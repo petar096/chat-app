@@ -9,24 +9,28 @@ class Chat extends Component {
 
 		this.state = {
 			activeChat: null,
-			activeUser: {}
+			activeUser: null
 		};
 
-		// this.setActiveUser = this.setActiveUser.bind(this);
-		// this.setActiveChat = this.setActiveChat.bind(this);
+		this.setActiveUser = this.setActiveUser.bind(this);
 		this.setActiveConversation = this.setActiveConversation.bind(this);
 	}
 
-	// setActiveUser(user) {
-	// 	this.setState({
-	// 		...this.state,
-	// 		activeUser: user
-	// 	});
-	// }
+	setActiveUser(user) {
+		this.setState({
+			activeUser: user,
+			activeChat: null
+		});
+	}
+	setActiveChat(id) {
+		this.setState({
+			...this.state,
+			activeChat: id
+		});
+	}
 
 	setActiveConversation(user, id) {
 		this.setState({
-			...this.state,
 			activeChat: id,
 			activeUser: user
 		});
@@ -36,13 +40,13 @@ class Chat extends Component {
 		return (
 			<div className="chat-container">
 				<ChatsList
-					// setActiveUser={this.setActiveUser}
-					// setActiveChat={this.setActiveChat}
 					setActiveConversation={this.setActiveConversation}
+					setActiveUser={this.setActiveUser}
 				/>
 				<Conversation
 					activeUser={this.state.activeUser}
 					activeChat={this.state.activeChat}
+					setActiveConversation={this.setActiveConversation}
 				/>
 			</div>
 		);
