@@ -5,8 +5,7 @@ import Message from './Message';
 import { connect } from 'react-redux';
 import {
 	messagesCollection,
-	sendMessage,
-	getChats
+	sendMessage
 } from '../../../../store/actions/chatActions';
 
 import './_Conversation.scss';
@@ -24,8 +23,7 @@ class Conversation extends Component {
 
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnSubmit = this.handleOnSubmit.bind(this);
-		// this.messageInput = React.createRef();
-		// this.chatBottom = React.createRef();
+		this.chatContainer = React.createRef();
 	}
 
 	componentDidMount() {
@@ -74,11 +72,19 @@ class Conversation extends Component {
 		}
 	}
 
+	scrollToMyRef() {
+		const scroll =
+			this.chatContainer.current.scrollHeight -
+			this.chatContainer.current.clientHeight;
+		this.chatContainer.current.scrollTo(0, scroll);
+	}
+
 	handleOnChange(e) {
-		// const el = this.messageInput.current;
+		if (e.key === 'Enter') {
+			this.handleOnSubmit();
+		}
 		this.setState({
 			message: e.target.value
-			// height: el.scrollHeight
 		});
 	}
 
@@ -95,14 +101,13 @@ class Conversation extends Component {
 			};
 			this.props.sendMessage(this.state.activeChat, msg);
 
-			this.setState({
-				...this.state,
-				message: ''
-			});
-
-			// console.log(this.chatBottom);
-			// this.chatBottom.current.scrollIntoView({ behavior: 'smooth' });
-			// window.scrollTo(0, this.chatBottom.current.offsetTop);
+			this.setState(
+				{
+					...this.state,
+					message: ''
+				},
+				() => this.scrollToMyRef()
+			);
 		}
 	}
 
@@ -122,7 +127,7 @@ class Conversation extends Component {
 						</a>
 					</div>
 				</div>
-				<div className="conversation__body">
+				<div className="conversation__body" ref={this.chatContainer}>
 					{this.state.messages.map((msg, i) => {
 						return (
 							<Message
