@@ -16,10 +16,8 @@ export const getUserReference = id => {
 };
 
 export const getChats = id => {
-	return () => {
-		const ref = getUserReference(id);
-		return db.collection('chats').where('participants', 'array-contains', ref);
-	};
+	const ref = getUserReference(id);
+	return db.collection('chats').where('participants', 'array-contains', ref);
 };
 
 export const getChatCollection = () => () => {

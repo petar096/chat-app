@@ -36,6 +36,10 @@
       position: absolute;
       right: .7rem;
       top: .2rem;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 

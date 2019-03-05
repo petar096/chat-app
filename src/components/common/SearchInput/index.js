@@ -13,6 +13,7 @@ const SearchInput = props => {
 				onChange={props.onChange}
 				name={props.name}
 				autoComplete={props.autoComplete}
+				value={props.value}
 			/>
 		</div>
 	);

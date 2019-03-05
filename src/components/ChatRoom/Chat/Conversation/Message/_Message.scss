@@ -1,28 +1,49 @@
 .message {
   display: block;
-  padding: 1rem 1.2rem;
-  font-size: 1.6rem;
+  padding: .1rem 1.4rem;
+  font-size: 1.4rem;
   max-width: 50%;
   word-wrap: break-word;
+  position: relative;
+  
  
   &--autor {
     margin-left: auto;
     border-radius: 2.5rem 2.5rem 0 2.5rem;
     background: #3B86FF;
     margin-right: 1rem;
-    margin-top: 1rem;
+    margin-top: 4rem;
     color: #fff;
+
+    &__time {
+      font-size: 1rem;
+      color: #43425D;
+      position: absolute;
+      bottom: -29px;
+      right: 0;
+      width:86px;
+      text-align: right;
+      
+    }
   }
   &--participant {
     margin-right: auto;
     border-radius:2.5rem 2.5rem 2.5rem 0;
     background: #EDF0F5;
-    margin-top: 1rem;
+    margin-top: 3rem;
     margin-left: 1rem;
+
+      
+  &__time {
+    font-size: 1rem;
+    color: #43425D;
+    position: absolute;
+    bottom: -29px;
+    left: 0;
+    text-align: left;
+    
+  }
   }
 
-  &-time {
-    font-size: 1.1rem;
-    color: #fff;
-  }
+
 }

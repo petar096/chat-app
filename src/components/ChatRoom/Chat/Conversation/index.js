@@ -20,7 +20,6 @@ class Conversation extends Component {
 		this.state = {
 			message: '',
 			messages: []
-			// activeChat: null
 		};
 
 		this.handleOnChange = this.handleOnChange.bind(this);
@@ -40,10 +39,13 @@ class Conversation extends Component {
 					this.setState({ messages: [] });
 					snapshot.forEach(doc => {
 						const msg = { id: doc.id, ...doc.data() };
-						this.setState({
-							...this.state,
-							messages: [...this.state.messages, msg]
-						});
+						this.setState(
+							{
+								...this.state,
+								messages: [...this.state.messages, msg]
+							},
+							() => this.scrollToMyRef()
+						);
 					});
 				});
 		}
@@ -95,7 +97,6 @@ class Conversation extends Component {
 
 	handleOnSubmit(e) {
 		e.preventDefault();
-
 		if (this.state.message === '') {
 			return false;
 		} else if (this.props.activeChat === null && this.props.activeUser) {
@@ -112,19 +113,24 @@ class Conversation extends Component {
 					this.props.getUserReference(this.props.activeUser.id)
 				)
 				.then(data => {
-					console.log(this.props.activeUser);
 					this.props.setActiveConversation(this.props.activeUser, data.id);
 					return data.id;
 				})
 				.then(id => {
 					console.log(id);
 					this.props.sendMessage(id, msg);
+					// this.props.clearSearchTerm();
 				});
 
-			this.setState({
-				...this.state,
-				message: ''
-			});
+			this.setState(
+				{
+					...this.state,
+					message: ''
+				},
+				() => {
+					this.props.clearSearchTerm();
+				}
+			);
 		} else {
 			const msg = {
 				text: this.state.message,
@@ -137,7 +143,10 @@ class Conversation extends Component {
 					...this.state,
 					message: ''
 				},
-				() => this.scrollToMyRef()
+				() => {
+					this.scrollToMyRef();
+					this.props.clearSearchTerm();
+				}
 			);
 		}
 	}
@@ -162,7 +171,7 @@ class Conversation extends Component {
 								{activeUser.firstName} {activeUser.lastName}
 							</span>
 							<span className="conversation__user-detail">Account menager</span>
-							<a href="#" className="close">
+							<a className="close" onClick={this.props.clearState}>
 								<i className="fa fa-times" />
 							</a>
 						</div>
@@ -212,7 +221,7 @@ class Conversation extends Component {
 								{activeUser.firstName} {activeUser.lastName}
 							</span>
 							<span className="conversation__user-detail">Account menager</span>
-							<a href="#" className="close">
+							<a className="close" onClick={this.props.clearState}>
 								<i className="fa fa-times" />
 							</a>
 						</div>
