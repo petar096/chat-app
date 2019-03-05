@@ -25,10 +25,13 @@ class Conversation extends Component {
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnSubmit = this.handleOnSubmit.bind(this);
 		this.chatContainer = React.createRef();
+		this.formC = React.createRef();
 		this.renderMessages = this.renderMessages.bind(this);
 	}
 
 	componentDidMount() {
+		// this.props.finishLoading();
+
 		if (this.props.activeChat === null) {
 			return false;
 		} else {
@@ -44,7 +47,9 @@ class Conversation extends Component {
 								...this.state,
 								messages: [...this.state.messages, msg]
 							},
-							() => this.scrollToMyRef()
+							() => {
+								this.scrollToMyRef();
+							}
 						);
 					});
 				});
@@ -77,6 +82,7 @@ class Conversation extends Component {
 							...this.state,
 							messages: [...this.state.messages, msg]
 						});
+						this.scrollToMyRef();
 					});
 				});
 		}
@@ -86,7 +92,7 @@ class Conversation extends Component {
 		const scroll =
 			this.chatContainer.current.scrollHeight -
 			this.chatContainer.current.clientHeight;
-		this.chatContainer.current.scrollTo(0, scroll);
+		this.chatContainer.current.scrollTo(50, scroll);
 	}
 
 	handleOnChange(e) {
@@ -119,7 +125,7 @@ class Conversation extends Component {
 				.then(id => {
 					console.log(id);
 					this.props.sendMessage(id, msg);
-					// this.props.clearSearchTerm();
+					this.props.clearSearchTerm();
 				});
 
 			this.setState(
@@ -152,7 +158,7 @@ class Conversation extends Component {
 	}
 
 	renderMessages() {
-		const { activeUser, activeChat } = this.props;
+		const { activeUser, activeChat, loading } = this.props;
 
 		if (activeUser === null && activeChat === null) {
 			return (
@@ -176,7 +182,7 @@ class Conversation extends Component {
 							</a>
 						</div>
 					</div>
-					<div className="conversation__body">
+					<div className="conversation__body" ref={this.chatContainer}>
 						<div style={{ margin: 'auto' }}>
 							<img
 								src={bear}
@@ -214,7 +220,7 @@ class Conversation extends Component {
 		} else {
 			return (
 				<React.Fragment>
-					<div className="conversation__header" ref={this.chatContainer}>
+					<div className="conversation__header">
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
@@ -226,7 +232,7 @@ class Conversation extends Component {
 							</a>
 						</div>
 					</div>
-					<div className="conversation__body">
+					<div className="conversation__body" ref={this.chatContainer}>
 						{this.state.messages.map((msg, i) => {
 							return (
 								<Message
@@ -238,7 +244,7 @@ class Conversation extends Component {
 							);
 						})}
 					</div>
-					<div className="conversation__form">
+					<div className="conversation__form" ref="formC">
 						<form className="message-form" onSubmit={this.handleOnSubmit}>
 							<input
 								type="text"
@@ -273,12 +279,13 @@ class Conversation extends Component {
 }
 const mapStateToProps = state => ({
 	user: state.auth,
-	chats: state.chats
+	chats: state.chats,
+	loading: state.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({
-	messagesCollection: id => dispatch(messagesCollection(id)),
-	sendMessage: (id, msg) => dispatch(sendMessage(id, msg)),
+	messagesCollection: id => messagesCollection(id),
+	sendMessage: (id, msg) => sendMessage(id, msg),
 	startConversation: (firstUser, secondUser) =>
 		startConversation(firstUser, secondUser),
 	getUserReference: id => getUserReference(id)

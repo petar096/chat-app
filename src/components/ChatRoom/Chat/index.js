@@ -38,7 +38,9 @@ class Chat extends Component {
 	}
 
 	componentDidMount() {
-		this.props.getChats(this.props.user.id).onSnapshot(snapshot => {
+		const { user } = this.props;
+
+		this.props.getChats(user.id).onSnapshot(snapshot => {
 			this.setState({ chats: [] });
 			snapshot.forEach(doc => {
 				const chat = { id: doc.id };
@@ -46,15 +48,15 @@ class Chat extends Component {
 				// get reference to other user from database
 				const userRef =
 					doc.data().participants[0].id ===
-					this.props.getUserReference(this.props.user.id).id
+					this.props.getUserReference(user.id).id
 						? doc.data().participants[1]
 						: doc.data().participants[0];
 
 				// get user data from reference
-				userRef.get().then(user => {
+				userRef.get().then(u => {
 					chat.otherUser = {
-						id: user.id,
-						...user.data()
+						id: u.id,
+						...u.data()
 					};
 
 					this.setState({
@@ -112,14 +114,11 @@ class Chat extends Component {
 
 	clearSearchTerm() {
 		console.log(this.state.searchTerm);
-		this.setState(
-			{
-				...this.state,
-				searchTerm: '',
-				users: []
-			},
-			() => console.log(this.state.searchTerm)
-		);
+		this.setState({
+			...this.state,
+			searchTerm: '',
+			users: []
+		});
 	}
 
 	clearState() {
