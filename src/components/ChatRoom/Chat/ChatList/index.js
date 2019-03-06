@@ -26,11 +26,11 @@ const ChatsList = ({
 				<React.Fragment>
 					<h2 className="subheading">Conversations</h2>
 					{chats
-						.filter(({ otherUser }) =>
-							otherUser.firstName
-								.toLowerCase()
-								.includes(searchTerm.toLowerCase())
-						)
+						// .filter(({ otherUser }) =>
+						// 	otherUser.firstName
+						// 		.toLowerCase()
+						// 		.includes(searchTerm.toLowerCase())
+						// )
 						.map(({ id, otherUser }) => {
 							return (
 								<ChatListItem

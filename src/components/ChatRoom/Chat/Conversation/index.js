@@ -11,7 +11,9 @@ import {
 } from '../../../../store/actions/chatActions';
 
 import './_Conversation.scss';
-import bear from '../../../../assets/images/bear.jpg';
+import bear from '../../../../assets/images/monster3.png';
+
+import Capitalize from '../../../common/helpers/Capitalize';
 
 class Conversation extends Component {
 	constructor(props) {
@@ -30,8 +32,6 @@ class Conversation extends Component {
 	}
 
 	componentDidMount() {
-		// this.props.finishLoading();
-
 		if (this.props.activeChat === null) {
 			return false;
 		} else {
@@ -158,12 +158,12 @@ class Conversation extends Component {
 	}
 
 	renderMessages() {
-		const { activeUser, activeChat, loading } = this.props;
+		const { activeUser, activeChat } = this.props;
 
 		if (activeUser === null && activeChat === null) {
 			return (
-				<div style={{ margin: 'auto' }}>
-					<img src={bear} style={{ maxHeight: '30rem', maxWidth: '40rem' }} />{' '}
+				<div style={{ margin: 'auto', textAlign: 'center' }}>
+					<img src={bear} style={{ maxHeight: '25rem', maxWidth: '30rem' }} />{' '}
 					<h2 className="subheading">Welcome!! Start chating now.. </h2>
 				</div>
 			);
@@ -174,7 +174,8 @@ class Conversation extends Component {
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
-								{activeUser.firstName} {activeUser.lastName}
+								{Capitalize(activeUser.firstName) || 'Google'}{' '}
+								{Capitalize(activeUser.lastName) || 'User'}
 							</span>
 							<span className="conversation__user-detail">Account menager</span>
 							<a className="close" onClick={this.props.clearState}>
@@ -224,7 +225,8 @@ class Conversation extends Component {
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
-								{activeUser.firstName} {activeUser.lastName}
+								{Capitalize(activeUser.firstName) || 'Google'}{' '}
+								{Capitalize(activeUser.lastName) || 'User'}
 							</span>
 							<span className="conversation__user-detail">Account menager</span>
 							<a className="close" onClick={this.props.clearState}>

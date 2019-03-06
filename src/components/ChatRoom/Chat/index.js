@@ -39,7 +39,7 @@ class Chat extends Component {
 
 	componentDidMount() {
 		const { user } = this.props;
-
+		console.log(user.id);
 		this.props.getChats(user.id).onSnapshot(snapshot => {
 			this.setState({ chats: [] });
 			snapshot.forEach(doc => {
@@ -72,7 +72,7 @@ class Chat extends Component {
 	getUsers(term) {
 		this.setState({ users: [] });
 		this.props
-			.getUsersByName(term)
+			.getUsersByName(term.toLowerCase())
 			.then(snapshots => {
 				snapshots.forEach(u => {
 					if (!this.state.chats.find(c => c.otherUser.id === u.id)) {

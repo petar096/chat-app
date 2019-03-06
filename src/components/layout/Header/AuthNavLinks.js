@@ -5,6 +5,7 @@ import { signOut } from '../../../store/actions/authActions';
 import { HOME_PAGE } from '../../../constants/routes';
 import img from '../../../assets/images/46.jpg';
 import Avatar from '../../common/Avatar';
+import Capitalize from '../../common/helpers/Capitalize';
 
 const AuthNavLinks = props => {
 	return (
@@ -25,7 +26,9 @@ const AuthNavLinks = props => {
 				</a>
 			</li>
 			<div className="user">
-				<span className="user__username">{props.auth.email}</span>
+				<span className="user__username">
+					{Capitalize(props.auth.firstName)} {Capitalize(props.auth.lastName)}
+				</span>
 				<i className="fa fa-chevron-down" />
 				<Avatar src={img} alt="User avatar image" />
 				<div className="dropdown">

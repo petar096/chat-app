@@ -5,6 +5,7 @@ import PageLayout from '../components/layout/PageLayout/PageLayout';
 
 export const PrivateRoute = ({
 	isAuthenticated,
+	isLoading,
 	component: Component,
 	...rest
 }) => (

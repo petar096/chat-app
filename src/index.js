@@ -11,7 +11,6 @@ import './styles/main.scss';
 import App from './components/App';
 
 import rootReducer from './store/reducers';
-import Modal from './components/common/Modal';
 
 const store = createStore(
 	rootReducer,

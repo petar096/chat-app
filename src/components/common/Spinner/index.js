@@ -4,12 +4,16 @@ import Modal from '../Modal';
 
 const Spinner = () => (
 	<Modal>
-		<div className="lds-ring">
-			<h1>Loading..</h1>
-			<div />
-			<div />
-			<div />
-			<div />
+		<div style={{ margin: 'auto', textAlign: 'center' }}>
+			<h1 className="primary-heading" style={{ color: '#fff' }}>
+				Loading...
+			</h1>
+			<div className="lds-ring">
+				<div />
+				<div />
+				<div />
+				<div />
+			</div>
 		</div>
 	</Modal>
 );

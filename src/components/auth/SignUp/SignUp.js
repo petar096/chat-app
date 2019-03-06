@@ -22,19 +22,19 @@ class SignUp extends Component {
 
 	handleOnSubmit(values) {
 		let user = {
-			firstName: values.firstName,
-			lastName: values.lastName,
-			email: values.email,
-			password: values.password,
-			rePassword: values.rePassword,
-			username: values.username
+			firstName: values.firstName.toLowerCase(),
+			lastName: values.lastName.toLowerCase(),
+			email: values.email.toLowerCase(),
+			password: values.password.toLowerCase(),
+			rePassword: values.rePassword.toLowerCase(),
+			username: values.username.toLowerCase()
 		};
 
 		this.props.signUp(user);
 	}
 
 	render() {
-		const { handleSubmit, reset, submitting } = this.props;
+		const { handleSubmit } = this.props;
 		return (
 			<React.Fragment>
 				<h2 className="primary-heading">Food-order</h2>

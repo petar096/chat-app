@@ -1,12 +1,14 @@
-export const startLoading = () => dispatch => {
-	dispatch({
+export const startLoading = () => {
+	console.log('start');
+
+	return {
 		type: 'LOADING_START'
-	});
+	};
 };
 
-export const finishLoading = () => dispatch => {
-	console.log('ovde');
-	dispatch({
+export const finishLoading = () => {
+	console.log('finish');
+	return {
 		type: 'LOADING_FINISH'
-	});
+	};
 };

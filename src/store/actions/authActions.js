@@ -1,33 +1,44 @@
 import { auth, app, db } from '../../firebase/config';
 import { toastr } from 'react-redux-toastr';
-import { SIGN_IN, LOG_OUT, SET_USER } from '../types/authConstants';
-import { startLoading, finishLoading } from './loadingActions';
+import { LOG_OUT, SET_USER } from '../types/authConstants';
 
-export const signIn = (email, password) => dispatch => {
-	dispatch(startLoading());
+export const signIn = (email, password) => {
 	auth
 		.signInWithEmailAndPassword(email, password)
-		.then(data => {
-			let user = data.user;
-			dispatch(setUser(user));
-			dispatch(finishLoading());
+		.then(() => {
+			// let user = data.user;
+			// setUser(user.uid);
+			// getUserById(user.uid).then(data => {
+			// 	console.log(data.data());
+			// 	dispatch(setUser(data.data().id));
 			toastr.success('Log in', 'You have signed in successfull');
+			// });
 		})
 		.catch(err => toastr.error('Login error', err.message));
 };
 
-export const setUser = user => dispatch => {
-	dispatch({
-		type: SET_USER,
-		user: {
-			id: user.uid,
-			email: user.email,
-			firstName: user.firstName,
-			lastName: user.lastName,
-			password: user.password,
-			rePassword: user.rePassword
-		}
+export const setUser = id => dispatch => {
+	return getUserById(id).then(doc => {
+		dispatch({
+			type: SET_USER,
+			user: {
+				id: id,
+				email: doc.data().email,
+				firstName: doc.data().firstName,
+				lastName: doc.data().lastName,
+				password: doc.data().password
+			}
+		});
 	});
+
+	// type: SET_USER,
+	// user: {
+	// 	id: user.uid,
+	// 	email: user.email,
+	// 	firstName: user.firstName,
+	// 	lastName: user.lastName,
+	// 	password: user.password
+	// }
 };
 
 export const signUp = user => () => {
@@ -58,16 +69,10 @@ export const signInWithGoogle = () => dispatch => {
 		.signInWithPopup(provider)
 		.then(data => {
 			let user = data.user;
-			dispatch({
-				type: SIGN_IN,
-				user: {
-					id: user.uid,
-					email: user.email
-				}
-			});
+			dispatch(setUser(user));
 			toastr.success('Log in', 'You have signed in successfull');
 		})
-		.catch(err => toastr.error('Login error', 'Invalid credentials'));
+		.catch(() => toastr.error('Login error', 'Invalid credentials'));
 };
 
 export const resetPassword = email => () => {
@@ -79,7 +84,7 @@ export const resetPassword = email => () => {
 		.catch(err => toastr.error('Error', err.message));
 };
 
-export const getUserById = id => () => {
+export const getUserById = id => {
 	return db
 		.collection('users')
 		.doc(id)

@@ -10,6 +10,16 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/'
 	},
+	resolve: {
+		extensions: ['*', '.js', '.jsx'],
+		alias: {
+			'@common': path.resolve(__dirname, '../src/components/common'),
+			'@layout': path.resolve(__dirname, '../src/components/layout'),
+			'@images': path.resolve(__dirname, '../src/assets/images'),
+			'@actions': path.resolve(__dirname, '../src/store/actions'),
+			'@reducers': path.resolve(__dirname, '../src/store/reducers')
+		}
+	},
 	module: {
 		rules: [
 			{

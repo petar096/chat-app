@@ -82,14 +82,9 @@ class Login extends Component {
 	}
 }
 
-const mapDispatchToProps = dispatch => ({
-	signIn: (email, password) => dispatch(signIn(email, password)),
-	signInWithGoogle: () => dispatch(signInWithGoogle())
-});
-
 export default connect(
 	null,
-	mapDispatchToProps
+	{ signIn, signInWithGoogle }
 )(
 	reduxForm({
 		form: 'loginForm',
