@@ -1,8 +1,7 @@
 import React from 'react';
 import ChatListItem from './ChatListItem';
 import './_ChatList.scss';
-import SearchInput from '../../../common/SearchInput';
-import { finishLoading } from '../../../../store/actions/loadingActions';
+import SearchInput from '@common/SearchInput';
 
 const ChatsList = ({
 	chats,
@@ -10,7 +9,8 @@ const ChatsList = ({
 	searchTerm,
 	handleChange,
 	setActiveConversation,
-	setActiveUser
+	setActiveUser,
+	toggleChatForm
 }) => {
 	return (
 		<div className="chats-list">
@@ -21,6 +21,9 @@ const ChatsList = ({
 				autoComplete="off"
 				value={searchTerm}
 			/>
+			<div>
+				<button onClick={() => toggleChatForm()}>New chat</button>
+			</div>
 			{/* chats collection */}
 			{chats.length === 0 ? null : (
 				<React.Fragment>

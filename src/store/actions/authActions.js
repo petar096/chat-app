@@ -30,15 +30,6 @@ export const setUser = id => dispatch => {
 			}
 		});
 	});
-
-	// type: SET_USER,
-	// user: {
-	// 	id: user.uid,
-	// 	email: user.email,
-	// 	firstName: user.firstName,
-	// 	lastName: user.lastName,
-	// 	password: user.password
-	// }
 };
 
 export const signUp = user => () => {

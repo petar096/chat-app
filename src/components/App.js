@@ -14,7 +14,6 @@ class App extends Component {
 		this.listener = auth.onAuthStateChanged(authUser => {
 			console.log(authUser);
 			if (authUser) {
-				//
 				this.props.setUser(authUser.uid).then(() => this.props.finishLoading());
 			} else {
 				this.props.finishLoading();

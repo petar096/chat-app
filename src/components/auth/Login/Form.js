@@ -25,10 +25,9 @@ class Login extends Component {
 				</h4>
 				<form
 					className="form"
-					onSubmit={handleSubmit(({ email, password }) => {
-						this.props.signIn(email, password);
-						reset();
-					})}>
+					onSubmit={handleSubmit(({ email, password }) =>
+						this.props.signIn(email, password)
+					)}>
 					<Field
 						type="email"
 						name="email"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Avatar from '../../../common/Avatar';
-import img from '../../../../assets/images/46.jpg';
+import img from '@images/46.jpg';
 import Message from './Message';
 import { connect } from 'react-redux';
 import {
@@ -11,7 +11,7 @@ import {
 } from '../../../../store/actions/chatActions';
 
 import './_Conversation.scss';
-import bear from '../../../../assets/images/monster3.png';
+import bear from '@images/monster3.png';
 
 import Capitalize from '../../../common/helpers/Capitalize';
 
@@ -174,8 +174,12 @@ class Conversation extends Component {
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
-								{Capitalize(activeUser.firstName) || 'Google'}{' '}
-								{Capitalize(activeUser.lastName) || 'User'}
+								{activeUser.firstName !== undefined
+									? Capitalize(activeUser.firstName)
+									: 'Google'}{' '}
+								{activeUser.lastName !== undefined
+									? Capitalize(activeUser.lastName)
+									: 'User'}
 							</span>
 							<span className="conversation__user-detail">Account menager</span>
 							<a className="close" onClick={this.props.clearState}>
@@ -225,8 +229,12 @@ class Conversation extends Component {
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
-								{Capitalize(activeUser.firstName) || 'Google'}{' '}
-								{Capitalize(activeUser.lastName) || 'User'}
+								{activeUser.firstName !== undefined
+									? Capitalize(activeUser.firstName)
+									: 'Google'}{' '}
+								{activeUser.lastName !== undefined
+									? Capitalize(activeUser.lastName)
+									: 'User'}
 							</span>
 							<span className="conversation__user-detail">Account menager</span>
 							<a className="close" onClick={this.props.clearState}>
@@ -285,7 +293,7 @@ const mapStateToProps = state => ({
 	loading: state.isLoading
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
 	messagesCollection: id => messagesCollection(id),
 	sendMessage: (id, msg) => sendMessage(id, msg),
 	startConversation: (firstUser, secondUser) =>

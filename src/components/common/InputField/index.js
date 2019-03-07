@@ -8,7 +8,7 @@ const InputField = ({
 	type,
 	label,
 	small,
-	meta: { touched, error, warning }
+	meta: { touched, error, warning } = null
 }) => {
 	if (type === 'checkbox') {
 		return (

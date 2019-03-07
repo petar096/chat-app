@@ -29,3 +29,10 @@ export const startConversation = (firstUser, secondUser) => {
 	};
 	return db.collection('chats').add(obj);
 };
+export const createGroupChat = (groupName, ...participants) => {
+	const groupChatObj = {
+		groupName,
+		participants
+	};
+	return db.collection('chats').add(groupChatObj);
+};

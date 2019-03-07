@@ -2,20 +2,12 @@ import React, { Component } from 'react';
 import './_Chat.scss';
 import ChatsList from './ChatList';
 import Conversation from './Conversation';
-import { getChats, getUserReference } from '../../../store/actions/chatActions';
-import { getUsersByName } from '../../../store/actions/authActions';
+import { getChats, getUserReference } from '@actions/chatActions';
+import { getUsersByName } from '@actions/authActions';
 import { connect } from 'react-redux';
+import GroupChatForm from './GroupChatForm';
 
-const debounce = (fn, delay) => {
-	let timer = null;
-	return function(...args) {
-		const context = this;
-		timer && clearTimeout(timer);
-		timer = setTimeout(() => {
-			fn.apply(context, args);
-		}, delay);
-	};
-};
+import debounce from '../../../helpers/debounce';
 
 class Chat extends Component {
 	constructor(props) {
@@ -26,7 +18,8 @@ class Chat extends Component {
 			activeUser: null,
 			searchTerm: '',
 			chats: [],
-			users: []
+			users: [],
+			openChatGroup: false
 		};
 
 		this.setActiveUser = this.setActiveUser.bind(this);
@@ -35,6 +28,7 @@ class Chat extends Component {
 		this.getUsers = debounce(this.getUsers.bind(this), 200);
 		this.clearSearchTerm = this.clearSearchTerm.bind(this);
 		this.clearState = this.clearState.bind(this);
+		this.toggleChatForm = this.toggleChatForm.bind(this);
 	}
 
 	componentDidMount() {
@@ -69,6 +63,14 @@ class Chat extends Component {
 		});
 	}
 
+	toggleChatForm() {
+		console.log('here');
+		console.log();
+		this.setState({
+			openChatGroup: !this.state.openChatGroup
+		});
+	}
+
 	getUsers(term) {
 		this.setState({ users: [] });
 		this.props
@@ -83,6 +85,8 @@ class Chat extends Component {
 			})
 			.catch(err => console.log(err));
 	}
+
+	createGroupChat() {}
 
 	handleChange(e) {
 		this.setState(
@@ -122,12 +126,12 @@ class Chat extends Component {
 	}
 
 	clearState() {
-		console.log('clearing state');
 		this.setState({
 			activeUser: null,
 			activeChat: null,
 			searchTerm: '',
-			users: []
+			users: [],
+			openChatGroup: false
 		});
 	}
 
@@ -142,6 +146,7 @@ class Chat extends Component {
 					chats={this.state.chats}
 					searchTerm={this.state.searchTerm}
 					handleChange={this.handleChange}
+					toggleChatForm={this.toggleChatForm}
 				/>
 				<Conversation
 					activeUser={this.state.activeUser}
@@ -150,6 +155,9 @@ class Chat extends Component {
 					clearSearchTerm={this.clearSearchTerm}
 					clearState={this.clearState}
 				/>
+				{this.state.openChatGroup ? (
+					<GroupChatForm clearState={this.clearState} />
+				) : null}
 			</div>
 		);
 	}
@@ -171,5 +179,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Chat);
-
-// export default Chat;

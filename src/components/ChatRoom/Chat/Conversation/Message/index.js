@@ -7,7 +7,7 @@ const Message = ({ time, text, autor }) => {
 	return (
 		<React.Fragment>
 			<div className={`message message--${autor ? 'autor' : 'participant'}`}>
-				<p>{text}</p>
+				<p className="message-content">{text}</p>
 				<span className={`message--${autor ? 'autor' : 'participant'}__time`}>
 					{moment(time).calendar()}
 				</span>

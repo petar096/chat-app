@@ -2,11 +2,13 @@
   display: block;
   padding: .1rem 1.4rem;
   font-size: 1.4rem;
-  max-width: 50%;
-  word-wrap: break-word;
+  max-width: 30%;
   position: relative;
   
- 
+  &-content {
+    word-wrap: break-word;
+    // max-width: 50%;
+  }
   &--autor {
     margin-left: auto;
     border-radius: 2.5rem 2.5rem 0 2.5rem;
@@ -21,7 +23,7 @@
       position: absolute;
       bottom: -29px;
       right: 0;
-      width:86px;
+      min-width:86px;
       text-align: right;
       
     }
