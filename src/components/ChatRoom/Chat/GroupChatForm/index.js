@@ -116,11 +116,20 @@ class GroupChatForm extends Component {
 									console.log(user);
 									return (
 										<div key={user.id} className="users-list__item">
-											{user.firstName}
+											{user.firstName} - {user.lastName}
 										</div>
 									);
 								})}
 							</div>
+							<button
+								className="button-prev"
+								onClick={() =>
+									this.setState({
+										page: this.state.page - 1
+									})
+								}>
+								<i className="fa fa-long-arrow-left" />
+							</button>
 						</React.Fragment>
 					) : null}
 				</div>
