@@ -18,7 +18,8 @@ module.exports = {
 			'@layout': path.resolve(__dirname, '../src/components/layout'),
 			'@images': path.resolve(__dirname, '../src/assets/images'),
 			'@actions': path.resolve(__dirname, '../src/store/actions'),
-			'@reducers': path.resolve(__dirname, '../src/store/reducers')
+			'@reducers': path.resolve(__dirname, '../src/store/reducers'),
+			'@helpers': path.resolve(__dirname, '../src/helpers')
 		}
 	},
 	module: {

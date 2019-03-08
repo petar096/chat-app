@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './_Chat.scss';
 import ChatsList from './ChatList';
 import Conversation from './Conversation';
-import { getChats, getUserReference } from '@actions/chatActions';
-import { getUsersByName } from '@actions/authActions';
+import { getChats } from '@actions/chatActions';
+import { getUsersByName, getUserReference } from '@actions/authActions';
 import { connect } from 'react-redux';
 import GroupChatForm from './GroupChatForm';
 
@@ -39,26 +39,37 @@ class Chat extends Component {
 			snapshot.forEach(doc => {
 				const chat = { id: doc.id };
 
-				// get reference to other user from database
-				const userRef =
-					doc.data().participants[0].id ===
-					this.props.getUserReference(user.id).id
-						? doc.data().participants[1]
-						: doc.data().participants[0];
-
-				// get user data from reference
-				userRef.get().then(u => {
-					chat.otherUser = {
-						id: u.id,
-						...u.data()
-					};
+				// check if chat has groupName & set groupName in state
+				if (doc.data().groupName) {
+					chat.groupName = doc.data().groupName;
 
 					this.setState({
 						...this.state,
 
 						chats: [...this.state.chats, chat]
 					});
-				});
+				} else {
+					// get reference to other user from database
+					const userRef =
+						doc.data().participants[0].id ===
+						this.props.getUserReference(user.id).id
+							? doc.data().participants[1]
+							: doc.data().participants[0];
+
+					// get user data from reference
+					userRef.get().then(u => {
+						chat.otherUser = {
+							id: u.id,
+							...u.data()
+						};
+
+						this.setState({
+							...this.state,
+
+							chats: [...this.state.chats, chat]
+						});
+					});
+				}
 			});
 		});
 	}
@@ -72,21 +83,24 @@ class Chat extends Component {
 	}
 
 	getUsers(term) {
+		// console.log('here');
 		this.setState({ users: [] });
 		this.props
 			.getUsersByName(term.toLowerCase())
 			.then(snapshots => {
 				snapshots.forEach(u => {
-					if (!this.state.chats.find(c => c.otherUser.id === u.id)) {
-						const user = { id: u.id, ...u.data() };
-						this.setState({ users: [...this.state.users, user] });
-					}
+					// console.log(u.data());
+
+					// const
+					// this.state.chats.map(c => console.log(c));
+					// // if (!this.state.chats.find(c => c.id === u.id)) {
+					const user = { id: u.id, ...u.data() };
+					this.setState({ users: [...this.state.users, user] });
+					// }
 				});
 			})
 			.catch(err => console.log(err));
 	}
-
-	createGroupChat() {}
 
 	handleChange(e) {
 		this.setState(
@@ -102,22 +116,17 @@ class Chat extends Component {
 			activeChat: null
 		});
 	}
-	setActiveChat(id) {
-		this.setState({
-			...this.state,
-			activeChat: id
-		});
-	}
 
-	setActiveConversation(user, id) {
+	setActiveConversation(data) {
 		this.setState({
-			activeChat: id,
-			activeUser: user
+			activeChat: {
+				...data
+			}
+			// activeUser: user
 		});
 	}
 
 	clearSearchTerm() {
-		console.log(this.state.searchTerm);
 		this.setState({
 			...this.state,
 			searchTerm: '',
@@ -141,7 +150,6 @@ class Chat extends Component {
 				<ChatsList
 					setActiveConversation={this.setActiveConversation}
 					setActiveUser={this.setActiveUser}
-					activeChat={this.state.activeChat}
 					users={this.state.users}
 					chats={this.state.chats}
 					searchTerm={this.state.searchTerm}

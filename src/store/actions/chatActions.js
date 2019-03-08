@@ -1,8 +1,5 @@
 import { db } from '../../firebase/config';
-
-export const getUserReference = id => {
-	return db.collection('users').doc(id);
-};
+import { getUserReference } from './authActions';
 
 export const getChats = id => {
 	const ref = getUserReference(id);
@@ -29,10 +26,6 @@ export const startConversation = (firstUser, secondUser) => {
 	};
 	return db.collection('chats').add(obj);
 };
-export const createGroupChat = (groupName, ...participants) => {
-	const groupChatObj = {
-		groupName,
-		participants
-	};
-	return db.collection('chats').add(groupChatObj);
+export const createGroupChat = (name, participants) => {
+	return db.collection('chats').add({ name, participants });
 };

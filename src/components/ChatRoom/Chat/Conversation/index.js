@@ -6,14 +6,13 @@ import { connect } from 'react-redux';
 import {
 	messagesCollection,
 	sendMessage,
-	startConversation,
-	getUserReference
-} from '../../../../store/actions/chatActions';
-
+	startConversation
+} from '@actions/chatActions';
+import { getUserReference } from '@actions/authActions';
 import './_Conversation.scss';
 import bear from '@images/monster3.png';
 
-import Capitalize from '../../../common/helpers/Capitalize';
+import Capitalize from '@helpers/Capitalize';
 
 class Conversation extends Component {
 	constructor(props) {
@@ -36,7 +35,7 @@ class Conversation extends Component {
 			return false;
 		} else {
 			this.props
-				.messagesCollection(this.props.activeChat)
+				.messagesCollection(this.props.activeChat.id)
 				.orderBy('time')
 				.onSnapshot(snapshot => {
 					this.setState({ messages: [] });
@@ -72,7 +71,7 @@ class Conversation extends Component {
 			this.props.activeChat !== null
 		) {
 			this.props
-				.messagesCollection(this.props.activeChat)
+				.messagesCollection(this.props.activeChat.id)
 				.orderBy('time')
 				.onSnapshot(snapshot => {
 					this.setState({ messages: [] });
@@ -143,7 +142,7 @@ class Conversation extends Component {
 				time: Date.now(),
 				sender: this.props.user.email
 			};
-			this.props.sendMessage(this.state.activeChat, msg);
+			this.props.sendMessage(this.state.activeChat.id, msg);
 			this.setState(
 				{
 					...this.state,
@@ -229,12 +228,17 @@ class Conversation extends Component {
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
-								{activeUser.firstName !== undefined
+								{activeChat.user
+									? `${Capitalize(activeChat.user.firstName)}  ${Capitalize(
+											activeChat.user.lastName
+									  )}`
+									: activeChat.groupName}
+								{/* {activeUser.firstName !== undefined
 									? Capitalize(activeUser.firstName)
 									: 'Google'}{' '}
 								{activeUser.lastName !== undefined
 									? Capitalize(activeUser.lastName)
-									: 'User'}
+									: 'User'} */}
 							</span>
 							<span className="conversation__user-detail">Account menager</span>
 							<a className="close" onClick={this.props.clearState}>

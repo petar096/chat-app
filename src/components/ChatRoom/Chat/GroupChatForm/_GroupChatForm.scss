@@ -88,7 +88,27 @@
   flex-direction : column;
   overflow-x: auto;
 
+
   &__item {
-    background: red;
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+
+
+    &:hover {
+      cursor: pointer;
+      background: darken(#fff, 10%);
+    border-bottom: .1rem solid #333;
+
+    }
+    &__details {
+      font-size: 1.8rem;
+      padding-left: 4rem;
+
+
+    }
   }
+}
+.btn-success {
+  background-image: linear-gradient(to right top, #5cdc8d, #68e179, #7ae662, #90e944, #a8eb12);
 }
