@@ -5,7 +5,7 @@ import { signOut } from '../../../store/actions/authActions';
 import { HOME_PAGE } from '../../../constants/routes';
 import img from '../../../assets/images/46.jpg';
 import Avatar from '../../common/Avatar';
-import Capitalize from '../../common/helpers/Capitalize';
+import Capitalize from '@helpers/Capitalize';
 
 const AuthNavLinks = props => {
 	return (

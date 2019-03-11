@@ -2,6 +2,7 @@ import React from 'react';
 import ChatListItem from './ChatListItem';
 import './_ChatList.scss';
 import SearchInput from '@common/SearchInput';
+import Capitalize from '@helpers/Capitalize';
 
 const ChatsList = ({
 	chats,
@@ -34,12 +35,13 @@ const ChatsList = ({
 						// 		.toLowerCase()
 						// 		.includes(searchTerm.toLowerCase())
 						// )
-						.map(({ id, otherUser }) => {
+						.map(data => {
+							const showData = data.groupName ? data.groupName : data.otherUser;
 							return (
 								<ChatListItem
-									key={id}
-									userData={otherUser}
-									onClick={() => setActiveConversation(otherUser, id)}
+									key={data.id}
+									data={showData}
+									onClick={() => setActiveConversation(data, data.id)}
 								/>
 							);
 						})}
@@ -53,7 +55,7 @@ const ChatsList = ({
 						return (
 							<ChatListItem
 								key={data.id}
-								userData={data}
+								data={data}
 								onClick={() => setActiveUser(data)}
 							/>
 						);
