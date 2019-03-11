@@ -2,7 +2,6 @@ import React from 'react';
 import ChatListItem from './ChatListItem';
 import './_ChatList.scss';
 import SearchInput from '@common/SearchInput';
-import Capitalize from '@helpers/Capitalize';
 
 const ChatsList = ({
 	chats,
@@ -22,26 +21,34 @@ const ChatsList = ({
 				autoComplete="off"
 				value={searchTerm}
 			/>
-			<div>
-				<button onClick={() => toggleChatForm()}>New chat</button>
+			<div style={{ display: 'flex' }}>
+				<button className="addChat" onClick={() => toggleChatForm()}>
+					<i className="fa fa-plus-circle" /> Add chat
+				</button>
 			</div>
 			{/* chats collection */}
 			{chats.length === 0 ? null : (
 				<React.Fragment>
 					<h2 className="subheading">Conversations</h2>
 					{chats
-						// .filter(({ otherUser }) =>
-						// 	otherUser.firstName
-						// 		.toLowerCase()
-						// 		.includes(searchTerm.toLowerCase())
-						// )
+						.filter(
+							data => {
+								let term = data.groupName
+									? data.groupName.toLowerCase()
+									: data.otherUser.firstName.toLowerCase();
+								return term.includes(searchTerm.toLowerCase());
+							}
+							// otherUser.firstName
+							// 	.toLowerCase()
+							// 	.includes(searchTerm.toLowerCase())
+						)
 						.map(data => {
 							const showData = data.groupName ? data.groupName : data.otherUser;
 							return (
 								<ChatListItem
 									key={data.id}
 									data={showData}
-									onClick={() => setActiveConversation(data, data.id)}
+									onClick={() => setActiveConversation(data)}
 								/>
 							);
 						})}
@@ -52,6 +59,7 @@ const ChatsList = ({
 				<React.Fragment>
 					<h2 className="subheading">Users</h2>
 					{users.map(data => {
+						console.log(data);
 						return (
 							<ChatListItem
 								key={data.id}

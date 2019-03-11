@@ -13,7 +13,6 @@ import './_Conversation.scss';
 import bear from '@images/monster3.png';
 
 import Capitalize from '@helpers/Capitalize';
-import ConversationHeader from './Header';
 
 const WellcomeSection = (
 	<div style={{ margin: 'auto', textAlign: 'center' }}>
@@ -112,7 +111,7 @@ class Conversation extends Component {
 		e.preventDefault();
 		if (this.state.message === '') {
 			return false;
-		} else if (this.props.activeChat === null && this.props.activeUser) {
+		} else if (this.props.activeUser) {
 			const msg = {
 				text: this.state.message,
 				time: Date.now(),
@@ -126,7 +125,10 @@ class Conversation extends Component {
 					this.props.getUserReference(this.props.activeUser.id)
 				)
 				.then(data => {
-					this.props.setActiveConversation(this.props.activeUser, data.id);
+					this.props.setActiveConversation({
+						id: data.id,
+						otherUser: this.props.activeUser
+					});
 					return data.id;
 				})
 				.then(id => {
@@ -177,18 +179,11 @@ class Conversation extends Component {
 		const { activeUser, activeChat } = this.props;
 
 		if (activeUser === null && activeChat === null) {
-			console.log(activeUser);
 			return WellcomeSection;
-			// return (
-			// 	<div style={{ margin: 'auto', textAlign: 'center' }}>
-			// 		<img src={bear} style={{ maxHeight: '25rem', maxWidth: '30rem' }} />{' '}
-			// 		<h2 className="subheading">Welcome!! Start chating now.. </h2>
-			// 	</div>
-			// );
 		} else if (activeChat === null && activeUser) {
 			return (
 				<React.Fragment>
-					{/* <div className="conversation__header">
+					<div className="conversation__header">
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
@@ -203,13 +198,8 @@ class Conversation extends Component {
 							<a className="close" onClick={this.props.clearState}>
 								<i className="fa fa-times" />
 							</a>
-						</div> */}
-					console.log(activeUser);
-					<ConversationHeader
-						activeUser={activeUser}
-						clearState={this.props.clearState}
-					/>
-					{/* </div> */}
+						</div>
+					</div>
 					<div className="conversation__body" ref={this.chatContainer}>
 						<div style={{ margin: 'auto' }}>
 							<img
@@ -248,34 +238,22 @@ class Conversation extends Component {
 		} else {
 			return (
 				<React.Fragment>
-					{/* {console.log(activeUser)}
 					<div className="conversation__header">
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
-								{activeChat.user
-									? `${Capitalize(activeChat.user.firstName)}  ${Capitalize(
-											activeChat.user.lastName
-									  )}`
-									: activeChat.groupName} */}
-					{/* {activeUser.firstName !== undefined
-									? Capitalize(activeUser.firstName)
-									: 'Google'}{' '}
-								{activeUser.lastName !== undefined
-									? Capitalize(activeUser.lastName)
-									: 'User'} */}
-					{/* </span>
+								{activeChat.otherUser
+									? `${Capitalize(
+											activeChat.otherUser.firstName
+									  )}  ${Capitalize(activeChat.otherUser.lastName)}`
+									: activeChat.groupName}
+							</span>
 							<span className="conversation__user-detail">Account menager</span>
 							<a className="close" onClick={this.props.clearState}>
 								<i className="fa fa-times" />
 							</a>
 						</div>
-					</div> */}
-					<ConversationHeader
-						activeUser={activeUser}
-						clearState={this.props.clearState}
-						img={img}
-					/>
+					</div>
 					<div className="conversation__body" ref={this.chatContainer}>
 						{this.state.messages.map((msg, i) => {
 							return (

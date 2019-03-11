@@ -33,7 +33,7 @@ class Chat extends Component {
 
 	componentDidMount() {
 		const { user } = this.props;
-		console.log(user.id);
+
 		this.props.getChats(user.id).onSnapshot(snapshot => {
 			this.setState({ chats: [] });
 			snapshot.forEach(doc => {
@@ -83,20 +83,18 @@ class Chat extends Component {
 	}
 
 	getUsers(term) {
-		// console.log('here');
 		this.setState({ users: [] });
 		this.props
 			.getUsersByName(term.toLowerCase())
 			.then(snapshots => {
 				snapshots.forEach(u => {
-					// console.log(u.data());
-
-					// const
-					// this.state.chats.map(c => console.log(c));
-					// // if (!this.state.chats.find(c => c.id === u.id)) {
-					const user = { id: u.id, ...u.data() };
-					this.setState({ users: [...this.state.users, user] });
-					// }
+					if (
+						!this.state.chats.find(c => !c.groupName && c.otherUser.id === u.id)
+					) {
+						console.log('ovde');
+						const user = { id: u.id, ...u.data() };
+						this.setState({ users: [...this.state.users, user] });
+					}
 				});
 			})
 			.catch(err => console.log(err));
@@ -119,10 +117,8 @@ class Chat extends Component {
 
 	setActiveConversation(data) {
 		this.setState({
-			activeChat: {
-				...data
-			}
-			// activeUser: user
+			activeChat: data,
+			activeUser: null
 		});
 	}
 

@@ -4,8 +4,10 @@ import { getUsersByName, getUserReference } from '@actions/authActions';
 import { createGroupChat } from '@actions/chatActions';
 import { connect } from 'react-redux';
 
+import Capitalize from '@helpers/Capitalize';
 import './_GroupChatForm.scss';
 import Avatar from '@common/Avatar';
+import img from '@images/46.jpg';
 
 const INITIAL_STATE = {
 	groupName: '',
@@ -28,6 +30,7 @@ class GroupChatForm extends Component {
 
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.addParticipant = this.addParticipant.bind(this);
+		this.removeParticipant = this.removeParticipant.bind(this);
 		this.createGroupChat = this.createGroupChat.bind(this);
 	}
 	getUsers(term) {
@@ -36,13 +39,13 @@ class GroupChatForm extends Component {
 			.getUsersByName(term.toLowerCase())
 			.then(snapshots => {
 				snapshots.forEach(u => {
-					console.log(u);
 					const user = { id: u.id, ...u.data() };
 					this.setState({ users: [...this.state.users, user] });
 				});
 			})
 			.catch(err => console.log(err));
 	}
+
 	handleOnChange(e) {
 		console.log(this.state.groupName);
 		this.setState(
@@ -59,15 +62,22 @@ class GroupChatForm extends Component {
 		if (exists) {
 			return false;
 		} else {
-			this.setState({
-				participants: [...this.state.participants, usr]
-			});
+			this.setState(
+				{
+					participants: [...this.state.participants, usr]
+				},
+				() => this.setState({ searchUser: '' })
+			);
 		}
+	}
+	removeParticipant(id) {
+		this.setState({
+			participants: this.state.participants.filter(p => p.id !== id)
+		});
 	}
 
 	createGroupChat(e) {
 		e.preventDefault();
-		console.log('clicked');
 		const participants = [this.props.getUserReference(this.props.user.id)];
 		this.state.participants.forEach(p =>
 			participants.push(this.props.getUserReference(p.id))
@@ -76,38 +86,36 @@ class GroupChatForm extends Component {
 		console.log(participants);
 
 		this.props.createGroupChat(this.state.groupName, participants);
-		this.setState({ ...INITIAL_STATE });
+		// this.setState({ ...INITIAL_STATE });
+		this.props.clearState();
 	}
 
 	render() {
 		return (
 			<Modal>
 				<div className="group-chat-form">
-					{this.state.page === 1 ? (
-						<React.Fragment>
-							<div className="group-chat-form__header">
-								<a className="close-btn" onClick={this.props.clearState}>
-									<i className="fa fa-times" />
+					<form
+						onSubmit={this.createGroupChat}
+						style={{ display: 'flex', flexDirection: 'column' }}>
+						{this.state.page === 1 ? (
+							<React.Fragment>
+								<div className="group-chat-form__header">
+									<a className="close-btn" onClick={this.props.clearState}>
+										<i className="fa fa-times" />
+									</a>
+									<h4
+										className="subheading"
+										style={{ flex: '2', textAlign: 'left' }}>
+										New Group Chat
+									</h4>
+								</div>
+								<div className="group-icon-container" />
+								<a className="group-icon">
+									<Avatar src={img} />
 								</a>
-								<h4
-									className="subheading"
-									style={{ flex: '2', textAlign: 'left' }}>
-									New Group Chat
-								</h4>
-							</div>
-							<div className="group-icon-container" />
-							<a className="group-icon">
-								<Avatar />
-							</a>
-							<form
-								className="form"
-								onSubmit={e => {
-									e.preventDefault();
-									this.setState({
-										page: this.state.page + 1
-									});
-								}}>
-								<div className="field ">
+								<div
+									className="field field--small"
+									style={{ margin: '0 auto' }}>
 									<input
 										name="groupName"
 										type="text"
@@ -127,70 +135,78 @@ class GroupChatForm extends Component {
 									}>
 									<i className="fa fa-long-arrow-right" />
 								</button>
-							</form>
-						</React.Fragment>
-					) : null}
+							</React.Fragment>
+						) : null}
 
-					{this.state.page === 2 ? (
-						<React.Fragment>
-							<div className="group-chat-form__header">
-								<a className="close-btn" onClick={this.props.clearState}>
-									<i className="fa fa-times" />
-								</a>
-								<h4
-									className="subheading"
-									style={{ flex: '2', textAlign: 'left' }}>
-									New group : <strong>{this.state.groupName}</strong>
-								</h4>
-							</div>
-							<form className="form" onSubmit={this.createGroupChat}>
-								<div className="field ">
+						{this.state.page === 2 ? (
+							<React.Fragment>
+								<div className="group-chat-form__header">
+									<a className="close-btn" onClick={this.props.clearState}>
+										<i className="fa fa-times" />
+									</a>
+									<h4
+										className="subheading"
+										style={{ flex: '2', textAlign: 'left' }}>
+										New group : <strong>{this.state.groupName}</strong>
+									</h4>
+								</div>
+								<div
+									className="field field--small "
+									style={{ margin: '0 auto', marginTop: '3rem' }}>
 									<input
 										name="searchUser"
 										type="text"
 										className="field__input"
+										value={this.state.searchUser}
 										placeholder="&nbsp;"
 										onChange={this.handleOnChange}
 									/>
 									<span className="field__label">Find users</span>
 								</div>
-							</form>
-							<div>
-								{this.state.participants.map(usr => {
-									return <div>{usr.firstName}</div>;
-								})}
-							</div>
-							<div className="users-list">
-								{this.state.users.map(user => {
-									console.log(user);
-									return (
-										<div
-											key={user.id}
-											className="users-list__item"
-											onClick={() => this.addParticipant(user)}>
-											<Avatar />
-											<div className="users-list__item__details">
-												{user.firstName} - {user.lastName}{' '}
+								<div className="group-participants">
+									{this.state.participants.map(usr => {
+										return (
+											<a
+												style={{ padding: '1rem' }}
+												onClick={() => this.removeParticipant(usr.id)}>
+												<Avatar src={img} />
+											</a>
+										);
+									})}
+								</div>
+								<div className="users-list">
+									{this.state.users.map(user => {
+										return (
+											<div
+												key={user.id}
+												className="users-list__item"
+												onClick={() => this.addParticipant(user)}>
+												<Avatar src={img} />
+												<div className="users-list__item__details">
+													{Capitalize(user.firstName)}{' '}
+													{Capitalize(user.lastName)}{' '}
+												</div>
+												<input type="radio" />
 											</div>
-										</div>
-									);
-								})}
-							</div>
-							<button
-								className="button-prev"
-								type="button"
-								onClick={() =>
-									this.setState({
-										page: this.state.page - 1
-									})
-								}>
-								<i className="fa fa-long-arrow-left" />
-							</button>
-							<button className="button-next btn-success" type="submit">
-								<i className="fa fa-check" />
-							</button>
-						</React.Fragment>
-					) : null}
+										);
+									})}
+								</div>
+								<button className="button-next btn-success" type="submit">
+									<i className="fa fa-check" />
+								</button>
+								<button
+									className="button-prev"
+									type="button"
+									onClick={() =>
+										this.setState({
+											page: this.state.page - 1
+										})
+									}>
+									<i className="fa fa-long-arrow-left" />
+								</button>
+							</React.Fragment>
+						) : null}
+					</form>
 				</div>
 			</Modal>
 		);

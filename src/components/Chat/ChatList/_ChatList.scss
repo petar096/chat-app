@@ -3,3 +3,20 @@
   border-right: .1rem solid #F1F1F3;
   overflow-y: auto;
 }
+.addChat {
+  background: #fff;
+  border: none;
+  -webkit-box-shadow: 5px 6px 5px 0px rgba(148,146,148,0.69);
+  -moz-box-shadow: 5px 6px 5px 0px rgba(148,146,148,0.69);
+  box-shadow: 5px 6px 5px 0px rgba(148,146,148,0.69);
+  border: .1rem solid #EBEBF2;
+  border-radius: 2rem;
+  padding: 1rem;
+  margin-right: 1rem;
+  margin-left: auto;
+
+
+  &:hover {
+    cursor: pointer;
+  }
+}

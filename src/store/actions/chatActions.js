@@ -26,6 +26,7 @@ export const startConversation = (firstUser, secondUser) => {
 	};
 	return db.collection('chats').add(obj);
 };
+
 export const createGroupChat = (name, participants) => {
-	return db.collection('chats').add({ name, participants });
+	return db.collection('chats').add({ groupName: name, participants });
 };

@@ -83,22 +83,28 @@
   }
 }
 
+.group-participants {
+  display: flex;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
 .users-list {
   display: flex;
   flex-direction : column;
   overflow-x: auto;
-
+  margin-top: 3rem;
 
   &__item {
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
-
+    
 
     &:hover {
       cursor: pointer;
       background: darken(#fff, 10%);
-    border-bottom: .1rem solid #333;
+      //  border-bottom: .1rem solid #333;
 
     }
     &__details {
