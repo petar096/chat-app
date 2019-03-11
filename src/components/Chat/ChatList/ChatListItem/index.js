@@ -1,6 +1,6 @@
 import React from 'react';
-import img from '../../../../../assets/images/46.jpg';
-import Avatar from '../../../../common/Avatar';
+import img from '@images/46.jpg';
+import Avatar from '@common/Avatar';
 
 import './_Chat-list-item.scss';
 import Capitalize from '@helpers/Capitalize';

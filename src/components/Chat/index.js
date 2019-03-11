@@ -7,7 +7,7 @@ import { getUsersByName, getUserReference } from '@actions/authActions';
 import { connect } from 'react-redux';
 import GroupChatForm from './GroupChatForm';
 
-import debounce from '../../../helpers/debounce';
+import debounce from '@helpers/debounce';
 
 class Chat extends Component {
 	constructor(props) {

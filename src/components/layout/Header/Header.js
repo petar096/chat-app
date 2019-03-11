@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AuthNavLinks from './AuthNavLinks';
 import NonAuthNavLinks from './NonAuthNavLinks';
+import SearchInput from '@common/SearchInput';
 
 import './_Header.scss';
-import SearchInput from '../../common/SearchInput';
 
 const Header = ({ isAuthenticated }) => (
 	<header className="header">

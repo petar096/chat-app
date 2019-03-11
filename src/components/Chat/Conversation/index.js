@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Avatar from '../../../common/Avatar';
+import Avatar from '@common/Avatar';
 import img from '@images/46.jpg';
 import Message from './Message';
 import { connect } from 'react-redux';
@@ -13,6 +13,14 @@ import './_Conversation.scss';
 import bear from '@images/monster3.png';
 
 import Capitalize from '@helpers/Capitalize';
+import ConversationHeader from './Header';
+
+const WellcomeSection = (
+	<div style={{ margin: 'auto', textAlign: 'center' }}>
+		<img src={bear} style={{ maxHeight: '25rem', maxWidth: '30rem' }} />{' '}
+		<h2 className="subheading">Welcome!! Start chating now.. </h2>
+	</div>
+);
 
 class Conversation extends Component {
 	constructor(props) {
@@ -156,20 +164,31 @@ class Conversation extends Component {
 		}
 	}
 
+	// WellcomeSection = () => {
+	// 	return (
+	// 		<div style={{ margin: 'auto', textAlign: 'center' }}>
+	// 			<img src={bear} style={{ maxHeight: '25rem', maxWidth: '30rem' }} />{' '}
+	// 			<h2 className="subheading">Welcome!! Start chating now.. </h2>
+	// 		</div>
+	// 	);
+	// };
+
 	renderMessages() {
 		const { activeUser, activeChat } = this.props;
 
 		if (activeUser === null && activeChat === null) {
-			return (
-				<div style={{ margin: 'auto', textAlign: 'center' }}>
-					<img src={bear} style={{ maxHeight: '25rem', maxWidth: '30rem' }} />{' '}
-					<h2 className="subheading">Welcome!! Start chating now.. </h2>
-				</div>
-			);
+			console.log(activeUser);
+			return WellcomeSection;
+			// return (
+			// 	<div style={{ margin: 'auto', textAlign: 'center' }}>
+			// 		<img src={bear} style={{ maxHeight: '25rem', maxWidth: '30rem' }} />{' '}
+			// 		<h2 className="subheading">Welcome!! Start chating now.. </h2>
+			// 	</div>
+			// );
 		} else if (activeChat === null && activeUser) {
 			return (
 				<React.Fragment>
-					<div className="conversation__header">
+					{/* <div className="conversation__header">
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
@@ -184,8 +203,13 @@ class Conversation extends Component {
 							<a className="close" onClick={this.props.clearState}>
 								<i className="fa fa-times" />
 							</a>
-						</div>
-					</div>
+						</div> */}
+					console.log(activeUser);
+					<ConversationHeader
+						activeUser={activeUser}
+						clearState={this.props.clearState}
+					/>
+					{/* </div> */}
 					<div className="conversation__body" ref={this.chatContainer}>
 						<div style={{ margin: 'auto' }}>
 							<img
@@ -224,6 +248,7 @@ class Conversation extends Component {
 		} else {
 			return (
 				<React.Fragment>
+					{/* {console.log(activeUser)}
 					<div className="conversation__header">
 						<Avatar src={img} large={true} />
 						<div className="conversation__header__details">
@@ -232,20 +257,25 @@ class Conversation extends Component {
 									? `${Capitalize(activeChat.user.firstName)}  ${Capitalize(
 											activeChat.user.lastName
 									  )}`
-									: activeChat.groupName}
-								{/* {activeUser.firstName !== undefined
+									: activeChat.groupName} */}
+					{/* {activeUser.firstName !== undefined
 									? Capitalize(activeUser.firstName)
 									: 'Google'}{' '}
 								{activeUser.lastName !== undefined
 									? Capitalize(activeUser.lastName)
 									: 'User'} */}
-							</span>
+					{/* </span>
 							<span className="conversation__user-detail">Account menager</span>
 							<a className="close" onClick={this.props.clearState}>
 								<i className="fa fa-times" />
 							</a>
 						</div>
-					</div>
+					</div> */}
+					<ConversationHeader
+						activeUser={activeUser}
+						clearState={this.props.clearState}
+						img={img}
+					/>
 					<div className="conversation__body" ref={this.chatContainer}>
 						{this.state.messages.map((msg, i) => {
 							return (

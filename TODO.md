@@ -4,7 +4,7 @@
 
 - srediti cet search
 
-- dodati feature da se napravi grupa
+-ubaci context
 
 - chat avatar za svakog usera
 

@@ -5,7 +5,7 @@ import { createGroupChat } from '@actions/chatActions';
 import { connect } from 'react-redux';
 
 import './_GroupChatForm.scss';
-import Avatar from '../../../common/Avatar';
+import Avatar from '@common/Avatar';
 
 const INITIAL_STATE = {
 	groupName: '',
