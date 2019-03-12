@@ -1,10 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Avatar from '../common/Avatar';
 
-const ProfilePage = () => {
+const ProfilePage = props => {
 	return (
 		<div>
-			<h1>Hellp</h1>
+			<Avatar src={props.user.avatar} />
+			<h1>{props.user.firstName}</h1>
+			<h1>{props.user.lastName}</h1>
+			<h1>{props.user.email}</h1>
 		</div>
 	);
 };
-export default ProfilePage;
+
+const mapStateFromProps = state => ({
+	user: state.auth
+});
+
+export default connect(
+	mapStateFromProps,
+	null
+)(ProfilePage);

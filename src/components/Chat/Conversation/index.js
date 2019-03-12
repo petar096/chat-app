@@ -192,13 +192,7 @@ class Conversation extends Component {
 						</div>
 					</div>
 					<div className="conversation__body" ref={this.chatContainer}>
-						<div style={{ margin: 'auto' }}>
-							<img
-								src={bear}
-								style={{ maxHeight: '30rem', maxWidth: '40rem' }}
-							/>{' '}
-							<h2 className="subheading">Welcome!! Start chating now.. </h2>
-						</div>
+						{WellcomeSection}
 					</div>
 					<div className="conversation__form">
 						<form className="message-form" onSubmit={this.handleOnSubmit}>
