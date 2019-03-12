@@ -41,7 +41,7 @@ class Conversation extends Component {
 		if (this.props.activeChat === null) {
 			return false;
 		} else {
-			this.props
+			this.listener = this.props
 				.messagesCollection(this.props.activeChat.id)
 				.orderBy('time')
 				.onSnapshot(snapshot => {

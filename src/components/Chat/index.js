@@ -74,6 +74,10 @@ class Chat extends Component {
 		});
 	}
 
+	// componentWillUnmount() {
+	// 	this.listener();
+	// }
+
 	toggleChatForm() {
 		this.setState({
 			openChatGroup: !this.state.openChatGroup

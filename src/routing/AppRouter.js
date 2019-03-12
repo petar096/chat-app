@@ -4,7 +4,8 @@ import {
 	SIGN_UP,
 	SIGN_IN,
 	PASSWORD_FORGET,
-	CHATROOM
+	CHATROOM,
+	MY_PROFILE
 } from '../constants/routes';
 
 import Home from '@components/static/Home';
@@ -16,6 +17,7 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import Test from '@components/static/Test';
 import Chat from '@components/Chat';
+import ProfilePage from '../components/ProfilePage';
 
 const AppRouter = () => {
 	return (
@@ -28,6 +30,7 @@ const AppRouter = () => {
 					<PublicRoute path={SIGN_UP} component={SignUp} />
 					<PublicRoute path={PASSWORD_FORGET} component={ResetPassword} exact />
 					<PrivateRoute path={CHATROOM} component={Chat} />
+					<PrivateRoute path={MY_PROFILE} component={ProfilePage} />
 					<Route component={NotFoundPage} />
 				</Switch>
 			</React.Fragment>

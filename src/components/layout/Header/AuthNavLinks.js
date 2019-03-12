@@ -32,8 +32,8 @@ const AuthNavLinks = props => {
 				<i className="fa fa-chevron-down" />
 				<Avatar src={props.auth.avatar} alt="User avatar image" />
 				<div className="dropdown">
-					<NavLink to="" className="dropdown__link">
-						dadas
+					<NavLink to="/profile" className="dropdown__link">
+						My profile
 					</NavLink>
 					<a href="#" onClick={props.logout} className="dropdown__link">
 						Logout
