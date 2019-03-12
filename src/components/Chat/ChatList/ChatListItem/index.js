@@ -1,11 +1,11 @@
 import React from 'react';
-import img from '@images/46.jpg';
+import img1 from '@images/46.jpg';
 import Avatar from '@common/Avatar';
 
 import './_Chat-list-item.scss';
 import Capitalize from '@helpers/Capitalize';
 
-const ChatListItem = ({ data, onClick }) => {
+const ChatListItem = ({ data, onClick, img }) => {
 	return (
 		<React.Fragment>
 			<a className="chat-list-item" onClick={onClick}>

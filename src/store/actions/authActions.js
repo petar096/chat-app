@@ -182,10 +182,12 @@ export const signInWithGoogle = () => dispatch => {
 		.signInWithPopup(provider)
 		.then(data => {
 			const displayName = data.user.displayName.split(' ');
+			console.log(data);
 			const user = {
 				email: data.user.email,
-				firstName: displayName[0],
-				lastName: displayName[1]
+				firstName: displayName[0].toLowerCase(),
+				lastName: displayName[1].toLowerCase(),
+				avatar: data.additionalUserInfo.profile.picture
 			};
 
 			db.collection('users')

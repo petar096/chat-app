@@ -9,14 +9,7 @@ import Spinner from './common/Spinner';
 
 class App extends Component {
 	componentDidMount() {
-		const {
-			setUser,
-			getUserById,
-			finishLoading,
-			startLoading,
-			user,
-			isLoading
-		} = this.props;
+		const { setUser, getUserById, startLoading, user } = this.props;
 		startLoading();
 		console.log(user);
 
@@ -27,7 +20,8 @@ class App extends Component {
 						id: authUser.uid,
 						email: data.data().email,
 						firstName: data.data().firstName,
-						lastName: data.data().lastName
+						lastName: data.data().lastName,
+						avatar: data.data().avatar
 					});
 				});
 			}

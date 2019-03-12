@@ -3,19 +3,17 @@ import Modal from '@common/Modal';
 import { getUsersByName, getUserReference } from '@actions/authActions';
 import { createGroupChat } from '@actions/chatActions';
 import { connect } from 'react-redux';
+import { storage } from '../../../firebase/config';
+
+import md5 from 'md5';
 
 import Capitalize from '@helpers/Capitalize';
 import './_GroupChatForm.scss';
 import Avatar from '@common/Avatar';
-import img from '@images/46.jpg';
+import img from '@images/teamwork.png';
 
-const INITIAL_STATE = {
-	groupName: '',
-	participants: [],
-	page: 1,
-	searchUser: '',
-	users: []
-};
+import FileUploader from 'react-firebase-file-uploader';
+
 class GroupChatForm extends Component {
 	constructor(props) {
 		super(props);
@@ -25,13 +23,22 @@ class GroupChatForm extends Component {
 			participants: [],
 			page: 1,
 			searchUser: '',
-			users: []
+			users: [],
+			avatar: '',
+			isUploading: false,
+			progress: 0,
+			avatarURL: img
 		};
 
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.addParticipant = this.addParticipant.bind(this);
 		this.removeParticipant = this.removeParticipant.bind(this);
 		this.createGroupChat = this.createGroupChat.bind(this);
+
+		this.handleUploadStart = this.handleUploadStart.bind(this);
+		this.handleProgress = this.handleProgress.bind(this);
+		this.handleUploadError = this.handleUploadError.bind(this);
+		this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
 	}
 	getUsers(term) {
 		this.setState({ users: [] });
@@ -46,6 +53,37 @@ class GroupChatForm extends Component {
 			.catch(err => console.log(err));
 	}
 
+	handleUploadStart() {
+		this.setState({ isUploading: true, progress: 0 });
+	}
+
+	handleProgress(progress) {
+		this.setState({ progress });
+	}
+
+	handleUploadError(error) {
+		this.setState({ isUploading: false });
+		console.error(error);
+	}
+
+	handleUploadSuccess(filename) {
+		this.setState({
+			image: filename,
+			progress: 100
+		});
+
+		storage
+			.ref('Avatars')
+			.child(filename)
+			.getDownloadURL()
+			.then(url => {
+				console.log(url);
+				this.setState({
+					avatarURL: url
+				});
+			});
+	}
+
 	handleOnChange(e) {
 		console.log(this.state.groupName);
 		this.setState(
@@ -56,6 +94,7 @@ class GroupChatForm extends Component {
 		);
 	}
 
+	// add participant in group
 	addParticipant(usr) {
 		const exists = this.state.participants.find(item => item === usr);
 
@@ -70,23 +109,29 @@ class GroupChatForm extends Component {
 			);
 		}
 	}
+
+	// remove participant from group
 	removeParticipant(id) {
 		this.setState({
 			participants: this.state.participants.filter(p => p.id !== id)
 		});
 	}
 
+	// creating group chat
 	createGroupChat(e) {
 		e.preventDefault();
+		// rifst user is logged user
 		const participants = [this.props.getUserReference(this.props.user.id)];
+
 		this.state.participants.forEach(p =>
 			participants.push(this.props.getUserReference(p.id))
 		);
 
-		console.log(participants);
-
-		this.props.createGroupChat(this.state.groupName, participants);
-		// this.setState({ ...INITIAL_STATE });
+		this.props.createGroupChat(
+			this.state.groupName,
+			participants,
+			this.state.avatarURL
+		);
 		this.props.clearState();
 	}
 
@@ -111,11 +156,35 @@ class GroupChatForm extends Component {
 								</div>
 								<div className="group-icon-container" />
 								<a className="group-icon">
-									<Avatar src={img} />
+									<FileUploader
+										accept="image/*"
+										storageRef={storage.ref('Avatars')}
+										onUploadStart={this.handleUploadStart}
+										onUploadError={this.handleUploadError}
+										onUploadSuccess={this.handleUploadSuccess}
+										onProgress={this.handleProgress}
+										randomizeFilename
+										hidden
+										id="uploadGroupAvatar"
+									/>
+									<label
+										htmlFor="uploadGroupAvatar"
+										className="label"
+										style={{ cursor: 'pointer' }}>
+										<Avatar
+											src={this.state.avatarURL}
+											style={{
+												height: '11rem',
+												width: '11rem',
+												border: 'none'
+											}}
+										/>
+									</label>
 								</a>
+								<div>{this.state.progress}</div>
 								<div
 									className="field field--small"
-									style={{ margin: '0 auto' }}>
+									style={{ margin: '2rem auto 0 auto ' }}>
 									<input
 										name="groupName"
 										type="text"
@@ -186,7 +255,6 @@ class GroupChatForm extends Component {
 													{Capitalize(user.firstName)}{' '}
 													{Capitalize(user.lastName)}{' '}
 												</div>
-												<input type="radio" />
 											</div>
 										);
 									})}
@@ -218,8 +286,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = () => ({
 	getUsersByName: name => getUsersByName(name),
 	getUserReference: id => getUserReference(id),
-	createGroupChat: (groupName, participants) =>
-		createGroupChat(groupName, participants)
+	createGroupChat: (groupName, participants, avatar) =>
+		createGroupChat(groupName, participants, avatar)
 });
 
 export default connect(

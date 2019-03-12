@@ -42,10 +42,10 @@ class Chat extends Component {
 				// check if chat has groupName & set groupName in state
 				if (doc.data().groupName) {
 					chat.groupName = doc.data().groupName;
+					chat.participants = doc.data().participants;
+					chat.avatar = doc.data().avatar;
 
 					this.setState({
-						...this.state,
-
 						chats: [...this.state.chats, chat]
 					});
 				} else {
@@ -75,8 +75,6 @@ class Chat extends Component {
 	}
 
 	toggleChatForm() {
-		console.log('here');
-		console.log();
 		this.setState({
 			openChatGroup: !this.state.openChatGroup
 		});

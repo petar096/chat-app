@@ -166,15 +166,6 @@ class Conversation extends Component {
 		}
 	}
 
-	// WellcomeSection = () => {
-	// 	return (
-	// 		<div style={{ margin: 'auto', textAlign: 'center' }}>
-	// 			<img src={bear} style={{ maxHeight: '25rem', maxWidth: '30rem' }} />{' '}
-	// 			<h2 className="subheading">Welcome!! Start chating now.. </h2>
-	// 		</div>
-	// 	);
-	// };
-
 	renderMessages() {
 		const { activeUser, activeChat } = this.props;
 
@@ -184,7 +175,7 @@ class Conversation extends Component {
 			return (
 				<React.Fragment>
 					<div className="conversation__header">
-						<Avatar src={img} large={true} />
+						<Avatar src={activeUser.avatar} large={true} />
 						<div className="conversation__header__details">
 							<span className="conversation__username">
 								{activeUser.firstName !== undefined
@@ -239,7 +230,14 @@ class Conversation extends Component {
 			return (
 				<React.Fragment>
 					<div className="conversation__header">
-						<Avatar src={img} large={true} />
+						<Avatar
+							src={
+								activeChat.avatar
+									? activeChat.avatar
+									: activeChat.otherUser.avatar
+							}
+							large={true}
+						/>
 						<div className="conversation__header__details">
 							<span className="conversation__username">
 								{activeChat.otherUser
@@ -248,7 +246,12 @@ class Conversation extends Component {
 									  )}  ${Capitalize(activeChat.otherUser.lastName)}`
 									: activeChat.groupName}
 							</span>
-							<span className="conversation__user-detail">Account menager</span>
+							<span className="conversation__user-detail">
+								{' '}
+								{activeChat.otherUser
+									? 'Account menager'
+									: `${activeChat.participants.length} participants`}
+							</span>
 							<a className="close" onClick={this.props.clearState}>
 								<i className="fa fa-times" />
 							</a>

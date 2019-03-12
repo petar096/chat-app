@@ -2,6 +2,7 @@ import React from 'react';
 import ChatListItem from './ChatListItem';
 import './_ChatList.scss';
 import SearchInput from '@common/SearchInput';
+import img from '@images/46.jpg';
 
 const ChatsList = ({
 	chats,
@@ -48,6 +49,7 @@ const ChatsList = ({
 								<ChatListItem
 									key={data.id}
 									data={showData}
+									img={data.avatar ? data.avatar : data.otherUser.avatar}
 									onClick={() => setActiveConversation(data)}
 								/>
 							);
@@ -64,6 +66,7 @@ const ChatsList = ({
 							<ChatListItem
 								key={data.id}
 								data={data}
+								img={data.avatar}
 								onClick={() => setActiveUser(data)}
 							/>
 						);
