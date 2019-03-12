@@ -85,6 +85,7 @@ class Chat extends Component {
 	}
 
 	getUsers(term) {
+		// console.log('here');
 		this.setState({ users: [] });
 		this.props
 			.getUsersByName(term.toLowerCase())
