@@ -9,9 +9,8 @@ import Spinner from './common/Spinner';
 
 class App extends Component {
 	componentDidMount() {
-		const { setUser, getUserById, startLoading, user } = this.props;
+		const { setUser, getUserById, startLoading } = this.props;
 		startLoading();
-		console.log(user);
 
 		this.listener = auth.onAuthStateChanged(authUser => {
 			if (authUser) {
@@ -19,6 +18,7 @@ class App extends Component {
 					setUser({
 						id: authUser.uid,
 						email: data.data().email,
+						username: data.data().username,
 						firstName: data.data().firstName,
 						lastName: data.data().lastName,
 						avatar: data.data().avatar

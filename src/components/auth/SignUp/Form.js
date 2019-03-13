@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../../../store/actions/authActions';
 
-import { storage } from '../../../firebase/config';
+// import { storage } from '../../../firebase/config';
 
 import { SIGN_IN } from '../../../constants/routes';
 import { Field, reduxForm, Form } from 'redux-form';
 import { warn, validate } from './validate';
 
-import InputField from '../../common/InputField';
-import Button from '../../common/Button';
-import Footer from '../../layout/Footer';
+import InputField from '@common/InputField';
+import Button from '@common/Button';
+import Footer from '@layout/Footer';
 
 import './_SignUp.scss';
 

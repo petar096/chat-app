@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
 import Modal from '@common/Modal';
 import { getUsersByName, getUserReference } from '@actions/authActions';
-import { createGroupChat } from '@actions/chatActions';
 import { connect } from 'react-redux';
+import FileUploader from 'react-firebase-file-uploader';
+
+import { createGroupChat } from '@actions/chatActions';
 import { storage } from '../../../firebase/config';
-
-import md5 from 'md5';
-
 import Capitalize from '@helpers/Capitalize';
-import './_GroupChatForm.scss';
+
 import Avatar from '@common/Avatar';
+
+import './_GroupChatForm.scss';
 import img from '@images/teamwork.png';
 
-import FileUploader from 'react-firebase-file-uploader';
+const style = {
+	position: 'absolute',
+	opacity: '0.7',
+	background: '#333',
+	padding: '1rem',
+	fontSize: '2rem',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%,-50%)',
+	color: '#fff',
+	borderRadius: '50%',
+	border: 'none'
+};
 
 class GroupChatForm extends Component {
 	constructor(props) {
@@ -40,6 +53,7 @@ class GroupChatForm extends Component {
 		this.handleUploadError = this.handleUploadError.bind(this);
 		this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
 	}
+
 	getUsers(term) {
 		this.setState({ users: [] });
 		this.props
@@ -156,21 +170,21 @@ class GroupChatForm extends Component {
 								</div>
 								<div className="group-icon-container" />
 								<a className="group-icon">
-									<FileUploader
-										accept="image/*"
-										storageRef={storage.ref('Avatars')}
-										onUploadStart={this.handleUploadStart}
-										onUploadError={this.handleUploadError}
-										onUploadSuccess={this.handleUploadSuccess}
-										onProgress={this.handleProgress}
-										randomizeFilename
-										hidden
-										id="uploadGroupAvatar"
-									/>
 									<label
 										htmlFor="uploadGroupAvatar"
 										className="label"
 										style={{ cursor: 'pointer' }}>
+										<FileUploader
+											accept="image/*"
+											storageRef={storage.ref('Avatars')}
+											onUploadStart={this.handleUploadStart}
+											onUploadError={this.handleUploadError}
+											onUploadSuccess={this.handleUploadSuccess}
+											onProgress={this.handleProgress}
+											randomizeFilename
+											hidden
+											id="uploadGroupAvatar"
+										/>
 										<Avatar
 											src={this.state.avatarURL}
 											style={{
@@ -179,6 +193,9 @@ class GroupChatForm extends Component {
 												border: 'none'
 											}}
 										/>
+										<span style={style} className="camera-icon">
+											<i className="fa fa-camera" aria-hidden="true" />
+										</span>
 									</label>
 								</a>
 								<div>{this.state.progress}</div>

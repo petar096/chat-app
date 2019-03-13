@@ -120,6 +120,7 @@ export const signIn = (email, password) => dispatch => {
 					setUser({
 						id: user.uid,
 						email: user.email,
+						username: user.username,
 						firstName: data.data().firstName,
 						lastName: data.data().lastName
 					})
@@ -182,9 +183,10 @@ export const signInWithGoogle = () => dispatch => {
 		.signInWithPopup(provider)
 		.then(data => {
 			const displayName = data.user.displayName.split(' ');
-			console.log(data);
+
 			const user = {
 				email: data.user.email,
+				username: displayName,
 				firstName: displayName[0].toLowerCase(),
 				lastName: displayName[1].toLowerCase(),
 				avatar: data.additionalUserInfo.profile.picture
@@ -225,4 +227,20 @@ export const getUsersByName = name => {
 
 export const getUserReference = id => {
 	return db.collection('users').doc(id);
+};
+
+export const updateUser = (id, data) => {
+	return db
+		.collection('users')
+		.doc(id)
+		.update(data);
+};
+
+export const updatePassword = password => {
+	return auth.currentUser
+		.updatePassword(password)
+		.then(() =>
+			toastr.success('Log in', 'You have successfully changed password')
+		)
+		.catch(err => toastr.error('Error', err.message));
 };
