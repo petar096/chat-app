@@ -33,8 +33,7 @@ class SignUp extends Component {
 			password: values.password.toLowerCase(),
 			rePassword: values.rePassword.toLowerCase(),
 			username: values.username.toLowerCase(),
-			avatar:
-				'https://firebasestorage.googleapis.com/v0/b/food-order-react.appspot.com/o/Avatars%2F6f15604b-15c3-47d5-b12b-b2dbf990a626.png?alt=media&token=402af659-0630-4333-b710-e55c203a2877'
+			avatar: ''
 		};
 
 		this.props.signUp(user);

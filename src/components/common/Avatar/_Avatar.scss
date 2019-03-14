@@ -1,11 +1,14 @@
 .avatar {
-  width: 5rem;
-  height: 5rem;
   border-radius: 50%;
-  border: .1rem solid #cdcdcd;
+  border: none;
 
+  &--sm {
+    width: 5rem;
+    height: 5rem;
+  }
   &--lg {
     width: 8rem;
     height: 8rem;
   }
+  
 }

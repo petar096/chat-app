@@ -11,6 +11,8 @@ import {
 import { getUserReference } from '@actions/authActions';
 import './_Conversation.scss';
 import bear from '@images/monster3.png';
+import userImage from '@images/46.jpg';
+import groupImage from '@images/teamwork.png';
 
 import Capitalize from '@helpers/Capitalize';
 
@@ -175,7 +177,10 @@ class Conversation extends Component {
 			return (
 				<React.Fragment>
 					<div className="conversation__header">
-						<Avatar src={activeUser.avatar} large={true} />
+						<Avatar
+							src={activeUser.avatar ? activeUser.avatar : img}
+							large={true}
+						/>
 						<div className="conversation__header__details">
 							<span className="conversation__username">
 								{activeUser.firstName !== undefined
@@ -224,14 +229,21 @@ class Conversation extends Component {
 			return (
 				<React.Fragment>
 					<div className="conversation__header">
-						<Avatar
-							src={
-								activeChat.avatar
-									? activeChat.avatar
-									: activeChat.otherUser.avatar
-							}
-							large={true}
-						/>
+						{activeChat.otherUser ? (
+							<Avatar
+								src={
+									activeChat.otherUser.avatar
+										? activeChat.otherUser.avatar
+										: userImage
+								}
+								size="lg"
+							/>
+						) : (
+							<Avatar
+								src={activeChat.avatar ? activeChat.avatar : groupImage}
+								size="lg"
+							/>
+						)}
 						<div className="conversation__header__details">
 							<span className="conversation__username">
 								{activeChat.otherUser

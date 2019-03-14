@@ -7,10 +7,12 @@ import { startLoading, finishLoading } from '@actions/loadingActions';
 import AppRouter from '../routing/AppRouter';
 import Spinner from './common/Spinner';
 
+import 'react-circular-progressbar/dist/styles.css';
+
 class App extends Component {
 	componentDidMount() {
 		const { setUser, getUserById, startLoading } = this.props;
-		startLoading();
+		// startLoading();
 
 		this.listener = auth.onAuthStateChanged(authUser => {
 			if (authUser) {

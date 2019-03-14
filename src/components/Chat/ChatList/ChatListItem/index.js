@@ -1,5 +1,4 @@
 import React from 'react';
-import img1 from '@images/46.jpg';
 import Avatar from '@common/Avatar';
 
 import './_Chat-list-item.scss';

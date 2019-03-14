@@ -34,7 +34,7 @@ class Chat extends Component {
 	componentDidMount() {
 		const { user } = this.props;
 
-		this.props.getChats(user.id).onSnapshot(snapshot => {
+		this.listener = this.props.getChats(user.id).onSnapshot(snapshot => {
 			this.setState({ chats: [] });
 			snapshot.forEach(doc => {
 				const chat = { id: doc.id };
@@ -74,9 +74,9 @@ class Chat extends Component {
 		});
 	}
 
-	// componentWillUnmount() {
-	// 	this.listener();
-	// }
+	componentWillUnmount() {
+		this.listener();
+	}
 
 	toggleChatForm() {
 		this.setState({

@@ -5,6 +5,7 @@ import { storage } from '../../../firebase/config';
 import './_AvatarUploader.scss';
 import { updateUser, setUser, getUserById } from '@actions/authActions';
 import { connect } from 'react-redux';
+import CircularProgressbar from 'react-circular-progressbar';
 
 class AvatarUploader extends Component {
 	constructor(props) {
@@ -89,38 +90,40 @@ class AvatarUploader extends Component {
 
 	render() {
 		return (
-			<div>
-				<label
-					htmlFor="uploadGroupAvatar"
-					className="avatar-label"
-					style={{
-						cursor: 'pointer',
-						position: 'relative',
-						display: 'inline-block'
-					}}>
-					<FileUploader
-						accept="image/*"
-						storageRef={storage.ref('Avatars')}
-						onUploadStart={this.handleUploadStart}
-						onUploadError={this.handleUploadError}
-						onUploadSuccess={this.handleUploadSuccess}
-						onProgress={this.handleProgress}
-						randomizeFilename
-						hidden
-						id="uploadGroupAvatar"
-					/>
-					<Avatar
-						src={this.state.avatarURL}
+			<div className="upload">
+				{this.state.isUploading && (
+					<CircularProgressbar percentage={this.state.progress} />
+				)}
+				<div className="upload__wrapper">
+					<label
+						htmlFor="uploadGroupAvatar"
+						className="avatar-label"
 						style={{
-							height: '11rem',
-							width: '11rem',
-							border: 'none'
-						}}
-					/>
-					<span className="camera-icon">
-						<i className="fa fa-camera" aria-hidden="true" />
-					</span>
-				</label>
+							cursor: 'pointer'
+						}}>
+						<FileUploader
+							accept="image/*"
+							storageRef={storage.ref('Avatars')}
+							onUploadStart={this.handleUploadStart}
+							onUploadError={this.handleUploadError}
+							onUploadSuccess={this.handleUploadSuccess}
+							onProgress={this.handleProgress}
+							randomizeFilename
+							hidden
+							id="uploadGroupAvatar"
+						/>
+						<Avatar
+							src={this.state.avatarURL}
+							style={{
+								height: '100%',
+								width: '100%'
+							}}
+						/>
+						<span className="camera-icon">
+							<i className="fa fa-camera" aria-hidden="true" />
+						</span>
+					</label>
+				</div>
 			</div>
 		);
 	}

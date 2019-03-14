@@ -8,6 +8,7 @@ import Capitalize from '@helpers/Capitalize';
 import InputField from '@common/InputField';
 import Button from '@common/Button';
 import AvatarUploader from '../common/AvatarUploader';
+import img from '@images/46.jpg';
 
 class ProfileInfo extends Component {
 	constructor(props) {
@@ -48,7 +49,10 @@ class ProfileInfo extends Component {
 		return (
 			<React.Fragment>
 				<h2 className="primary-heading">Profile information</h2>
-				<AvatarUploader avatar={this.props.auth.avatar} />
+				<AvatarUploader
+					avatar={this.props.auth.avatar ? this.props.auth.avatar : img}
+					size="lg"
+				/>
 				<Form onSubmit={handleSubmit(this.updateUserInfo)} className="form">
 					<div>
 						<Field

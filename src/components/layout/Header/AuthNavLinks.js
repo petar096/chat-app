@@ -30,7 +30,11 @@ const AuthNavLinks = props => {
 					{Capitalize(props.auth.firstName)} {Capitalize(props.auth.lastName)}
 				</span>
 				<i className="fa fa-chevron-down" />
-				<Avatar src={props.auth.avatar} alt="User avatar image" />
+				<Avatar
+					src={props.auth.avatar ? props.auth.avatar : img}
+					alt="User avatar image"
+					size="sm"
+				/>
 				<div className="dropdown">
 					<NavLink to="/profile" className="dropdown__link">
 						My profile

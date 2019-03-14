@@ -1,3 +1,18 @@
+
+.upload {
+	position: relative;
+	width: 11rem;
+	height: 11rem;
+
+  &__wrapper {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+
+  }
+}
 .camera-icon {
   display: none;
   position: absolute;
