@@ -12,20 +12,21 @@ import Avatar from '@common/Avatar';
 
 import './_GroupChatForm.scss';
 import img from '@images/teamwork.png';
+import AvatarUploader from '../../common/AvatarUploader';
 
-const style = {
-	position: 'absolute',
-	opacity: '0.7',
-	background: '#333',
-	padding: '1rem',
-	fontSize: '2rem',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%,-50%)',
-	color: '#fff',
-	borderRadius: '50%',
-	border: 'none'
-};
+// const style = {
+// 	position: 'absolute',
+// 	opacity: '0.7',
+// 	background: '#333',
+// 	padding: '1rem',
+// 	fontSize: '2rem',
+// 	top: '50%',
+// 	left: '50%',
+// 	transform: 'translate(-50%,-50%)',
+// 	color: '#fff',
+// 	borderRadius: '50%',
+// 	border: 'none'
+// };
 
 class GroupChatForm extends Component {
 	constructor(props) {
@@ -36,22 +37,24 @@ class GroupChatForm extends Component {
 			participants: [],
 			page: 1,
 			searchUser: '',
-			users: [],
 			avatar: '',
-			isUploading: false,
-			progress: 0,
-			avatarURL: img
+			users: []
+			// avatar: '',
+			// isUploading: false,
+			// progress: 0,
+			// avatarURL: img
 		};
 
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.addParticipant = this.addParticipant.bind(this);
 		this.removeParticipant = this.removeParticipant.bind(this);
 		this.createGroupChat = this.createGroupChat.bind(this);
+		this.setAvatar = this.setAvatar.bind(this);
 
-		this.handleUploadStart = this.handleUploadStart.bind(this);
-		this.handleProgress = this.handleProgress.bind(this);
-		this.handleUploadError = this.handleUploadError.bind(this);
-		this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
+		// this.handleUploadStart = this.handleUploadStart.bind(this);
+		// this.handleProgress = this.handleProgress.bind(this);
+		// this.handleUploadError = this.handleUploadError.bind(this);
+		// this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
 	}
 
 	getUsers(term) {
@@ -67,36 +70,36 @@ class GroupChatForm extends Component {
 			.catch(err => console.log(err));
 	}
 
-	handleUploadStart() {
-		this.setState({ isUploading: true, progress: 0 });
-	}
+	// handleUploadStart() {
+	// 	this.setState({ isUploading: true, progress: 0 });
+	// }
 
-	handleProgress(progress) {
-		this.setState({ progress });
-	}
+	// handleProgress(progress) {
+	// 	this.setState({ progress });
+	// }
 
-	handleUploadError(error) {
-		this.setState({ isUploading: false });
-		console.error(error);
-	}
+	// handleUploadError(error) {
+	// 	this.setState({ isUploading: false });
+	// 	console.error(error);
+	// }
 
-	handleUploadSuccess(filename) {
-		this.setState({
-			image: filename,
-			progress: 100
-		});
+	// handleUploadSuccess(filename) {
+	// 	this.setState({
+	// 		image: filename,
+	// 		progress: 100
+	// 	});
 
-		storage
-			.ref('Avatars')
-			.child(filename)
-			.getDownloadURL()
-			.then(url => {
-				console.log(url);
-				this.setState({
-					avatarURL: url
-				});
-			});
-	}
+	// 	storage
+	// 		.ref('Avatars')
+	// 		.child(filename)
+	// 		.getDownloadURL()
+	// 		.then(url => {
+	// 			console.log(url);
+	// 			this.setState({
+	// 				avatarURL: url
+	// 			});
+	// 		});
+	// }
 
 	handleOnChange(e) {
 		console.log(this.state.groupName);
@@ -131,6 +134,11 @@ class GroupChatForm extends Component {
 		});
 	}
 
+	// get avatar for group chat
+	setAvatar(url) {
+		this.setState({ avatar: url });
+	}
+
 	// creating group chat
 	createGroupChat(e) {
 		e.preventDefault();
@@ -144,7 +152,7 @@ class GroupChatForm extends Component {
 		this.props.createGroupChat(
 			this.state.groupName,
 			participants,
-			this.state.avatarURL
+			this.state.avatar
 		);
 		this.props.clearState();
 	}
@@ -170,35 +178,12 @@ class GroupChatForm extends Component {
 								</div>
 								<div className="group-icon-container" />
 								<a className="group-icon">
-									<label
-										htmlFor="uploadGroupAvatar"
-										className="label"
-										style={{ cursor: 'pointer' }}>
-										<FileUploader
-											accept="image/*"
-											storageRef={storage.ref('Avatars')}
-											onUploadStart={this.handleUploadStart}
-											onUploadError={this.handleUploadError}
-											onUploadSuccess={this.handleUploadSuccess}
-											onProgress={this.handleProgress}
-											randomizeFilename
-											hidden
-											id="uploadGroupAvatar"
-										/>
-										<Avatar
-											src={this.state.avatarURL}
-											style={{
-												height: '11rem',
-												width: '11rem',
-												border: 'none'
-											}}
-										/>
-										<span style={style} className="camera-icon">
-											<i className="fa fa-camera" aria-hidden="true" />
-										</span>
-									</label>
+									<AvatarUploader
+										avatar={img}
+										setGroupAvatar={this.setAvatar}
+										group={true}
+									/>
 								</a>
-								<div>{this.state.progress}</div>
 								<div
 									className="field field--small"
 									style={{ margin: '2rem auto 0 auto ' }}>
@@ -255,7 +240,7 @@ class GroupChatForm extends Component {
 											<a
 												style={{ padding: '1rem' }}
 												onClick={() => this.removeParticipant(usr.id)}>
-												<Avatar src={img} />
+												<Avatar src={usr.avatar} />
 											</a>
 										);
 									})}
@@ -267,7 +252,7 @@ class GroupChatForm extends Component {
 												key={user.id}
 												className="users-list__item"
 												onClick={() => this.addParticipant(user)}>
-												<Avatar src={img} />
+												<Avatar src={user.avatar} />
 												<div className="users-list__item__details">
 													{Capitalize(user.firstName)}{' '}
 													{Capitalize(user.lastName)}{' '}

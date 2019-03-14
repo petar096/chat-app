@@ -47,29 +47,44 @@ class AvatarUploader extends Component {
 			progress: 100
 		});
 
-		storage
-			.ref('Avatars')
-			.child(filename)
-			.getDownloadURL()
-			.then(url => {
-				this.setState(
-					{
-						avatarURL: url
-					},
-					() => {
-						this.props
-							.updateUser(this.props.auth.id, {
-								...this.props.auth,
-								avatar: this.state.avatarURL
-							})
-							.then(() => {
-								getUserById(this.props.auth.id).then(data =>
-									this.props.setUser(data.data())
-								);
-							});
-					}
-				);
-			});
+		if (this.props.group) {
+			storage
+				.ref('Avatars')
+				.child(filename)
+				.getDownloadURL()
+				.then(url => {
+					this.setState(
+						{
+							avatarURL: url
+						},
+						() => this.props.setGroupAvatar(this.state.avatarURL)
+					);
+				});
+		} else {
+			storage
+				.ref('Avatars')
+				.child(filename)
+				.getDownloadURL()
+				.then(url => {
+					this.setState(
+						{
+							avatarURL: url
+						},
+						() => {
+							this.props
+								.updateUser(this.props.auth.id, {
+									...this.props.auth,
+									avatar: this.state.avatarURL
+								})
+								.then(() => {
+									getUserById(this.props.auth.id).then(data =>
+										this.props.setUser(data.data())
+									);
+								});
+						}
+					);
+				});
+		}
 	}
 
 	render() {
