@@ -11,12 +11,21 @@ import 'react-circular-progressbar/dist/styles.css';
 
 class App extends Component {
 	componentDidMount() {
-		const { setUser, getUserById, startLoading } = this.props;
-		// startLoading();
+		const { setUser, getUserById, startLoading, finishLoading } = this.props;
 
+		startLoading();
 		this.listener = auth.onAuthStateChanged(authUser => {
 			if (authUser) {
+				setUser({
+					id: authUser.uid,
+					email: authUser.email,
+					firstName: '',
+					lastName: ''
+				});
+
 				getUserById(authUser.uid).then(data => {
+					finishLoading();
+
 					setUser({
 						id: authUser.uid,
 						email: data.data().email,
@@ -27,6 +36,7 @@ class App extends Component {
 					});
 				});
 			}
+			finishLoading();
 		});
 	}
 
@@ -37,7 +47,7 @@ class App extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{this.props.user && this.props.isLoading ? <Spinner /> : <AppRouter />}
+				{this.props.isLoading ? <Spinner /> : <AppRouter />}
 			</React.Fragment>
 		);
 	}

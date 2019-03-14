@@ -85,7 +85,6 @@ class Chat extends Component {
 	}
 
 	getUsers(term) {
-		// console.log('here');
 		this.setState({ users: [] });
 		this.props
 			.getUsersByName(term.toLowerCase())
@@ -94,7 +93,6 @@ class Chat extends Component {
 					if (
 						!this.state.chats.find(c => !c.groupName && c.otherUser.id === u.id)
 					) {
-						console.log('ovde');
 						const user = { id: u.id, ...u.data() };
 						this.setState({ users: [...this.state.users, user] });
 					}

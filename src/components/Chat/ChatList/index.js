@@ -2,7 +2,7 @@ import React from 'react';
 import ChatListItem from './ChatListItem';
 import './_ChatList.scss';
 import SearchInput from '@common/SearchInput';
-import userImage from '@images/46.jpg';
+import userImage from '@images/user.png';
 import groupImage from '@images/teamwork.png';
 
 const ChatsList = ({

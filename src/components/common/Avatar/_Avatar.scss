@@ -2,6 +2,10 @@
   border-radius: 50%;
   border: none;
 
+  &--xs {
+    width: 3rem;
+    height: 3rem;
+  }
   &--sm {
     width: 5rem;
     height: 5rem;

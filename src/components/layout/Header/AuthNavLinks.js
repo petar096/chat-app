@@ -2,8 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signOut } from '../../../store/actions/authActions';
-import { HOME_PAGE } from '../../../constants/routes';
-import img from '../../../assets/images/46.jpg';
+import img from '../../../assets/images/user.png';
 import Avatar from '../../common/Avatar';
 import Capitalize from '@helpers/Capitalize';
 
@@ -25,25 +24,29 @@ const AuthNavLinks = props => {
 					<i className="fa fa-bell" />
 				</a>
 			</li>
-			<div className="user">
-				<span className="user__username">
-					{Capitalize(props.auth.firstName)} {Capitalize(props.auth.lastName)}
-				</span>
-				<i className="fa fa-chevron-down" />
-				<Avatar
-					src={props.auth.avatar ? props.auth.avatar : img}
-					alt="User avatar image"
-					size="sm"
-				/>
-				<div className="dropdown">
-					<NavLink to="/profile" className="dropdown__link">
-						My profile
-					</NavLink>
-					<a href="#" onClick={props.logout} className="dropdown__link">
-						Logout
-					</a>
+			{props.auth.firstName === '' ? (
+				<p>Loading...</p>
+			) : (
+				<div className="user">
+					<span className="user__username">
+						{Capitalize(props.auth.firstName)} {Capitalize(props.auth.lastName)}
+					</span>
+					<i className="fa fa-chevron-down" />
+					<Avatar
+						src={props.auth.avatar ? props.auth.avatar : img}
+						alt="User avatar image"
+						size="sm"
+					/>
+					<div className="dropdown">
+						<NavLink to="/profile" className="dropdown__link">
+							My profile
+						</NavLink>
+						<a href="#" onClick={props.logout} className="dropdown__link">
+							Logout
+						</a>
+					</div>
 				</div>
-			</div>
+			)}
 		</React.Fragment>
 	);
 };

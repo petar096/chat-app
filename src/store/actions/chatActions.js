@@ -10,7 +10,12 @@ export const sendMessage = (id, msg) => {
 	db.collection('chats')
 		.doc(id)
 		.collection('messages')
-		.add({ sender: msg.sender, text: msg.text, time: msg.time });
+		.add({
+			sender: msg.sender,
+			text: msg.text,
+			time: msg.time,
+			avatar: msg.avatar
+		});
 };
 
 export const messagesCollection = id => {

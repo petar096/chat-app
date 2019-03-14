@@ -8,7 +8,7 @@ import Capitalize from '@helpers/Capitalize';
 import InputField from '@common/InputField';
 import Button from '@common/Button';
 import AvatarUploader from '../common/AvatarUploader';
-import img from '@images/46.jpg';
+import img from '@images/user.png';
 
 class ProfileInfo extends Component {
 	constructor(props) {
@@ -35,12 +35,12 @@ class ProfileInfo extends Component {
 		const updatedValues = {
 			firstName: values.firstName.toLowerCase(),
 			lastName: values.lastName.toLowerCase(),
-			username: values.username.toLowerCase()
+			username: values.username
 		};
 
 		this.props
 			.updateUser(this.props.auth.id, updatedValues)
-			.then(data => this.props.setUser(updatedValues));
+			.then(() => this.props.setUser(updatedValues));
 	}
 
 	render() {
@@ -84,7 +84,6 @@ class ProfileInfo extends Component {
 						style={{ margin: '0 auto' }}
 					/>
 				</Form>
-				;
 			</React.Fragment>
 		);
 	}

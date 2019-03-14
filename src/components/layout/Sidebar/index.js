@@ -4,14 +4,14 @@ import './_Sidebar.scss';
 
 const Sidenav = () => {
 	const routes = [
-		{ icon: 'fa fa-home', text: 'Rooms', path: 'test' },
-		{ icon: 'fa fa-envelope-o', text: 'Inbox', path: 'test' },
-		{ icon: 'fa fa-product-hunt', text: 'Products', path: 'test' },
-		{ icon: 'fa fa-bar-chart', text: 'Invoices', path: 'test' },
-		{ icon: 'fa fa-user-o', text: 'Customers', path: 'test' },
+		{ icon: 'fa fa-home', text: 'Rooms', path: '/404' },
+		{ icon: 'fa fa-envelope-o', text: 'Inbox', path: '/404' },
+		{ icon: 'fa fa-product-hunt', text: 'Products', path: '/404' },
+		{ icon: 'fa fa-bar-chart', text: 'Invoices', path: '/404' },
+		{ icon: 'fa fa-user-o', text: 'Customers', path: '/404' },
 		{ icon: 'fa fa-comments-o', text: 'Chat Room', path: 'chatroom' },
-		{ icon: 'fa fa-calendar', text: 'Calendar', path: 'test' },
-		{ icon: 'fa fa-cog', text: 'Settings', path: 'test' }
+		{ icon: 'fa fa-calendar', text: 'Calendar', path: '/404' },
+		{ icon: 'fa fa-cog', text: 'Settings', path: '/profile' }
 	];
 	return (
 		<aside className="sidenav">

@@ -2,8 +2,10 @@ import React from 'react';
 import './_Message.scss';
 import * as moment from 'moment';
 import './_Message.scss';
+import Avatar from '../../../common/Avatar';
+import img from '@images/user.png';
 
-const Message = ({ time, text, autor }) => {
+const Message = ({ time, text, autor, avatar }) => {
 	return (
 		<React.Fragment>
 			<div className={`message message--${autor ? 'autor' : 'participant'}`}>
@@ -12,6 +14,13 @@ const Message = ({ time, text, autor }) => {
 					{moment(time).calendar()}
 				</span>
 			</div>
+			{!autor && avatar ? (
+				<Avatar
+					src={avatar ? avatar : img}
+					size="xs"
+					style={{ marginTop: '3rem' }}
+				/>
+			) : null}{' '}
 		</React.Fragment>
 	);
 };

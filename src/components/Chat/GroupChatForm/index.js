@@ -46,7 +46,6 @@ class GroupChatForm extends Component {
 	}
 
 	handleOnChange(e) {
-		console.log(this.state.groupName);
 		this.setState(
 			{
 				[e.target.name]: e.target.value
@@ -182,6 +181,7 @@ class GroupChatForm extends Component {
 									{this.state.participants.map(usr => {
 										return (
 											<a
+												key={usr.id}
 												style={{ padding: '1rem' }}
 												onClick={() => this.removeParticipant(usr.id)}>
 												<Avatar src={usr.avatar} />

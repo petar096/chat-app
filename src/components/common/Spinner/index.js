@@ -2,10 +2,10 @@ import React from 'react';
 import './_Spinner.scss';
 import Modal from '../Modal';
 
-const Spinner = () => (
+const Spinner = ({ color = '#fff' }) => (
 	<Modal>
 		<div style={{ margin: 'auto', textAlign: 'center' }}>
-			<h1 className="primary-heading" style={{ color: '#fff' }}>
+			<h1 className="primary-heading" style={{ color: color }}>
 				Loading...
 			</h1>
 			<div className="lds-ring">

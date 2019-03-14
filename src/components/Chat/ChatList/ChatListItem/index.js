@@ -1,10 +1,10 @@
 import React from 'react';
 import Avatar from '@common/Avatar';
-
+import { connect } from 'react-redux';
 import './_Chat-list-item.scss';
 import Capitalize from '@helpers/Capitalize';
 
-const ChatListItem = ({ data, onClick, img }) => {
+const ChatListItem = ({ data, onClick, img, auth }) => {
 	return (
 		<React.Fragment>
 			<a className="chat-list-item" onClick={onClick}>
@@ -14,6 +14,7 @@ const ChatListItem = ({ data, onClick, img }) => {
 						{data.firstName
 							? `${Capitalize(data.firstName)}  ${Capitalize(data.lastName)}`
 							: Capitalize(data)}
+						{data.id === auth.id ? ` (you)` : null}
 					</div>
 					<p className="last-message">
 						i <i className="fa fa-heart" style={{ color: 'red' }} /> Firebase
@@ -24,4 +25,10 @@ const ChatListItem = ({ data, onClick, img }) => {
 	);
 };
 
-export default ChatListItem;
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+export default connect(
+	mapStateToProps,
+	null
+)(ChatListItem);

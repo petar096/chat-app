@@ -117,7 +117,8 @@ class Conversation extends Component {
 			const msg = {
 				text: this.state.message,
 				time: Date.now(),
-				sender: this.props.user.email
+				sender: this.props.user.email,
+				avatar: this.props.user.avatar
 			};
 
 			// creating new chat room if dont exist
@@ -134,7 +135,6 @@ class Conversation extends Component {
 					return data.id;
 				})
 				.then(id => {
-					console.log(id);
 					this.props.sendMessage(id, msg);
 					this.props.clearSearchTerm();
 				});
@@ -152,7 +152,8 @@ class Conversation extends Component {
 			const msg = {
 				text: this.state.message,
 				time: Date.now(),
-				sender: this.props.user.email
+				sender: this.props.user.email,
+				avatar: this.props.user.avatar
 			};
 			this.props.sendMessage(this.state.activeChat.id, msg);
 			this.setState(
@@ -269,6 +270,7 @@ class Conversation extends Component {
 								<Message
 									key={i + 1}
 									text={msg.text}
+									avatar={this.props.activeChat.groupName ? msg.avatar : null}
 									autor={msg.sender === this.props.user.email ? true : false}
 									time={msg.time}
 								/>
@@ -310,7 +312,6 @@ class Conversation extends Component {
 }
 const mapStateToProps = state => ({
 	user: state.auth,
-	chats: state.chats,
 	loading: state.isLoading
 });
 
