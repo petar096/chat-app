@@ -4,6 +4,7 @@ import './_ChatList.scss';
 import SearchInput from '@common/SearchInput';
 import userImage from '@images/user.png';
 import groupImage from '@images/teamwork.png';
+import PropTypes from 'prop-types';
 
 const ChatsList = ({
 	chats,
@@ -25,7 +26,7 @@ const ChatsList = ({
 			/>
 			<div style={{ display: 'flex' }}>
 				<button className="addChat" onClick={() => toggleChatForm()}>
-					<i className="fa fa-plus-circle" /> Add chat
+					<i className="fa fa-plus" /> Add chat
 				</button>
 			</div>
 			{/* chats collection */}
@@ -47,9 +48,7 @@ const ChatsList = ({
 									<ChatListItem
 										key={data.id}
 										data={showData}
-										img={
-											data.otherUser.avatar ? data.otherUser.avatar : userImage
-										}
+										img={data.otherUser.avatar}
 										onClick={() => setActiveConversation(data)}
 									/>
 								);
@@ -74,7 +73,7 @@ const ChatsList = ({
 							<ChatListItem
 								key={data.id}
 								data={data}
-								img={data.avatar ? data.avatar : userImage}
+								img={data.avatar}
 								onClick={() => setActiveUser(data)}
 							/>
 						);
@@ -84,4 +83,14 @@ const ChatsList = ({
 		</div>
 	);
 };
+
+ChatsList.propTypes = {
+	chats: PropTypes.array,
+	users: PropTypes.array,
+	searchTerm: PropTypes.string,
+	handleChange: PropTypes.func,
+	setActiveConversation: PropTypes.func,
+	toggleChatForm: PropTypes.func
+};
+
 export default ChatsList;

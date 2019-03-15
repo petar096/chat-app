@@ -10,6 +10,7 @@ import Avatar from '@common/Avatar';
 
 import './_GroupChatForm.scss';
 import img from '@images/teamwork.png';
+import userPlaceholder from '@images/user.png';
 import AvatarUploader from '../../common/AvatarUploader';
 
 class GroupChatForm extends Component {
@@ -182,7 +183,7 @@ class GroupChatForm extends Component {
 										return (
 											<a
 												key={usr.id}
-												style={{ padding: '1rem' }}
+												style={{ padding: '1rem', cursor: 'pointer' }}
 												onClick={() => this.removeParticipant(usr.id)}>
 												<Avatar src={usr.avatar} />
 											</a>
@@ -205,7 +206,10 @@ class GroupChatForm extends Component {
 										);
 									})}
 								</div>
-								<button className="button-next btn-success" type="submit">
+								<button
+									className="button-next btn-success"
+									type="submit"
+									disabled={this.state.participants.length < 2}>
 									<i className="fa fa-check" />
 								</button>
 								<button

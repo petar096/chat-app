@@ -12,7 +12,7 @@ const Message = ({ time, text, autor, avatar }) => {
 				<Avatar
 					src={avatar ? avatar : img}
 					size="xs"
-					style={{ marginTop: '3rem' }}
+					style={{ marginTop: '3rem', marginLeft: '2rem' }}
 				/>
 			) : null}
 			<div className={`message message--${autor ? 'autor' : 'participant'}`}>

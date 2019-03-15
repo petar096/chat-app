@@ -57,25 +57,28 @@ export const signInWithGoogle = () => dispatch => {
 	const provider = new app.auth.GoogleAuthProvider();
 	auth
 		.signInWithPopup(provider)
-		.then(data => {
-			const displayName = data.user.displayName.split(' ');
+		.then(googleUser => {
+			getUserById(googleUser.user.uid).then(data => {
+				if (!data.exists) {
+					const displayName = googleUser.user.displayName.split(' ');
+					const user = {
+						email: googleUser.user.email,
+						username: `${displayName[0].toLowerCase()} ${displayName[1].toLowerCase()}`,
+						firstName: displayName[0].toLowerCase(),
+						lastName: displayName[1].toLowerCase(),
+						avatar: googleUser.additionalUserInfo.profile.picture
+					};
 
-			const user = {
-				email: data.user.email,
-				username: displayName,
-				firstName: displayName[0].toLowerCase(),
-				lastName: displayName[1].toLowerCase(),
-				avatar: data.additionalUserInfo.profile.picture
-			};
-
-			db.collection('users')
-				.doc(data.user.uid)
-				.set({ ...user });
-			dispatch(setUser(user));
+					db.collection('users')
+						.doc(googleUser.user.uid)
+						.set({ ...user });
+					dispatch(setUser(user));
+				}
+			});
 
 			toastr.success('Log in', 'You have signed in successfull');
 		})
-		.catch(() => toastr.error('Login error', 'Invalid credentials'));
+		.catch(err => toastr.error('Login error', err.message));
 };
 
 export const resetPassword = email => () => {

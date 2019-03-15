@@ -3,6 +3,7 @@ import Avatar from '@common/Avatar';
 import { connect } from 'react-redux';
 import './_Chat-list-item.scss';
 import Capitalize from '@helpers/Capitalize';
+import PropTypes from 'prop-types';
 
 const ChatListItem = ({ data, onClick, img, auth }) => {
 	return (
@@ -25,9 +26,17 @@ const ChatListItem = ({ data, onClick, img, auth }) => {
 	);
 };
 
+ChatListItem.propTypes = {
+	data: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+	onClick: PropTypes.func,
+	img: PropTypes.string,
+	auth: PropTypes.object
+};
+
 const mapStateToProps = state => ({
 	auth: state.auth
 });
+
 export default connect(
 	mapStateToProps,
 	null
