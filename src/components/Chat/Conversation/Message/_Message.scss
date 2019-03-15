@@ -1,3 +1,7 @@
+.message-container {
+  display: flex;
+  align-items: center;
+}
 .message {
   display: block;
   padding: .1rem 1.4rem;
@@ -42,7 +46,7 @@
     position: absolute;
     bottom: -29px;
     left: 0;
-    width:86px;
+    width: 9rem;
     text-align: left;
     
   }
