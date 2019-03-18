@@ -34,10 +34,15 @@
   flex: 1;
   padding-left: 1rem;
   color : #A4AFB7;
+  outline: none;
+
 
   &:hover {
     cursor: pointer;
     color: #333;
+  }
+  &:focus {
+    outline: none;
   }
 }
 
@@ -54,6 +59,8 @@
   border-radius: 50%;
   background-image: linear-gradient(to right top, #7a779f, #7074a8, #6172b1, #4c70bb, #226fc4);
   display: flex;
+  outline: none;
+
 
   &:hover {
     cursor: pointer;
@@ -80,6 +87,8 @@
   border-radius: 50%;
   background-image: linear-gradient(to right top, #7a779f, #7074a8, #6172b1, #4c70bb, #226fc4);
   display: flex;
+  outline: none;
+
 
   &:hover {
     cursor: pointer;

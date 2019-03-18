@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, Form } from 'redux-form';
 import { updatePassword } from '@actions/authActions';
-
+import PropTypes from 'prop-types';
 import InputField from '@common/InputField';
 import Button from '@common/Button';
 
@@ -31,13 +31,14 @@ const validate = values => {
 class ChangePasswordForm extends Component {
 	constructor(props) {
 		super(props);
+
 		this.changePassword = this.changePassword.bind(this);
 	}
 
-	changePassword(values) {
-		console.log('tu sam');
-		this.props.updatePassword(values.password.toLowerCase());
+	changePassword({ password }) {
+		this.props.updatePassword(password.toLowerCase());
 	}
+
 	render() {
 		const { handleSubmit } = this.props;
 		return (
@@ -73,6 +74,10 @@ class ChangePasswordForm extends Component {
 		);
 	}
 }
+
+ChangePasswordForm.propTypes = {
+	updatePassword: PropTypes.func
+};
 
 const mapDispatchToProps = dispatch => ({
 	updatePassword: password => updatePassword(password)

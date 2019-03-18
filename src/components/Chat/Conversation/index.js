@@ -32,11 +32,11 @@ class Conversation extends Component {
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnSubmit = this.handleOnSubmit.bind(this);
 		this.chatContainer = React.createRef();
-		this.formC = React.createRef();
 		this.renderMessages = this.renderMessages.bind(this);
 	}
 
 	componentDidMount() {
+		// check if user has conversation with that user
 		if (this.props.activeChat === null) {
 			return false;
 		} else {
@@ -45,14 +45,18 @@ class Conversation extends Component {
 				.orderBy('time')
 				.onSnapshot(snapshot => {
 					this.setState({ messages: [] });
+
 					snapshot.forEach(doc => {
+						// create new message populated with data from database
 						const msg = { id: doc.id, ...doc.data() };
+						// add each recieved message to state
 						this.setState(
 							{
 								...this.state,
 								messages: [...this.state.messages, msg]
 							},
 							() => {
+								// croll chat container to last message
 								this.scrollToMyRef();
 							}
 						);
@@ -60,7 +64,7 @@ class Conversation extends Component {
 				});
 		}
 	}
-
+	// listen for new active conversations
 	static getDerivedStateFromProps(nextProps, prevState) {
 		if (prevState.activeChat !== nextProps.activeChat) {
 			return {
@@ -71,6 +75,7 @@ class Conversation extends Component {
 		return null;
 	}
 
+	// check if user has new active conversation & re render new messages
 	componentDidUpdate(prevProps, prevState) {
 		if (
 			prevProps.activeChat !== this.props.activeChat &&
@@ -93,6 +98,7 @@ class Conversation extends Component {
 		}
 	}
 
+	// scroll to bottom of the chat container
 	scrollToMyRef() {
 		const scroll =
 			this.chatContainer.current.scrollHeight -
@@ -107,6 +113,8 @@ class Conversation extends Component {
 	}
 
 	handleOnSubmit(e) {
+		e.preventDefault();
+
 		const {
 			getUserReference,
 			setActiveConversation,
@@ -115,10 +123,11 @@ class Conversation extends Component {
 			startConversation
 		} = this.props;
 
-		e.preventDefault();
+		// check if nothing is written in textfield
 		if (this.state.message === '') {
 			return false;
 		} else if (this.props.activeUser) {
+			// create new message populated with providen data
 			const msg = {
 				text: this.state.message,
 				time: Date.now(),
@@ -127,7 +136,6 @@ class Conversation extends Component {
 			};
 
 			// creating new chat room if dont exist
-
 			startConversation(
 				getUserReference(this.props.user.id),
 				getUserReference(this.props.activeUser.id)
@@ -158,7 +166,9 @@ class Conversation extends Component {
 				sender: this.props.user.email,
 				avatar: this.props.user.avatar
 			};
+			// send new message to already existing conversation
 			sendMessage(this.state.activeChat.id, msg);
+
 			this.setState(
 				{
 					...this.state,
@@ -175,8 +185,11 @@ class Conversation extends Component {
 	renderMessages() {
 		const { activeUser, activeChat } = this.props;
 
+		// check if none of conversations is selected
 		if (activeUser === null && activeChat === null) {
 			return WellcomeSection;
+			// if there is no existing conversation with user
+			// but user is found and clicked in sidebar
 		} else if (activeChat === null && activeUser) {
 			return (
 				<React.Fragment>
@@ -193,6 +206,7 @@ class Conversation extends Component {
 				</React.Fragment>
 			);
 		} else {
+			// if there is already conversation with selected user
 			return (
 				<React.Fragment>
 					<ChatHeader

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { auth } from '../firebase/config';
 import { setUser, getUserById } from '@actions/authActions';
 import { startLoading, finishLoading } from '@actions/loadingActions';
+import PropTypes from 'prop-types';
 
 import AppRouter from '../routing/AppRouter';
 import Spinner from './common/Spinner';
@@ -26,13 +27,15 @@ class App extends Component {
 				getUserById(authUser.uid).then(data => {
 					finishLoading();
 
+					const { email, username, firstName, lastName, avatar } = data.data();
+
 					setUser({
 						id: authUser.uid,
-						email: data.data().email,
-						username: data.data().username,
-						firstName: data.data().firstName,
-						lastName: data.data().lastName,
-						avatar: data.data().avatar
+						email: email,
+						username: username,
+						firstName: firstName,
+						lastName: lastName,
+						avatar: avatar
 					});
 				});
 			}
@@ -40,6 +43,7 @@ class App extends Component {
 		});
 	}
 
+	// unsubsribe listener
 	componentWillUnmount() {
 		this.listener();
 	}
@@ -52,6 +56,15 @@ class App extends Component {
 		);
 	}
 }
+
+App.propTypes = {
+	user: PropTypes.object,
+	isLoading: PropTypes.bool,
+	getUserById: PropTypes.func,
+	setUser: PropTypes.func,
+	startLoading: PropTypes.func,
+	finishLoading: PropTypes.func
+};
 
 const mapStateFromProps = state => ({
 	user: state.auth,
