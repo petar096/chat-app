@@ -1,3 +1,5 @@
+@import '../../../styles/helpers/mixins';
+
 .header {
   min-height: 7rem;
   position: relative;
@@ -10,19 +12,30 @@
 	background: #fff;
 	box-shadow: 0px 1px 15px 1px #45414e1a;
   
-
-
+  @include respond-to(phone) {
+    justify-content: flex-start;
+  }
 
   .nav {
-    // flex: 2;
     display: flex;
     padding: 0;
     list-style: none;
     align-items: center;
     position: relative;
     height: auto;
-    // margin-left: auto;
     margin: 0 3rem 0 auto;
+    z-index: 1;
+
+    @include respond-to(phone) {
+      display: none;
+    }
+    @include respond-to(toTablet) {
+      display: none;
+    }
+    @include respond-to(tablet) {
+      display: none;
+    }
+ 
 
     &__link {
       display: inline-block;
@@ -30,9 +43,7 @@
       font-size: 2rem;
       text-decoration: none;
       color:#cdcdcd;
-      // color: red;
       padding: 1rem 1.2rem;
-      // background: red;
 
       &:hover {
         cursor: pointer;
@@ -46,6 +57,7 @@
     align-items: center;
     border-left: 1px solid #cdcdcd;
     padding: 0 1rem 0 3rem;
+    border: 2px solid red;
 
     &__username {
       font-size: 1.6rem;
@@ -68,7 +80,6 @@
       display: none;
       position: absolute;
       min-width: 29.4rem;
-      // border-top: .1rem solid #45414e1a;
       z-index: 5;
       right: -2.3rem;
       top: 5rem;
@@ -88,6 +99,110 @@
       }
     }
   }
+}
+.nav-mobile {
+  align-items: center;
+  display: none;
+  margin-left: auto;
+  margin-right: 2rem;
+
+  @include respond-to(phone) {
+    display: flex;
+  }
+  @include respond-to(toTablet) {
+    display: flex;
+  }
+  @include respond-to(tablet) {
+    display: flex;
+  }
+
+  &__link {
+    font-size: 2rem;
+    color: #BCBCCB;
+    padding: 1rem;
+    display: block;
 
 
+    &:hover {
+      cursor: pointer;
+      color: darken(#BCBCCB, 20%);
+    }
+
+    &:first-child{
+      display: none;
+
+      @include respond-to(phone) {
+        display: block;
+      }
+    }
+  }
+}
+
+.hide-search {
+  display: block;
+
+  @include respond-to(phone) {
+    display: none;
+  }
+}
+
+.sub-header {
+  width: 100%;
+  align-items: center;
+  display: none;
+  right: -100%;
+  position: absolute;
+  top: 7rem;
+  transition: 0.3s;
+  background: #fff;
+  border-top: .1rem solid #45414e1a;
+  z-index: 1;
+  display: flex;
+
+  // @include respond-to(desktop) {
+  //   display: none;
+
+  // }
+  
+  // @include respond-to(tablet) {
+  //   display: none;
+  // }
+  // @include respond-to(big-desktop) {
+  //   display: none;
+  // }
+  // @include respond-to(large-desktop) {
+  //   display: none;
+  // }
+
+  @include respond-to(phone) {
+    &--open {
+      top: 7rem;
+      right: 0;
+    }
+  }
+  @include respond-to(toTablet) {
+    &--open {
+      top: 7rem;
+      // left:9rem;
+      width: calc(100% - 9rem);
+      margin-left: 9rem;
+      right: 0;
+    }
+  }
+  @include respond-to(tablet) {
+    &--open {
+      top: 7rem;
+      // left:9rem;
+      width: calc(100% - 9rem);
+      margin-left: 9rem;
+      right: 0;
+    }
+  }
+
+  
+
+  &__nav {
+    margin-left: auto;
+    margin-right: 2rem;
+  }
 }

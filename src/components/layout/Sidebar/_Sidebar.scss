@@ -1,18 +1,66 @@
 @import '../../../styles/common/variables';
+@import '../../../styles/helpers/mixins';
+
 
 .sidenav {
   background:  $dark-purple;
   width: 30rem;
   left: 0;
-  // top: $header-height;
   height: 100%;
-  // padding-top: .5rem;
+
+
+
+  @include respond-to(phone) {
+    position: fixed;
+    height: 100%;
+    width: 60% !important;
+    visibility: hidden;
+    top: 0;
+    bottom: 0;
+    z-index: 12;
+    transition: 0.3s;
+    left: -62%;
+
+    &--opened {
+      visibility: visible;
+      left: 0;
+    }
+  }
+  @include respond-to(toTablet) {
+    width: auto;
+  }
+  @include respond-to(tablet) {
+    width: auto;
+  }
 
   .logo-div {
     display: flex;
     background:darken( $dark-purple, 10%);
     height: $header-height;
+  
+    .logo-normal {
+      display: block;
+      @include respond-to(tablet) {
+        display: none;
+      }
+  
+      @include respond-to(toTablet) {
+        display: none;
+      }
 
+    }
+    .logo-sm {
+      display: none;
+
+      @include respond-to(tablet) {
+        display: block;
+      }
+  
+      @include respond-to(toTablet) {
+        display: block;
+      }
+    }
+  
     span {
       font-size: 1.8rem;
       font-weight: 600;
@@ -21,6 +69,32 @@
       margin: auto;
       letter-spacing: .2rem;
     } 
+  }
+ 
+  &-links--normal {
+    display: block;
+
+    @include respond-to(tablet) {
+      display: none;
+    }
+
+    @include respond-to(toTablet) {
+      display: none;
+    }
+  }
+  &-links--sm {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @include respond-to(tablet) {
+      display: flex;
+    }
+
+    @include respond-to(toTablet) {
+      display: flex;
+    }
   }
 
   &__link {
@@ -39,6 +113,16 @@
     &:nth-child(2) {
       margin-top: 2rem;
       margin-bottom: 5rem;
+
+      @include respond-to(phone) {
+        margin-top: 10rem;
+      }
+      @include respond-to(toTablet) {
+        margin-top: 10rem;
+      }
+      @include respond-to(tablet) {
+        margin-top: 10rem;
+      }
     }
 
     &:last-child {
@@ -49,4 +133,8 @@
       border-left: .5rem solid $light-purple;
     }
   }
+
 }
+
+
+

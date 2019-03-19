@@ -8,7 +8,7 @@ import Capitalize from '@helpers/Capitalize';
 
 const AuthNavLinks = props => {
 	return (
-		<React.Fragment>
+		<div style={{ display: 'flex' }} className="">
 			<li>
 				<a href="#0" className="nav__link">
 					<i className="fa fa-bullseye" />
@@ -32,11 +32,7 @@ const AuthNavLinks = props => {
 						{Capitalize(props.auth.firstName)} {Capitalize(props.auth.lastName)}
 					</span>
 					<i className="fa fa-chevron-down" />
-					<Avatar
-						src={props.auth.avatar ? props.auth.avatar : img}
-						alt="User avatar image"
-						size="sm"
-					/>
+					<Avatar src={props.auth.avatar} alt="User avatar image" size="sm" />
 					<div className="dropdown">
 						<NavLink to="/profile" className="dropdown__link">
 							My profile
@@ -47,7 +43,7 @@ const AuthNavLinks = props => {
 					</div>
 				</div>
 			)}
-		</React.Fragment>
+		</div>
 	);
 };
 
