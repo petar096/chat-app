@@ -48,12 +48,12 @@ class ProfileInfo extends Component {
 	}
 
 	render() {
-		const { handleSubmit } = this.props;
+		const { handleSubmit, t } = this.props;
 		const { firstName, lastName, username } = this.props.initialValues;
 
 		return (
 			<React.Fragment>
-				<h2 className="primary-heading">Profile information</h2>
+				<h2 className="primary-heading">{t('profileInfo')}</h2>
 				<div
 					style={{
 						textAlign: 'center',
@@ -91,7 +91,7 @@ class ProfileInfo extends Component {
 						/>
 					</div>
 					<Button
-						text="Update changes"
+						text={t('updateChanges')}
 						className="btn--primary btn-block"
 						style={{ margin: '0 auto' }}
 					/>

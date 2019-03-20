@@ -4,7 +4,7 @@ import './_ChatList.scss';
 import SearchInput from '@common/SearchInput';
 import groupImage from '@images/teamwork.png';
 import PropTypes from 'prop-types';
-
+import { useTranslation } from 'react-i18next';
 const ChatsList = ({
 	chats,
 	users,
@@ -16,6 +16,8 @@ const ChatsList = ({
 	showChatOnSmall,
 	toggleShowChatOnSmall
 }) => {
+	const { t, i18n } = useTranslation();
+
 	return (
 		<div
 			className={`chats-list ${showChatOnSmall ? '' : 'chats-list--opened'}`}>
@@ -28,13 +30,13 @@ const ChatsList = ({
 			/>
 			<div style={{ display: 'flex' }}>
 				<button className="addChat" onClick={() => toggleChatForm()}>
-					<i className="fa fa-plus" /> Add chat
+					<i className="fa fa-plus" /> {t('addChat')}
 				</button>
 			</div>
 			{/* chats collection */}
 			{chats.length === 0 ? null : (
 				<React.Fragment>
-					<h2 className="subheading">Conversations</h2>
+					<h2 className="subheading">{t('conversations')}</h2>
 					{chats
 						.filter(data => {
 							let term = data.groupName
@@ -76,7 +78,7 @@ const ChatsList = ({
 			{/* users collection */}
 			{users.length === 0 ? null : (
 				<React.Fragment>
-					<h2 className="subheading">Users</h2>
+					<h2 className="subheading">{t('users')}</h2>
 					{users.map(data => {
 						return (
 							<ChatListItem

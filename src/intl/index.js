@@ -10,14 +10,46 @@ i18n
 		resources: {
 			en: {
 				translations: {
-					welcome: 'Hello <br/> <strong>World</strong>'
+					wellcome: 'Wellcome to FOOD ORDER aplication',
+					nesto: 'Something new',
+					profileInfo: 'User information',
+					notFoundPage: 'Page not found',
+					myProfile: 'My Profile',
+					logout: 'Log out',
+					security: 'Security',
+					userInfo: 'User info',
+					updateChanges: 'Update changes',
+					changePasswordMsg:
+						'Please fill the form in order to change current password',
+					password: 'Password',
+					rePassword: 'Re Password',
+					changePassword: 'Change Password',
+					addChat: 'Add chat',
+					conversations: 'Conversations',
+					users: 'Users',
+					search: 'Search for people..'
 				}
 			},
 			srb: {
 				translations: {
-					'To get started, edit <1>src/App.js</1> and save to reload.':
-						'Starte in dem du, <1>src/App.js</1> editierst und speicherst.',
-					'Welcome to React': 'Willkommen bei React und react-i18next'
+					wellcome: 'Dobrodosli u FOOD ORDER aplikaciju',
+					nesto: 'Nesto novo',
+					profileInfo: 'Informacije o profilu',
+					notFoundPage: 'Stranica nije pronadjena',
+					myProfile: 'Moj Profil',
+					logout: 'Izloguj se',
+					security: 'Sigurnost',
+					userInfo: 'Informacije',
+					updateChanges: 'Azuriraj promene',
+					changePasswordMsg:
+						'Molimo Vas unesite podatke ukoliko zelite da promenite lozinku',
+					password: 'Lozinka',
+					rePassword: 'Ponovi Lozinku',
+					changePassword: 'Promeni lozinku',
+					addChat: 'Dodaj',
+					conversations: 'Konverzacije',
+					users: 'Korisnici',
+					search: 'Pretrazi ljude, konverzacije...'
 				}
 			}
 		},

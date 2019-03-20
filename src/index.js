@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import './styles/main.scss';
 
 import App from './components/App';
+
 import './intl';
 
 import rootReducer from './store/reducers';

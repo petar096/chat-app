@@ -40,13 +40,11 @@ class ChangePasswordForm extends Component {
 	}
 
 	render() {
-		const { handleSubmit } = this.props;
+		const { handleSubmit, t } = this.props;
 		return (
 			<React.Fragment>
-				<h2 className="primary-heading">User security</h2>
-				<h4 className="subheading">
-					Please fill the form in order to change current password
-				</h4>
+				<h2 className="primary-heading">{t('security')}</h2>
+				<h4 className="subheading">{t('changePasswordMsg')}</h4>
 				<Form
 					className="form"
 					onSubmit={handleSubmit(this.changePassword)}
@@ -54,18 +52,18 @@ class ChangePasswordForm extends Component {
 					<Field
 						type="password"
 						name="password"
-						label="New Password"
+						label={t('password')}
 						component={InputField}
 					/>
 					<Field
 						type="password"
 						name="rePassword"
-						label="Re Password"
+						label={t('rePassword')}
 						component={InputField}
 					/>
 
 					<Button
-						text="Reset password"
+						text={t('changePassword')}
 						className="btn--primary btn-block"
 						style={{ margin: '0 auto' }}
 					/>
