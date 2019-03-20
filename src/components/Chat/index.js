@@ -19,7 +19,8 @@ class Chat extends Component {
 			searchTerm: '',
 			chats: [],
 			users: [],
-			openChatGroup: false
+			openChatGroup: false,
+			showChatOnSmall: false
 		};
 
 		this.setActiveUser = this.setActiveUser.bind(this);
@@ -29,6 +30,7 @@ class Chat extends Component {
 		this.clearSearchTerm = this.clearSearchTerm.bind(this);
 		this.clearState = this.clearState.bind(this);
 		this.toggleChatForm = this.toggleChatForm.bind(this);
+		this.toggleShowChatOnSmall = this.toggleShowChatOnSmall.bind(this);
 	}
 
 	componentDidMount() {
@@ -109,6 +111,7 @@ class Chat extends Component {
 			() => this.getUsers(this.state.searchTerm)
 		);
 	}
+
 	setActiveUser(user) {
 		this.setState({
 			activeUser: user,
@@ -141,12 +144,20 @@ class Chat extends Component {
 		});
 	}
 
+	toggleShowChatOnSmall() {
+		this.setState({
+			showChatOnSmall: !this.state.showChatOnSmall
+		});
+	}
+
 	render() {
 		return (
 			<div className="chat-container">
 				<ChatsList
 					setActiveConversation={this.setActiveConversation}
 					setActiveUser={this.setActiveUser}
+					showChatOnSmall={this.state.showChatOnSmall}
+					toggleShowChatOnSmall={this.toggleShowChatOnSmall}
 					users={this.state.users}
 					chats={this.state.chats}
 					searchTerm={this.state.searchTerm}
@@ -159,6 +170,8 @@ class Chat extends Component {
 					setActiveConversation={this.setActiveConversation}
 					clearSearchTerm={this.clearSearchTerm}
 					clearState={this.clearState}
+					showChatOnSmall={this.state.showChatOnSmall}
+					toggleShowChatOnSmall={this.toggleShowChatOnSmall}
 				/>
 				{this.state.openChatGroup ? (
 					<GroupChatForm clearState={this.clearState} />

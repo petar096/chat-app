@@ -1,3 +1,5 @@
+@import '../../../styles/helpers/mixins';
+
 .page-layout {
   display: flex;
   height: 100vh;
@@ -15,9 +17,14 @@
   background: #f0f0f7;
   margin: 0;
   height: 100vh;
-  // flex: 1;
 
+  @include respond-to(phone) {
+    padding:  0;
+  }
+  
   h1 {
     margin: 0;
   }
+
+
 }

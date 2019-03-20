@@ -3,7 +3,12 @@ import Capitalize from '@helpers/Capitalize';
 import Avatar from '@common/Avatar';
 import groupImage from '@images/teamwork.png';
 
-const ChatHeader = ({ activeChat, activeUser, clearState }) => {
+const ChatHeader = ({
+	activeChat,
+	activeUser,
+	clearState,
+	toggleShowChatOnSmall
+}) => {
 	if (!activeChat && activeUser) {
 		return (
 			<div className="conversation__header">
@@ -15,6 +20,10 @@ const ChatHeader = ({ activeChat, activeUser, clearState }) => {
 						)}`}
 					</span>
 					<span className="conversation__user-detail">Account menager</span>
+
+					<a onClick={toggleShowChatOnSmall} className="conversations-list">
+						<i className="fa fa-comments" />
+					</a>
 					<a className="close" onClick={clearState}>
 						<i className="fa fa-times" />
 					</a>
@@ -46,6 +55,10 @@ const ChatHeader = ({ activeChat, activeUser, clearState }) => {
 							? 'Account menager'
 							: `${activeChat.participants.length} participants`}
 					</span>
+
+					<a onClick={toggleShowChatOnSmall} className="conversations-list">
+						<i className="fa fa-comments" />
+					</a>
 					<a className="close" onClick={clearState}>
 						<i className="fa fa-times" />
 					</a>

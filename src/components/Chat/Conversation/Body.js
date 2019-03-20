@@ -19,7 +19,7 @@ const ChatBody = ({ messages, chatContainer, activeChat, user }) => {
 			</div>
 		);
 	} else {
-		return WellcomeSection;
+		return <WellcomeSection button={false} />;
 	}
 };
 export default ChatBody;

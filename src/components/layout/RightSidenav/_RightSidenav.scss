@@ -1,0 +1,50 @@
+@import '../../../styles/common/variables';
+@import '../../../styles/helpers/mixins';
+
+.right-side-nav {
+  background:  lighten($dark-purple, 10%);
+  display: none;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  visibility: hidden;
+  top: 7rem;
+  // width: 40%;
+  right: -42%;
+  transition: 0.3s;
+  padding: 1rem;
+  z-index: 12323;
+
+  @include respond-to(phone) {
+    &--opened {
+      visibility: visible;
+      right: 0;
+    }
+  }
+
+  @include respond-to(toTablet) {
+    &--opened {
+      visibility: visible;
+      right: 0;
+    }
+  }
+  @include respond-to(tablet) {
+    &--opened {
+      visibility: visible;
+      right: 0;
+    }
+  }
+  &__link {
+    color: #fff;
+    font-size: 1.8rem;
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -16,7 +16,7 @@ class ProfilePage extends Component {
 
 	render() {
 		return (
-			<div style={{ display: 'flex', alignItems: 'center' }}>
+			<div className="profile-page-container">
 				<nav className="profile-page-nav">
 					<a
 						className="profile-page-link"

@@ -13,10 +13,20 @@ import ChatHeader from './Header';
 import ChatBody from './Body';
 import ChatForm from './Form';
 
-export const WellcomeSection = (
+import Button from '@common/Button';
+
+export const WellcomeSection = ({ toggleShowChatOnSmall, button }) => (
 	<div style={{ margin: 'auto', textAlign: 'center' }}>
 		<img src={bear} style={{ maxHeight: '25rem', maxWidth: '30rem' }} />{' '}
 		<h2 className="subheading">Welcome!! Start chating now.. </h2>
+		{button ? (
+			<Button
+				className="btn--primary back-to-chat-list"
+				onClick={toggleShowChatOnSmall}
+				text="Back to chat list"
+				// style={{}}
+			/>
+		) : null}
 	</div>
 );
 
@@ -187,7 +197,12 @@ class Conversation extends Component {
 
 		// check if none of conversations is selected
 		if (activeUser === null && activeChat === null) {
-			return WellcomeSection;
+			return (
+				<WellcomeSection
+					toggleShowChatOnSmall={this.props.toggleShowChatOnSmall}
+					button={true}
+				/>
+			);
 			// if there is no existing conversation with user
 			// but user is found and clicked in sidebar
 		} else if (activeChat === null && activeUser) {
@@ -196,8 +211,9 @@ class Conversation extends Component {
 					<ChatHeader
 						activeUser={activeUser}
 						clearState={this.props.clearState}
+						toggleShowChatOnSmall={this.props.toggleShowChatOnSmall}
 					/>
-					<ChatBody />
+					<ChatBody toggleChatForm={this.props.toggleChatForm} />
 					<ChatForm
 						handleOnSubmit={this.handleOnSubmit}
 						handleOnChange={this.handleOnChange}
@@ -212,12 +228,14 @@ class Conversation extends Component {
 					<ChatHeader
 						activeChat={activeChat}
 						clearState={this.props.clearState}
+						toggleShowChatOnSmall={this.props.toggleShowChatOnSmall}
 					/>
 					<ChatBody
 						messages={this.state.messages}
 						chatContainer={this.chatContainer}
 						activeChat={this.props.activeChat}
 						user={this.props.user}
+						toggleChatForm={this.props.toggleChatForm}
 					/>
 					<ChatForm
 						handleOnSubmit={this.handleOnSubmit}
@@ -230,7 +248,14 @@ class Conversation extends Component {
 	}
 
 	render() {
-		return <div className="conversation">{this.renderMessages()}</div>;
+		return (
+			<div
+				className={`conversation ${
+					this.props.showChatOnSmall ? 'conversation--opened' : ''
+				}`}>
+				{this.renderMessages()}
+			</div>
+		);
 	}
 }
 

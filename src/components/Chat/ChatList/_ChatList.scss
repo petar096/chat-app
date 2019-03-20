@@ -1,22 +1,45 @@
+@import '../../../styles/helpers/mixins';
+
 .chats-list {
   flex: 1;
   border-right: .1rem solid #F1F1F3;
   overflow-y: auto;
+
+  @include respond-to(phone) {
+    display: none;
+
+    &--opened {
+      display: block;
+    }
+  }
+  @include respond-to(toTablet) {
+    display: none;
+
+    &--opened {
+      display: block;
+    }
+  }
+  @include respond-to(tablet) {
+    display: none;
+
+    &--opened {
+      display: block;
+    }
+  }
+  @include respond-to(desktop) {
+    display: none;
+
+    &--opened {
+      display: block;
+    }
+  }
+
 }
 .addChat {
-  // background: #fff;
-  // border: none;
-  // -webkit-box-shadow: 5px 6px 5px 0px rgba(148,146,148,0.69);
-  // -moz-box-shadow: 5px 6px 5px 0px rgba(148,146,148,0.69);
-  // box-shadow: 5px 6px 5px 0px rgba(148,146,148,0.69);
-  // border: .1rem solid #EBEBF2;
-  // border-radius: 2rem;
-  // padding: 1rem;
   margin-right: 1rem;
   margin-left: auto;
   width: 14rem;
   height: 4.5rem;
-  // font-family: 'Roboto', sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
@@ -30,6 +53,19 @@
   cursor: pointer;
   outline: none;
 
+
+  @include respond-to(phone) {
+    width: 12rem;
+    height: 4.5rem;
+  }
+  @include respond-to(toTablet) {
+    width: 12rem;
+    height: 4.5rem;
+  }
+  @include respond-to(tablet) {
+    width: 12rem;
+    height: 4.5rem;
+  }
 
   &:hover {
     background-color: #A3A0FB;

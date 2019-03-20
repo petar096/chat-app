@@ -6,6 +6,7 @@
   background:  $dark-purple;
   width: 30rem;
   left: 0;
+  top: 0;
   height: 100%;
 
 
@@ -20,6 +21,9 @@
     z-index: 12;
     transition: 0.3s;
     left: -62%;
+    display: flex;
+    flex-direction: column;
+
 
     &--opened {
       visibility: visible;
@@ -31,6 +35,12 @@
   }
   @include respond-to(tablet) {
     width: auto;
+  }
+  @include respond-to(desktop) {
+    width: 20rem
+  }
+  @include respond-to(big-desktop) {
+    width: 20rem
   }
 
   .logo-div {
@@ -73,6 +83,8 @@
  
   &-links--normal {
     display: block;
+    margin-top: auto;
+    margin-bottom: auto;
 
     @include respond-to(tablet) {
       display: none;
@@ -82,6 +94,7 @@
       display: none;
     }
   }
+  
   &-links--sm {
     display: none;
     flex-direction: column;
@@ -110,12 +123,13 @@
       font-size: 1.7rem;
     }
 
-    &:nth-child(2) {
+    &:first-child {
       margin-top: 2rem;
       margin-bottom: 5rem;
 
       @include respond-to(phone) {
-        margin-top: 10rem;
+        // margin-top: 10rem;
+        margin-bottom: 0;
       }
       @include respond-to(toTablet) {
         margin-top: 10rem;
@@ -127,6 +141,11 @@
 
     &:last-child {
       margin-top: 5rem;
+
+      @include respond-to(phone) {
+        margin-top: 0;
+        margin-bottom: 2rem;
+      }
     }
     &:hover {
       background: darken($dark-purple, 10%);

@@ -10,7 +10,8 @@ const Header = ({
 	isAuthenticated,
 	toggleLeftSidenav,
 	toggleNavbarSubMenu,
-	topSubMenu
+	topSubMenu,
+	toggleRightSidenav
 }) => (
 	<React.Fragment>
 		<header className="header">
@@ -18,14 +19,15 @@ const Header = ({
 			<nav className="nav">
 				{isAuthenticated ? <AuthNavLinks /> : <NonAuthNavLinks />}
 			</nav>
+			{/* for mobilie devices */}
 			<nav className="nav-mobile">
-				<a className="nav-mobile__link" onClick={e => toggleLeftSidenav()}>
+				<a className="nav-mobile__link" onClick={() => toggleLeftSidenav()}>
 					<i className="fa fa-align-left" />
 				</a>
-				<a className="nav-mobile__link">
+				<a className="nav-mobile__link" onClick={() => toggleRightSidenav()}>
 					<i className="fa fa-align-right" />
 				</a>
-				<a className="nav-mobile__link" onClick={e => toggleNavbarSubMenu()}>
+				<a className="nav-mobile__link" onClick={() => toggleNavbarSubMenu()}>
 					<i className="fa fa-ellipsis-v" />
 				</a>
 			</nav>

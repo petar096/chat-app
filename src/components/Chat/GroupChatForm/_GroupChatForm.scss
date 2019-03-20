@@ -1,3 +1,5 @@
+@import '../../../styles/helpers/mixins';
+
 .group-chat-form {
   position: relative;
   margin: auto;
@@ -9,6 +11,10 @@
   box-shadow: 0px 1px 15px 1px #45414e1a;
 
 
+  @include respond-to(phone) {
+    width: 90%;
+  }
+
   &__header {
     display: flex;
     justify-content: center;
@@ -17,14 +23,16 @@
   }
   .group-icon-container {
     margin-bottom: 6rem;
+    position: relative;
     background-image: linear-gradient(to right top, #7a779f, #7074a8, #6172b1, #4c70bb, #226fc4);
     height: 15rem;
   }
 
   .group-icon {
     position: absolute;
-    left: 20rem;
-    top: 16rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }
 }
 
@@ -121,14 +129,11 @@
     &:hover {
       cursor: pointer;
       background: darken(#fff, 10%);
-      //  border-bottom: .1rem solid #333;
-
     }
+
     &__details {
       font-size: 1.8rem;
       padding-left: 4rem;
-
-
     }
   }
 }

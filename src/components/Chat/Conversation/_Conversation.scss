@@ -1,7 +1,39 @@
+@import '../../../styles/helpers/mixins';
+
+
 .conversation {
   display: flex;
   flex-direction: column;
   max-width: 110rem;
+
+  @include respond-to(phone) {
+    display: none;
+
+    &--opened {
+      display: flex;
+    }
+  }
+  @include respond-to(toTablet) {
+    display: none;
+
+    &--opened {
+      display: flex;
+    }
+  }
+  @include respond-to(tablet) {
+    display: none;
+
+    &--opened {
+      display: flex;
+    }
+  }
+  @include respond-to(desktop) {
+    display: none;
+
+    &--opened {
+      display: flex;
+    }
+  }
 
   &__header {
     padding: 2rem;
@@ -9,17 +41,30 @@
     display: flex;
     position: relative;
 
+    @include respond-to(phone) {
+     padding: 1rem;
+     
+    }
+
     &__details {
       flex: 2;
       align-items: center;
       position: relative;
       margin-left: 2.2rem;
+
+      @include respond-to(phone) {
+        margin-left: 0;
+      }
     }
 
     .conversation__username {
       display: block;
       padding: 1rem;
       font-size: 2.2rem;
+
+      @include respond-to(phone) {
+        font-size: 1.5rem;
+      }
     }
     .conversation__user-detail {
       display: block;
@@ -41,6 +86,37 @@
 
       &:hover {
         cursor: pointer;
+      }
+
+      @include respond-to(phone) {
+        font-size: 2rem;
+      }
+    }
+
+    .conversations-list {
+      text-decoration: none;
+      color: #A4AFB7;
+      display: inline-block;
+      margin-left: auto;
+      font-size: 2.4rem;
+      z-index: 0;
+      position: absolute;
+      right: 5rem;
+      top: .2rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      @include respond-to(phone) {
+        font-size: 2rem;
+        right: 3.5rem;
+      }
+      @include respond-to(big-desktop) {
+        display: none;
+      }
+      @include respond-to(large-desktop) {
+        display: none;
       }
     }
   }
@@ -69,7 +145,6 @@
         flex: 1;
         display: flex;
         align-items: center;
-        justify-content: space-between;
 
         .input-actions {
           font-size: 2.2rem;
@@ -80,6 +155,12 @@
 
           &:hover {
             color: darken(#CECFD0, 20%)
+          }
+
+          @include respond-to(phone) {
+            font-size: 1.6rem;
+            padding: .4rem 1rem;
+            margin: 0;
           }
         }
 
@@ -96,7 +177,13 @@
           &:hover {
             cursor: pointer;
           }
-      }
+
+          @include respond-to(phone) {
+            height: 4rem;
+            width: 4rem;
+          }
+
+         }
 
       }
     }
@@ -113,6 +200,14 @@
       margin-right: 1rem;
       padding: 1rem 2rem;
 
+
+      @include respond-to(phone) {
+        font-size: 1.6rem;
+      }
+      @include respond-to(toTablet) {
+        font-size: 1.8rem;
+      }
+
       &:focus {
         outline: none;
         // border-bottom: .2rem solid #F7EDE2;
@@ -123,5 +218,14 @@
         margin-top: 1rem;
       }
     }
+  }
+}
+
+.back-to-chat-list {
+  @include respond-to(big-desktop) {
+    display: none;
+  }
+  @include respond-to(large-desktop) {
+    display: none;
   }
 }

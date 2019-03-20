@@ -1,3 +1,21 @@
+@import '../../styles/helpers/mixins';
+
+.profile-page-container {
+  display: flex;
+  align-items: center;
+
+  @include respond-to(phone) {
+    flex-direction: column;
+  }
+  @include respond-to(toTablet) {
+    flex-direction: column;
+  }
+  @include respond-to(tablet) {
+    flex-direction: column;
+  }
+
+}
+
 .profile-page-nav {
   border: none;
   width: 20rem;
@@ -5,6 +23,26 @@
   flex-direction: column;
   justify-content: center;
   height: 30rem;
+  
+
+  @include respond-to(phone) {
+    height: auto;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    padding: 1.2rem;
+  }
+  @include respond-to(toTablet) {
+    height: auto;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    padding: 1.2rem;
+  }
+  @include respond-to(tablet) {
+    height: auto;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    padding: 1.2rem;
+  }
  
 }
 .profile-page-link {

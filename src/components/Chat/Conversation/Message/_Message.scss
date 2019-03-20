@@ -1,3 +1,5 @@
+@import '../../../../styles/helpers/mixins';
+
 .message-container {
   display: flex;
   align-items: center;
@@ -9,6 +11,21 @@
   max-width: 30%;
   position: relative;
   
+ @include respond-to(phone) {
+  font-size: 1.2rem;
+  max-width: 50%;
+ }
+ @include respond-to(toTablet) {
+  max-width: 50%;
+ }
+ @include respond-to(tablet) {
+  max-width: 50%;
+ }
+ @include respond-to(desktop) {
+  max-width: 50%;
+ }
+
+
   &-content {
     word-wrap: break-word;
     // max-width: 50%;

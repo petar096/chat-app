@@ -54,10 +54,17 @@ class ProfileInfo extends Component {
 		return (
 			<React.Fragment>
 				<h2 className="primary-heading">Profile information</h2>
-				<AvatarUploader
-					avatar={this.props.auth.avatar ? this.props.auth.avatar : img}
-					size="lg"
-				/>
+				<div
+					style={{
+						textAlign: 'center',
+						margin: '0 auto'
+					}}>
+					<AvatarUploader
+						avatar={this.props.auth.avatar ? this.props.auth.avatar : img}
+						size="lg"
+					/>
+				</div>
+
 				<Form onSubmit={handleSubmit(this.updateUserInfo)} className="form">
 					<div>
 						<Field

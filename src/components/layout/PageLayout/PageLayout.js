@@ -1,22 +1,8 @@
-// import React from 'react';
+import React, { Component } from 'react';
 import Sidenav from '../Sidebar';
 import Header from '../Header/Header';
+import RightSidenav from '../RightSidenav';
 import './_PageLayout.scss';
-
-// const PageLayout = ({ content }) => {
-// 	return (
-// 		<div className="page-layout">
-// 			<Sidenav />
-// 			<div className="dashboard-container">
-// 				<Header />
-// 				<main className="site-content">{content}</main>
-// 			</div>
-// 		</div>
-// 	);
-// };
-// export default PageLayout;
-
-import React, { Component } from 'react';
 
 class PageLayout extends Component {
 	constructor(props) {
@@ -24,11 +10,13 @@ class PageLayout extends Component {
 
 		this.state = {
 			leftSidebar: false,
-			topSubMenu: false
+			topSubMenu: false,
+			rightSidebar: false
 		};
 
 		this.toggleLeftSidenav = this.toggleLeftSidenav.bind(this);
 		this.toggleNavbarSubMenu = this.toggleNavbarSubMenu.bind(this);
+		this.toggleRightSidenav = this.toggleRightSidenav.bind(this);
 	}
 
 	toggleLeftSidenav() {
@@ -43,14 +31,25 @@ class PageLayout extends Component {
 		});
 	}
 
+	toggleRightSidenav() {
+		this.setState(
+			{
+				rightSidebar: !this.state.rightSidebar
+			},
+			() => console.log(this.state.rightSidebar)
+		);
+	}
+
 	render() {
 		return (
 			<div className="page-layout">
 				<Sidenav opened={this.state.leftSidebar} />
+				<RightSidenav opened={this.state.rightSidebar} />
 				<div className="dashboard-container">
 					<Header
 						toggleLeftSidenav={this.toggleLeftSidenav}
 						toggleNavbarSubMenu={this.toggleNavbarSubMenu}
+						toggleRightSidenav={this.toggleRightSidenav}
 						topSubMenu={this.state.topSubMenu}
 					/>
 					<main className="site-content">{this.props.content}</main>

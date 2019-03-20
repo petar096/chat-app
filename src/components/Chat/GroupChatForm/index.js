@@ -120,14 +120,15 @@ class GroupChatForm extends Component {
 										New Group Chat
 									</h4>
 								</div>
-								<div className="group-icon-container" />
-								<a className="group-icon">
-									<AvatarUploader
-										avatar={img}
-										setGroupAvatar={this.setAvatar}
-										group={true}
-									/>
-								</a>
+								<div className="group-icon-container">
+									<a className="group-icon">
+										<AvatarUploader
+											avatar={img}
+											setGroupAvatar={this.setAvatar}
+											group={true}
+										/>
+									</a>
+								</div>
 								<div
 									className="field field--small"
 									style={{ margin: '2rem auto 0 auto ' }}>

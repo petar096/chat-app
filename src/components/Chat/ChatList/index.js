@@ -2,7 +2,6 @@ import React from 'react';
 import ChatListItem from './ChatListItem';
 import './_ChatList.scss';
 import SearchInput from '@common/SearchInput';
-import userImage from '@images/user.png';
 import groupImage from '@images/teamwork.png';
 import PropTypes from 'prop-types';
 
@@ -13,10 +12,13 @@ const ChatsList = ({
 	handleChange,
 	setActiveConversation,
 	setActiveUser,
-	toggleChatForm
+	toggleChatForm,
+	showChatOnSmall,
+	toggleShowChatOnSmall
 }) => {
 	return (
-		<div className="chats-list">
+		<div
+			className={`chats-list ${showChatOnSmall ? '' : 'chats-list--opened'}`}>
 			<SearchInput
 				large={true}
 				onChange={handleChange}
@@ -41,7 +43,8 @@ const ChatsList = ({
 							return term.includes(searchTerm.toLowerCase());
 						})
 						.map(data => {
-							const showData = data.groupName ? data.groupName : data.otherUser;
+							const showData =
+								data.groupName || null ? data.groupName : data.otherUser;
 
 							if (data.otherUser) {
 								return (
@@ -49,7 +52,10 @@ const ChatsList = ({
 										key={data.id}
 										data={showData}
 										img={data.otherUser.avatar}
-										onClick={() => setActiveConversation(data)}
+										onClick={() => {
+											setActiveConversation(data);
+											toggleShowChatOnSmall();
+										}}
 									/>
 								);
 							} else
@@ -58,7 +64,10 @@ const ChatsList = ({
 										key={data.id}
 										data={showData}
 										img={data.avatar ? data.avatar : groupImage}
-										onClick={() => setActiveConversation(data)}
+										onClick={() => {
+											setActiveConversation(data);
+											toggleShowChatOnSmall();
+										}}
 									/>
 								);
 						})}
@@ -74,7 +83,10 @@ const ChatsList = ({
 								key={data.id}
 								data={data}
 								img={data.avatar}
-								onClick={() => setActiveUser(data)}
+								onClick={() => {
+									setActiveUser(data);
+									toggleShowChatOnSmall();
+								}}
 							/>
 						);
 					})}
