@@ -6,10 +6,11 @@ const PublicRoute = ({ isAuthenticated, component: Component, ...rest }) => (
 	<Route
 		{...rest}
 		component={props =>
-			isAuthenticated ? <Redirect to="/chatroom" /> : <Component {...props} />
+			isAuthenticated ? <Redirect to="/" /> : <Component {...props} />
 		}
 	/>
 );
+
 const mapStateToProps = state => ({
 	isAuthenticated: !!state.auth.email
 });

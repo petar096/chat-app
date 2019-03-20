@@ -15,7 +15,6 @@ import SignUp from '@components/auth/SignUp';
 import NotFoundPage from '@components/static/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
-import Test from '@components/static/Test';
 import Chat from '@components/Chat';
 import ProfilePage from '../components/ProfilePage';
 
@@ -25,7 +24,6 @@ const AppRouter = () => {
 			<React.Fragment>
 				<Switch>
 					<PrivateRoute path="/" component={Home} exact />
-					<PrivateRoute path="/test" component={Test} />
 					<PublicRoute path={SIGN_IN} component={Login} />
 					<PublicRoute path={SIGN_UP} component={SignUp} />
 					<PublicRoute path={PASSWORD_FORGET} component={ResetPassword} exact />
