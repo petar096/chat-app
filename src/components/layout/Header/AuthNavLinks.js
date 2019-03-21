@@ -6,7 +6,8 @@ import Avatar from '@common/Avatar';
 import Capitalize from '@helpers/Capitalize';
 
 import serbia from '@images/serbia.svg';
-import usa from '@images/united-states.svg';
+import uk from '@images/uk.svg';
+
 import { useTranslation } from 'react-i18next';
 
 const AuthNavLinks = props => {
@@ -61,7 +62,7 @@ const AuthNavLinks = props => {
 				<a
 					onClick={() => changeLanguage('en')}
 					className="right-side-nav__link">
-					<img src={usa} style={{ width: '20px', height: '20px' }} />
+					<img src={uk} style={{ width: '20px', height: '20px' }} />
 				</a>
 			</div>
 		</div>

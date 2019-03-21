@@ -7,7 +7,7 @@ import Capitalize from '@helpers/Capitalize';
 import { useTranslation } from 'react-i18next';
 
 import serbia from '@images/serbia.svg';
-import usa from '@images/united-states.svg';
+import uk from '@images/uk.svg';
 
 import './_RightSidenav.scss';
 
@@ -52,7 +52,7 @@ const RightSidenav = props => {
 							<a
 								onClick={() => changeLanguage('en')}
 								className="right-side-nav__link">
-								<img src={usa} style={{ width: '30px', height: '30px' }} />
+								<img src={uk} style={{ width: '30px', height: '30px' }} />
 							</a>
 						</div>
 					</nav>
