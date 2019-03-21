@@ -1,10 +1,9 @@
 @import '../../../styles/common/variables';
 @import '../../../styles/helpers/mixins';
 
-
 .sidenav {
   background:  $dark-purple;
-  width: 30rem;
+  width: $sidenav-width;
   left: 0;
   top: 0;
   height: 100%;
@@ -44,27 +43,26 @@
 
   .logo-div {
     display: flex;
-    background:darken( $dark-purple, 10%);
+    background:darken($dark-purple, 10%);
     height: $header-height;
   
     .logo-normal {
       display: block;
+
       @include respond-to(tablet) {
         display: none;
       }
-  
       @include respond-to(toTablet) {
         display: none;
       }
-
     }
+
     .logo-sm {
       display: none;
 
       @include respond-to(tablet) {
         display: block;
       }
-  
       @include respond-to(toTablet) {
         display: block;
       }
@@ -74,7 +72,7 @@
       font-size: 1.8rem;
       font-weight: 600;
       text-transform: uppercase;
-      color: #fff;
+      color: $white;
       margin: auto;
       letter-spacing: .2rem;
     } 
@@ -103,7 +101,6 @@
     @include respond-to(tablet) {
       display: flex;
     }
-
     @include respond-to(toTablet) {
       display: flex;
     }
@@ -111,12 +108,13 @@
 
   &__link {
     display: block;
-    color: #fff;
+    color: $white;
     text-decoration: none;
     font-size: 1.7rem;
     padding: 2rem 3rem;
     font-weight: 600;
     border-left: .5rem solid transparent;
+    
     i {
       margin-right: 1rem;
       font-size: 1.7rem;

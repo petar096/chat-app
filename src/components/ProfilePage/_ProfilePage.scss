@@ -1,4 +1,5 @@
 @import '../../styles/helpers/mixins';
+@import '../../styles/common/variables';
 
 .profile-page-container {
   display: flex;
@@ -53,8 +54,8 @@
   &:hover {
     cursor: pointer;
     background: lighten($color: #333, $amount: 70%);
-    border-bottom: .1rem solid #EBEBF2;
-    border-right: .1rem solid #444268;
+    border-bottom: .1rem solid $light-gray;
+    border-right: .1rem solid $dark-purple;
   }
 }
 

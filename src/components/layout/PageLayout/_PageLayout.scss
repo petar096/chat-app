@@ -1,4 +1,5 @@
 @import '../../../styles/helpers/mixins';
+@import '../../../styles/common/variables';
 
 .page-layout {
   display: flex;
@@ -14,16 +15,12 @@
 
 .site-content {
   padding: 2rem 2rem 0 2rem;
-  background: #f0f0f7;
+  background: $background-gray;
   margin: 0;
   height: 100vh;
 
   @include respond-to(phone) {
     padding:  0;
-  }
-  
-  h1 {
-    margin: 0;
   }
 
 

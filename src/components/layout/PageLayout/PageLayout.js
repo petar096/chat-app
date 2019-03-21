@@ -32,12 +32,9 @@ class PageLayout extends Component {
 	}
 
 	toggleRightSidenav() {
-		this.setState(
-			{
-				rightSidebar: !this.state.rightSidebar
-			},
-			() => console.log(this.state.rightSidebar)
-		);
+		this.setState({
+			rightSidebar: !this.state.rightSidebar
+		});
 	}
 
 	render() {

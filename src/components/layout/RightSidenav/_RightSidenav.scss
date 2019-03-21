@@ -10,11 +10,11 @@
   align-items: center;
   height: 100%;
   visibility: hidden;
-  top: 7rem;
+  top: $header-height;
   right: -42%;
   transition: 0.3s;
   padding: 1rem 3rem;
-  z-index: 12323;
+  z-index: 4;
 
   @include respond-to(phone) {
     &--opened {
