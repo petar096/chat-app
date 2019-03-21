@@ -52,7 +52,7 @@ const RightSidenav = props => {
 							<a
 								onClick={() => changeLanguage('en')}
 								className="right-side-nav__link">
-								<img src={uk} style={{ width: '30px', height: '30px' }} />
+								<img src={uk} style={{ width: '40px', height: '30px' }} />
 							</a>
 						</div>
 					</nav>

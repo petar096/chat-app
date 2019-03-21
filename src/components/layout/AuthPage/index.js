@@ -27,12 +27,12 @@ const AuthPage = ({ left = null, right = null }) => {
 							<a
 								onClick={() => changeLanguage('rs')}
 								className="right-side-nav__link">
-								<img src={serbia} style={{ width: '30px', height: '20px' }} />
+								<img src={serbia} style={{ width: '40px', height: '30px' }} />
 							</a>{' '}
 							<a
 								onClick={() => changeLanguage('en')}
 								className="right-side-nav__link">
-								<img src={uk} style={{ width: '20px', height: '20px' }} />
+								<img src={uk} style={{ width: '40px', height: '30px' }} />
 							</a>
 						</div>
 						{right}
