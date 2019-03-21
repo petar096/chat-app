@@ -35,8 +35,12 @@
 
 }
 
-.bg-side {
-
+.auth-page__image {
+	flex: 1;
+	max-width: 50%;
+	height: 100%;
+	object-fit: cover;
+	
 	@include respond-to(phone) {
 		display: none;
 	} 
@@ -46,17 +50,38 @@
 	@include respond-to(toTablet) {
 		display: none;
 	} 
-
 }
 
 .flags-auth-page {
 	display: flex;
-  display: flex;
   align-items: center;
   justify-content: center;
 	margin-left: 3rem;
 	position: absolute;
-	right: 4rem;
-	top: 2rem;
-}
+
+
+	&--left {
+		left: 4rem;
+		top: 2rem;
+	}
+
+	&--right {
+		right: 4rem;
+		top: 2rem;
+	}
+
+
+	@include respond-to(phone) {
+
+		&--left {
+			left: 0;
+			top: 0;
+		}
+
+		&--right {
+			right: 0;
+			top: 0;
+		}
+	}
+} 
 

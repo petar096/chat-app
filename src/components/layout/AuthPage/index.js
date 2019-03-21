@@ -3,6 +3,7 @@ import serbia from '@images/serbia.svg';
 import uk from '@images/uk.svg';
 import { useTranslation } from 'react-i18next';
 
+import AuthImage from './AuthImage';
 import './_AuthPage.scss';
 
 const AuthPage = ({ left = null, right = null }) => {
@@ -16,14 +17,28 @@ const AuthPage = ({ left = null, right = null }) => {
 		<div className="auth-container">
 			{left !== null ? (
 				<React.Fragment>
-					<div className="auth-right-side">{left}</div>
-					<div className="auth-left-side bg-side" />
+					<div className="auth-right-side">
+						<div className="flags-auth-page flags-auth-page--left">
+							<a
+								onClick={() => changeLanguage('rs')}
+								className="right-side-nav__link">
+								<img src={serbia} style={{ width: '40px', height: '30px' }} />
+							</a>{' '}
+							<a
+								onClick={() => changeLanguage('en')}
+								className="right-side-nav__link">
+								<img src={uk} style={{ width: '40px', height: '30px' }} />
+							</a>
+						</div>
+						{left}
+					</div>
+					<AuthImage />
 				</React.Fragment>
 			) : (
 				<React.Fragment>
-					<div className="auth-left-side bg-side" />
+					<AuthImage />
 					<div className="auth-right-side">
-						<div className="flags-auth-page">
+						<div className="flags-auth-page flags-auth-page--right">
 							<a
 								onClick={() => changeLanguage('rs')}
 								className="right-side-nav__link">

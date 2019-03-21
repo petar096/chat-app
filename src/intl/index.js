@@ -54,7 +54,8 @@ i18n
 					newGroup: 'New Group',
 					groupName: 'Group Name',
 					findUsers: 'Find user',
-					typeMsg: 'Write message..'
+					typeMsg: 'Write message..',
+					footer: 'Terms of use. Privacy policy.'
 				}
 			},
 			rs: {
@@ -103,7 +104,8 @@ i18n
 					newGroup: 'Nova Grupa',
 					groupName: 'Ime grupe',
 					findUsers: 'Pronađi korisnika',
-					typeMsg: 'Napiši poruku..'
+					typeMsg: 'Napiši poruku..',
+					footer: 'Uslovi koriscenja. Pravila privatnosti.'
 				}
 			}
 		},

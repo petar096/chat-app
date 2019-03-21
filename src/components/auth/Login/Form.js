@@ -20,7 +20,9 @@ class Login extends Component {
 
 		return (
 			<React.Fragment>
-				<h2 className="primary-heading">Food-order</h2>
+				<h2 className="primary-heading" style={{ marginTop: '5rem' }}>
+					Food-order
+				</h2>
 				<h4 className="subheading">{t('loginMsg')}</h4>
 				<form
 					className="form"
