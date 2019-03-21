@@ -10,8 +10,8 @@ import Avatar from '@common/Avatar';
 
 import './_GroupChatForm.scss';
 import img from '@images/teamwork.png';
-import userPlaceholder from '@images/user.png';
 import AvatarUploader from '../../common/AvatarUploader';
+import { withTranslation } from 'react-i18next';
 
 class GroupChatForm extends Component {
 	constructor(props) {
@@ -102,6 +102,7 @@ class GroupChatForm extends Component {
 	}
 
 	render() {
+		const { t } = this.props;
 		return (
 			<Modal>
 				<div className="group-chat-form">
@@ -117,7 +118,7 @@ class GroupChatForm extends Component {
 									<h4
 										className="subheading"
 										style={{ flex: '2', textAlign: 'left' }}>
-										New Group Chat
+										{t('newGroup')}
 									</h4>
 								</div>
 								<div className="group-icon-container">
@@ -139,7 +140,7 @@ class GroupChatForm extends Component {
 										placeholder="&nbsp;"
 										onChange={this.handleOnChange}
 									/>
-									<span className="field__label">Group Chat Name</span>
+									<span className="field__label">{t('groupName')}</span>
 								</div>
 								<button
 									disabled={!this.state.groupName}
@@ -163,7 +164,7 @@ class GroupChatForm extends Component {
 									<h4
 										className="subheading"
 										style={{ flex: '2', textAlign: 'left' }}>
-										New group : <strong>{this.state.groupName}</strong>
+										{t('newGroup')} : <strong>{this.state.groupName}</strong>
 									</h4>
 								</div>
 								<div
@@ -177,7 +178,7 @@ class GroupChatForm extends Component {
 										placeholder="&nbsp;"
 										onChange={this.handleOnChange}
 									/>
-									<span className="field__label">Find users</span>
+									<span className="field__label">{t('findUsers')}</span>
 								</div>
 								<div className="group-participants">
 									{this.state.participants.map(usr => {
@@ -244,4 +245,4 @@ const mapDispatchToProps = () => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(GroupChatForm);
+)(withTranslation()(GroupChatForm));

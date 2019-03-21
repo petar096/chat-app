@@ -1,17 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './_Sidebar.scss';
+import { useTranslation } from 'react-i18next';
 
 const Sidenav = ({ opened }) => {
+	const { t, i18n } = useTranslation();
+
 	const routes = [
-		{ icon: 'fa fa-home', text: 'Rooms', path: '/404' },
-		{ icon: 'fa fa-envelope-o', text: 'Inbox', path: '/404' },
-		{ icon: 'fa fa-product-hunt', text: 'Products', path: '/404' },
-		{ icon: 'fa fa-bar-chart', text: 'Invoices', path: '/404' },
-		{ icon: 'fa fa-user-o', text: 'Customers', path: '/404' },
-		{ icon: 'fa fa-comments-o', text: 'Chat Room', path: 'chatroom' },
-		{ icon: 'fa fa-calendar', text: 'Calendar', path: '/404' },
-		{ icon: 'fa fa-cog', text: 'Settings', path: '/profile' }
+		{ icon: 'fa fa-home', text: t('rooms'), path: '/404' },
+		{ icon: 'fa fa-envelope-o', text: t('rooms'), path: '/404' },
+		{ icon: 'fa fa-product-hunt', text: t('products'), path: '/404' },
+		{ icon: 'fa fa-bar-chart', text: t('invoices'), path: '/404' },
+		{ icon: 'fa fa-user-o', text: t('customers'), path: '/404' },
+		{ icon: 'fa fa-comments-o', text: t('chatroom'), path: 'chatroom' },
+		{ icon: 'fa fa-calendar', text: t('calendar'), path: '/404' },
+		{ icon: 'fa fa-cog', text: t('settings'), path: '/profile' }
 	];
 	return (
 		<React.Fragment>

@@ -11,10 +11,9 @@
   height: 100%;
   visibility: hidden;
   top: 7rem;
-  // width: 40%;
   right: -42%;
   transition: 0.3s;
-  padding: 1rem;
+  padding: 1rem 3rem;
   z-index: 12323;
 
   @include respond-to(phone) {

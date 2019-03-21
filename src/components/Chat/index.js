@@ -6,7 +6,6 @@ import { getChats } from '@actions/chatActions';
 import { getUsersByName, getUserReference } from '@actions/authActions';
 import { connect } from 'react-redux';
 import GroupChatForm from './GroupChatForm';
-import { withTranslation } from 'react-i18next';
 
 import debounce from '@helpers/debounce';
 

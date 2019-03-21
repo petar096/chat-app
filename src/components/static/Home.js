@@ -5,16 +5,10 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 const Home = props => {
-	const { t, i18n } = useTranslation();
-
-	const changeLanguage = lng => {
-		i18n.changeLanguage(lng);
-	};
+	const { t } = useTranslation();
 
 	return (
 		<div>
-			<button onClick={() => changeLanguage('srb')}>srb</button>
-			<button onClick={() => changeLanguage('en')}>en</button>
 			<h1 className="primary-heading" style={{ marginTop: '5rem' }}>
 				{' '}
 				{t('wellcome')}

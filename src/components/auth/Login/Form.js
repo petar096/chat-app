@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signIn, signInWithGoogle } from '../../../store/actions/authActions';
 import { Field, reduxForm } from 'redux-form';
+import { withTranslation } from 'react-i18next';
 
 import './_Login.scss';
 
@@ -15,14 +16,12 @@ import { warn, validate } from './validate';
 
 class Login extends Component {
 	render() {
-		const { handleSubmit, reset, submitting } = this.props;
+		const { handleSubmit, t, submitting } = this.props;
 
 		return (
 			<React.Fragment>
 				<h2 className="primary-heading">Food-order</h2>
-				<h4 className="subheading">
-					Welcome back!Please login to your account.
-				</h4>
+				<h4 className="subheading">{t('loginMsg')}</h4>
 				<form
 					className="form"
 					onSubmit={handleSubmit(({ email, password }) =>
@@ -31,13 +30,13 @@ class Login extends Component {
 					<Field
 						type="email"
 						name="email"
-						label="Email"
+						label={t('email')}
 						component={InputField}
 					/>
 					<Field
 						type="password"
 						name="password"
-						label="Password"
+						label={t('password')}
 						component={InputField}
 					/>
 					<div className="form-group-inline">
@@ -45,15 +44,15 @@ class Login extends Component {
 							type="checkbox"
 							name="rememberMe"
 							component={InputField}
-							label="Remeber me"
+							label={t('rememberMe')}
 						/>
 						<Link to={PASSWORD_FORGET} className="forgot-password-link">
-							Forgot Password?
+							{t('forgotPass')}
 						</Link>
 					</div>
 					<div className="inline-wrapper">
 						<Button
-							text="Login"
+							text={t('login')}
 							className="btn--primary btn-block"
 							type="submit"
 							disabled={submitting}
@@ -71,9 +70,11 @@ class Login extends Component {
 					style={{
 						marginTop: '3rem',
 						textDecoration: 'underline',
-						fontSize: '1.8rem'
+						fontSize: '1.8rem',
+						display: 'block',
+						textAlign: 'center'
 					}}>
-					Don't have account? Sign up for free.
+					{t('dontHaveAcc')}
 				</Link>
 				<Footer />
 			</React.Fragment>
@@ -89,5 +90,5 @@ export default connect(
 		form: 'loginForm',
 		validate,
 		warn
-	})(Login)
+	})(withTranslation()(Login))
 );

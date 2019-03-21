@@ -1,12 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signOut } from '../../../store/actions/authActions';
-import img from '../../../assets/images/user.png';
-import Avatar from '../../common/Avatar';
+import { signOut } from '@actions/authActions';
+import Avatar from '@common/Avatar';
 import Capitalize from '@helpers/Capitalize';
 
+import serbia from '@images/serbia.svg';
+import usa from '@images/united-states.svg';
+import { useTranslation } from 'react-i18next';
+
 const AuthNavLinks = props => {
+	const { t, i18n } = useTranslation();
+
+	const changeLanguage = lng => {
+		i18n.changeLanguage(lng);
+	};
+
 	return (
 		<div style={{ display: 'flex' }} className="">
 			<li>
@@ -43,6 +52,18 @@ const AuthNavLinks = props => {
 					</div>
 				</div>
 			)}
+			<div className="flags">
+				<a
+					onClick={() => changeLanguage('rs')}
+					className="right-side-nav__link">
+					<img src={serbia} style={{ width: '30px', height: '20px' }} />
+				</a>{' '}
+				<a
+					onClick={() => changeLanguage('en')}
+					className="right-side-nav__link">
+					<img src={usa} style={{ width: '20px', height: '20px' }} />
+				</a>
+			</div>
 		</div>
 	);
 };

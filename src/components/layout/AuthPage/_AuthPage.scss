@@ -4,7 +4,7 @@
 .auth-container {
   display: flex;
 	height: 100vh;
-	
+
 	@include respond-to(phone) {
 		width: 100%;
 	}
@@ -26,14 +26,17 @@
 	flex-direction: column;
 	align-items: center;
 	padding-top: 6rem;
+	position: relative;
 	
 	@include respond-to(phone) {
+		position: relative;
 		width: 100%;
 	}
 
 }
 
 .bg-side {
+
 	@include respond-to(phone) {
 		display: none;
 	} 
@@ -43,4 +46,17 @@
 	@include respond-to(toTablet) {
 		display: none;
 	} 
+
 }
+
+.flags-auth-page {
+	display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+	margin-left: 3rem;
+	position: absolute;
+	right: 4rem;
+	top: 2rem;
+}
+

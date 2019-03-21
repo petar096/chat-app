@@ -21,6 +21,7 @@
 		"classnames": "^2.2.6",
 		"emoji-mart": "^2.9.2",
 		"firebase": "^5.8.2",
+		"flag-icon-css": "^3.3.0",
 		"i18next": "^15.0.7",
 		"i18next-browser-languagedetector": "^3.0.1",
 		"md5": "^2.2.1",

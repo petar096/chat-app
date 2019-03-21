@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ChatForm = ({ handleOnSubmit, handleOnChange, message }) => {
+	const { t } = useTranslation();
 	return (
 		<div className="conversation__form">
 			<form className="message-form" onSubmit={handleOnSubmit}>
@@ -11,7 +13,7 @@ const ChatForm = ({ handleOnSubmit, handleOnChange, message }) => {
 					onChange={handleOnChange}
 					name="message"
 					value={message}
-					placeholder="Type message..."
+					placeholder={t('typeMsg')}
 				/>
 				<div className="action-buttons-container">
 					<button className="send-button" type="submit">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../../../store/actions/authActions';
 
-// import { storage } from '../../../firebase/config';
+import { withTranslation } from 'react-i18next';
 
 import { SIGN_IN } from '../../../constants/routes';
 import { Field, reduxForm, Form } from 'redux-form';
@@ -40,60 +40,60 @@ class SignUp extends Component {
 	}
 
 	render() {
-		const { handleSubmit } = this.props;
+		const { handleSubmit, t } = this.props;
 		return (
 			<React.Fragment>
 				<h2 className="primary-heading">Food-order</h2>
-				<h4 className="subheading">Please complete to create your account</h4>
+				<h4 className="subheading">{t('registerMsg')}</h4>
 
 				<Form className="form" onSubmit={handleSubmit(this.handleOnSubmit)}>
 					<Field
 						type="text"
 						name="firstName"
-						label="First Name"
+						label={t('firstName')}
 						component={InputField}
 						small={true}
 					/>
 					<Field
 						type="text"
 						name="lastName"
-						label="Last Name"
+						label={t('lastName')}
 						small={true}
 						component={InputField}
 					/>
 					<Field
 						type="text"
 						name="username"
-						label="Username"
+						label={t('username')}
 						component={InputField}
 					/>
 
 					<Field
 						type="email"
 						name="email"
-						label="Email"
+						label={t('email')}
 						component={InputField}
 					/>
 					<Field
 						type="password"
 						name="password"
-						label="Password"
+						label={t('password')}
 						component={InputField}
 					/>
 					<Field
 						type="password"
 						name="rePassword"
-						label="Re Password"
+						label={t('rePassword')}
 						component={InputField}
 					/>
 					<Button
-						text="Sign up"
+						text={t('signUp')}
 						className="btn--primary btn-block"
 						style={{ margin: '0 auto' }}
 					/>
 				</Form>
 				<Link to={SIGN_IN} className="have-account-link">
-					Already have account?Sign in.
+					{t('dontHaveAcc')}
 				</Link>
 				<Footer />
 			</React.Fragment>
@@ -109,5 +109,5 @@ export default connect(
 		form: 'signUpForm',
 		validate,
 		warn
-	})(SignUp)
+	})(withTranslation()(SignUp))
 );

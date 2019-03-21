@@ -59,7 +59,7 @@
     padding: 0 1rem 0 3rem;
 
     &__username {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       margin-right: 1rem;
       color: #7c648f;
     }
@@ -202,4 +202,23 @@
       }
     }
   }
+}
+
+.flags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3rem;
+
+  @include respond-to(phone) {
+    display: none;
+  }
+  @include respond-to(toTablet) {
+    display: none;
+  }
+  @include respond-to(tablet) {
+    display: none;
+  }
+
+  
 }

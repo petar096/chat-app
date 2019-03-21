@@ -4,10 +4,20 @@ import { connect } from 'react-redux';
 import { signOut } from '@actions/authActions';
 import Avatar from '@common/Avatar';
 import Capitalize from '@helpers/Capitalize';
+import { useTranslation } from 'react-i18next';
+
+import serbia from '@images/serbia.svg';
+import usa from '@images/united-states.svg';
 
 import './_RightSidenav.scss';
 
 const RightSidenav = props => {
+	const { t, i18n } = useTranslation();
+
+	const changeLanguage = lng => {
+		i18n.changeLanguage(lng);
+	};
+
 	return (
 		<aside
 			className={`right-side-nav ${
@@ -28,11 +38,23 @@ const RightSidenav = props => {
 					</span>
 					<nav style={{ marginTop: '3rem' }}>
 						<NavLink to="/profile" className="right-side-nav__link">
-							My profile
+							{t('myProfile')}
 						</NavLink>
 						<a onClick={props.logout} className="right-side-nav__link">
-							Logout
+							{t('logout')}
 						</a>
+						<div style={{ display: 'flex' }}>
+							<a
+								onClick={() => changeLanguage('rs')}
+								className="right-side-nav__link">
+								<img src={serbia} style={{ width: '40px', height: '30px' }} />
+							</a>{' '}
+							<a
+								onClick={() => changeLanguage('en')}
+								className="right-side-nav__link">
+								<img src={usa} style={{ width: '30px', height: '30px' }} />
+							</a>
+						</div>
 					</nav>
 				</React.Fragment>
 			)}

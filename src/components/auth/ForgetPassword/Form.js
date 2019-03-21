@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { resetPassword } from '../../../store/actions/authActions';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import InputField from '../../common/InputField';
 import Button from '../../common/Button';
@@ -34,12 +35,11 @@ class ResetPassword extends Component {
 	}
 
 	render() {
+		const { t } = this.props;
 		return (
 			<React.Fragment>
 				<h2 className="primary-heading">Food-order</h2>
-				<h4 className="subheading">
-					Welcome back! Please login to your account.
-				</h4>
+				<h4 className="subheading">{t('forgotPassMsg')}</h4>
 				<form className="form" onSubmit={this.resetPassword}>
 					<Field
 						type="email"
@@ -48,13 +48,13 @@ class ResetPassword extends Component {
 						component={InputField}
 					/>
 					<Button
-						text="Send request"
+						text={t('sendReq')}
 						className="btn--primary btn-block"
 						style={{ margin: '0 auto' }}
 					/>
 				</form>
 				<Link to={SIGN_IN} className="have-account-link">
-					Already have account?Sign in.
+					{t('alreadyHaveAcc')}
 				</Link>
 				<Footer />
 			</React.Fragment>
@@ -68,5 +68,5 @@ export default connect(
 )(
 	reduxForm({
 		form: 'resetForm'
-	})(ResetPassword)
+	})(withTranslation()(ResetPassword))
 );
