@@ -7,8 +7,8 @@ const Sidenav = ({ opened }) => {
 	const { t, i18n } = useTranslation();
 
 	const routes = [
-		{ icon: 'fa fa-home', text: t('rooms'), path: '/404' },
-		{ icon: 'fa fa-envelope-o', text: t('rooms'), path: '/404' },
+		{ icon: 'fa fa-home', text: t('rooms'), path: '/' },
+		{ icon: 'fa fa-envelope-o', text: t('inbox'), path: '/404' },
 		{ icon: 'fa fa-product-hunt', text: t('products'), path: '/404' },
 		{ icon: 'fa fa-bar-chart', text: t('invoices'), path: '/404' },
 		{ icon: 'fa fa-user-o', text: t('customers'), path: '/404' },
